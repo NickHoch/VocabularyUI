@@ -78,6 +78,7 @@ namespace VocabularyUI.UserControls
             }
             if (String.IsNullOrEmpty(msgErr))
             {
+
                 //vocabularyContext.Credentials.Add(new Credential { Email = loginField.Text, Password = passwordField.Password });
                 //vocabularyContext.SaveChanges();
                 //var userId = vocabularyContext.Credentials.Where(x => x.Email == loginField.Text && x.Password == passwordField.Password).Select(x => x.Id).SingleOrDefault();
