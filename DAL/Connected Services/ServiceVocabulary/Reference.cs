@@ -9,17 +9,80 @@
 //------------------------------------------------------------------------------
 
 namespace DAL.ServiceVocabulary {
+    using System.Runtime.Serialization;
+    using System;
     
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CredentialDC", Namespace="http://schemas.datacontract.org/2004/07/WCF.DCs")]
+    [System.SerializableAttribute()]
+    public partial class CredentialDC : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PasswordField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email {
+            get {
+                return this.EmailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
+                    this.EmailField = value;
+                    this.RaisePropertyChanged("Email");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Password {
+            get {
+                return this.PasswordField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PasswordField, value) != true)) {
+                    this.PasswordField = value;
+                    this.RaisePropertyChanged("Password");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceVocabulary.IVocabulary")]
     public interface IVocabulary {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/CheckCredential", ReplyAction="http://tempuri.org/IVocabulary/CheckCredentialResponse")]
-        System.Nullable<int> CheckCredential(string login, string password);
+        System.Nullable<int> CheckCredential(DAL.ServiceVocabulary.CredentialDC credentialDC);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/CheckCredential", ReplyAction="http://tempuri.org/IVocabulary/CheckCredentialResponse")]
-        System.Threading.Tasks.Task<System.Nullable<int>> CheckCredentialAsync(string login, string password);
+        System.Threading.Tasks.Task<System.Nullable<int>> CheckCredentialAsync(DAL.ServiceVocabulary.CredentialDC credentialDC);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/IsEmailAddressFree", ReplyAction="http://tempuri.org/IVocabulary/IsEmailAddressFreeResponse")]
         bool IsEmailAddressFree(string email);
@@ -55,12 +118,12 @@ namespace DAL.ServiceVocabulary {
                 base(binding, remoteAddress) {
         }
         
-        public System.Nullable<int> CheckCredential(string login, string password) {
-            return base.Channel.CheckCredential(login, password);
+        public System.Nullable<int> CheckCredential(DAL.ServiceVocabulary.CredentialDC credentialDC) {
+            return base.Channel.CheckCredential(credentialDC);
         }
         
-        public System.Threading.Tasks.Task<System.Nullable<int>> CheckCredentialAsync(string login, string password) {
-            return base.Channel.CheckCredentialAsync(login, password);
+        public System.Threading.Tasks.Task<System.Nullable<int>> CheckCredentialAsync(DAL.ServiceVocabulary.CredentialDC credentialDC) {
+            return base.Channel.CheckCredentialAsync(credentialDC);
         }
         
         public bool IsEmailAddressFree(string email) {
