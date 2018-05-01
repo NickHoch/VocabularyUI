@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ServiceModel;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -41,53 +42,67 @@ namespace VocabularyUI.UserControls
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            if (String.IsNullOrEmpty(loginField.Text) || String.IsNullOrEmpty(passwordField.Password))
+            try
             {
-                MaterialMessageBox.ShowError("Please, fill in all login details.");
-            }
-            else
-            {
-                string msgErr = String.Empty;
-                string pattern = @"^\w+.*,*@\w+[.]\w+$";
-                var regex = new Regex(pattern);
-                var match = regex.Match(loginField.Text);
-                if (!match.Success)
+                if (String.IsNullOrEmpty(loginField.Text) || String.IsNullOrEmpty(passwordField.Password))
                 {
-                    msgErr = "Invalid email address\n";
-                    loginField.Text = String.Empty;
-                    passwordField.Password = String.Empty;
-                }
-
-                pattern = @"\w$";
-                regex = new Regex(pattern);
-                match = regex.Match(passwordField.Password);
-                if (!match.Success)
-                {
-                    msgErr = String.Concat(msgErr, "Password must contain only numbers and letters\n");
-                    passwordField.Password = String.Empty;
-                }
-
-                if (String.IsNullOrEmpty(msgErr))
-                {
-                    var userId = _dal.CheckCredential(loginField.Text, passwordField.Password);
-                    if (userId.HasValue)
-                    {
-                        var menuWindow = new MenuWindow((int)userId);
-                        menuWindow.Show();
-                        RaiseEvent(new RoutedEventArgs(SignIn.LoginClick, this));
-                    }
-                    else
-                    {
-                        MaterialMessageBox.ShowError("Invalid login credentials. Please, try again.");
-                        loginField.Text = String.Empty;
-                        passwordField.Password = String.Empty;
-                    }
+                    MaterialMessageBox.ShowError("Please, fill in all login details.");
                 }
                 else
                 {
-                    MaterialMessageBox.ShowError(msgErr);
+                    string msgErr = String.Empty;
+                    string pattern = @"^\w+.*,*@\w+[.]\w+$";
+                    var regex = new Regex(pattern);
+                    var match = regex.Match(loginField.Text);
+                    if (!match.Success)
+                    {
+                        msgErr = "Invalid email address\n";
+                        loginField.Text = String.Empty;
+                        passwordField.Password = String.Empty;
+                    }
+
+                    pattern = @"\w$";
+                    regex = new Regex(pattern);
+                    match = regex.Match(passwordField.Password);
+                    if (!match.Success)
+                    {
+                        msgErr = String.Concat(msgErr, "Password must contain only numbers and letters\n");
+                        passwordField.Password = String.Empty;
+                    }
+
+                    if (String.IsNullOrEmpty(msgErr))
+                    {
+
+                        var userId = _dal.CheckCredential(loginField.Text, passwordField.Password);
+                        if (userId.HasValue)
+                        {
+                            var menuWindow = new MenuWindow((int)userId);
+                            menuWindow.Show();
+                            RaiseEvent(new RoutedEventArgs(SignIn.LoginClick, this));
+                        }
+                        else
+                        {
+                            MaterialMessageBox.ShowError("Invalid login credentials. Please, try again.");
+                            loginField.Text = String.Empty;
+                            passwordField.Password = String.Empty;
+                        }
+
+                    }
+                    else
+                    {
+                        MaterialMessageBox.ShowError(msgErr);
+                    }
                 }
             }
+            catch (FaultException ex)
+            {
+                MaterialMessageBox.ShowError(ex.Message);
+            }
+            catch(Exception ex)
+            {
+                MaterialMessageBox.ShowError(ex.Message);
+            }
         }
+
     }
 }
