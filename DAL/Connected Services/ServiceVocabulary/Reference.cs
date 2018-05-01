@@ -89,6 +89,12 @@ namespace DAL.ServiceVocabulary {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/IsEmailAddressFree", ReplyAction="http://tempuri.org/IVocabulary/IsEmailAddressFreeResponse")]
         System.Threading.Tasks.Task<bool> IsEmailAddressFreeAsync(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/AddCredential", ReplyAction="http://tempuri.org/IVocabulary/AddCredentialResponse")]
+        bool AddCredential(DAL.ServiceVocabulary.CredentialDC credentialDC);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/AddCredential", ReplyAction="http://tempuri.org/IVocabulary/AddCredentialResponse")]
+        System.Threading.Tasks.Task<bool> AddCredentialAsync(DAL.ServiceVocabulary.CredentialDC credentialDC);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -132,6 +138,14 @@ namespace DAL.ServiceVocabulary {
         
         public System.Threading.Tasks.Task<bool> IsEmailAddressFreeAsync(string email) {
             return base.Channel.IsEmailAddressFreeAsync(email);
+        }
+        
+        public bool AddCredential(DAL.ServiceVocabulary.CredentialDC credentialDC) {
+            return base.Channel.AddCredential(credentialDC);
+        }
+        
+        public System.Threading.Tasks.Task<bool> AddCredentialAsync(DAL.ServiceVocabulary.CredentialDC credentialDC) {
+            return base.Channel.AddCredentialAsync(credentialDC);
         }
     }
 }

@@ -19,6 +19,12 @@
   <wsdl:message name="IVocabulary_IsEmailAddressFree_OutputMessage">
     <wsdl:part name="parameters" element="tns:IsEmailAddressFreeResponse" />
   </wsdl:message>
+  <wsdl:message name="IVocabulary_AddCredential_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddCredential" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_AddCredential_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddCredentialResponse" />
+  </wsdl:message>
   <wsdl:portType name="IVocabulary">
     <wsdl:operation name="CheckCredential">
       <wsdl:input wsaw:Action="http://tempuri.org/IVocabulary/CheckCredential" message="tns:IVocabulary_CheckCredential_InputMessage" />
@@ -27,6 +33,10 @@
     <wsdl:operation name="IsEmailAddressFree">
       <wsdl:input wsaw:Action="http://tempuri.org/IVocabulary/IsEmailAddressFree" message="tns:IVocabulary_IsEmailAddressFree_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IVocabulary/IsEmailAddressFreeResponse" message="tns:IVocabulary_IsEmailAddressFree_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddCredential">
+      <wsdl:input wsaw:Action="http://tempuri.org/IVocabulary/AddCredential" message="tns:IVocabulary_AddCredential_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IVocabulary/AddCredentialResponse" message="tns:IVocabulary_AddCredential_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IVocabulary" type="tns:IVocabulary">
@@ -42,6 +52,15 @@
     </wsdl:operation>
     <wsdl:operation name="IsEmailAddressFree">
       <soap:operation soapAction="http://tempuri.org/IVocabulary/IsEmailAddressFree" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddCredential">
+      <soap:operation soapAction="http://tempuri.org/IVocabulary/AddCredential" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

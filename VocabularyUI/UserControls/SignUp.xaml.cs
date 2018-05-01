@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DAL.DMs;
 
 namespace VocabularyUI.UserControls
 {
@@ -81,6 +82,12 @@ namespace VocabularyUI.UserControls
                 }
                 if (String.IsNullOrEmpty(msgErr))
                 {
+                    Credential credential = new Credential
+                    {
+                        Email = loginField.Text,
+                        Password = passwordField.Password
+                    };
+                    _dal.AddCredential(credential);
                     //vocabularyContext.Credentials.Add(new Credential { Email = loginField.Text, Password = passwordField.Password });
                     //vocabularyContext.SaveChanges();
                     //var userId = vocabularyContext.Credentials.Where(x => x.Email == loginField.Text && x.Password == passwordField.Password).Select(x => x.Id).SingleOrDefault();

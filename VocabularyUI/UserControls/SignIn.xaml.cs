@@ -91,7 +91,6 @@ namespace VocabularyUI.UserControls
                             loginField.Text = String.Empty;
                             passwordField.Password = String.Empty;
                         }
-
                     }
                     else
                     {
