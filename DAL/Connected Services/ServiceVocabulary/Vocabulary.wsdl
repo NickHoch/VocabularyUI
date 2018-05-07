@@ -5,13 +5,14 @@
       <xsd:import schemaLocation="http://localhost:55842/Vocabulary.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:55842/Vocabulary.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:55842/Vocabulary.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/WCF.DCs" />
+      <xsd:import schemaLocation="http://localhost:55842/Vocabulary.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IVocabulary_CheckCredential_InputMessage">
-    <wsdl:part name="parameters" element="tns:CheckCredential" />
+  <wsdl:message name="IVocabulary_GetUserIdByCredential_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserIdByCredential" />
   </wsdl:message>
-  <wsdl:message name="IVocabulary_CheckCredential_OutputMessage">
-    <wsdl:part name="parameters" element="tns:CheckCredentialResponse" />
+  <wsdl:message name="IVocabulary_GetUserIdByCredential_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserIdByCredentialResponse" />
   </wsdl:message>
   <wsdl:message name="IVocabulary_IsEmailAddressFree_InputMessage">
     <wsdl:part name="parameters" element="tns:IsEmailAddressFree" />
@@ -25,10 +26,16 @@
   <wsdl:message name="IVocabulary_AddCredential_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddCredentialResponse" />
   </wsdl:message>
+  <wsdl:message name="IVocabulary_AddDictionary_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddDictionary" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_AddDictionary_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddDictionaryResponse" />
+  </wsdl:message>
   <wsdl:portType name="IVocabulary">
-    <wsdl:operation name="CheckCredential">
-      <wsdl:input wsaw:Action="http://tempuri.org/IVocabulary/CheckCredential" message="tns:IVocabulary_CheckCredential_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IVocabulary/CheckCredentialResponse" message="tns:IVocabulary_CheckCredential_OutputMessage" />
+    <wsdl:operation name="GetUserIdByCredential">
+      <wsdl:input wsaw:Action="http://tempuri.org/IVocabulary/GetUserIdByCredential" message="tns:IVocabulary_GetUserIdByCredential_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IVocabulary/GetUserIdByCredentialResponse" message="tns:IVocabulary_GetUserIdByCredential_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="IsEmailAddressFree">
       <wsdl:input wsaw:Action="http://tempuri.org/IVocabulary/IsEmailAddressFree" message="tns:IVocabulary_IsEmailAddressFree_InputMessage" />
@@ -38,11 +45,15 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IVocabulary/AddCredential" message="tns:IVocabulary_AddCredential_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IVocabulary/AddCredentialResponse" message="tns:IVocabulary_AddCredential_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="AddDictionary">
+      <wsdl:input wsaw:Action="http://tempuri.org/IVocabulary/AddDictionary" message="tns:IVocabulary_AddDictionary_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IVocabulary/AddDictionaryResponse" message="tns:IVocabulary_AddDictionary_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IVocabulary" type="tns:IVocabulary">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="CheckCredential">
-      <soap:operation soapAction="http://tempuri.org/IVocabulary/CheckCredential" style="document" />
+    <wsdl:operation name="GetUserIdByCredential">
+      <soap:operation soapAction="http://tempuri.org/IVocabulary/GetUserIdByCredential" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -61,6 +72,15 @@
     </wsdl:operation>
     <wsdl:operation name="AddCredential">
       <soap:operation soapAction="http://tempuri.org/IVocabulary/AddCredential" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddDictionary">
+      <soap:operation soapAction="http://tempuri.org/IVocabulary/AddDictionary" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

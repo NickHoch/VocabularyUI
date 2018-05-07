@@ -45,8 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DMs\Credential.cs" />
+    <Compile Include="DTOs\CredentialDTO.cs" />
+    <Compile Include="DTOs\DictionaryDTO.cs" />
+    <Compile Include="DTOs\WordDTO.cs" />
     <Compile Include="Mapping\MappingCredential.cs" />
+    <Compile Include="Mapping\MappingDictionary.cs" />
     <Compile Include="ServerDAL.cs" />
     <Compile Include="Connected Services\ServiceVocabulary\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -70,6 +73,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServiceVocabulary\Vocabulary2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceVocabulary\Vocabulary3.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />

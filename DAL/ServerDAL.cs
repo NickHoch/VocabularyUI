@@ -1,4 +1,4 @@
-﻿using DAL.DMs;
+﻿using DAL.DTOs;
 using DAL.Mapping;
 
 namespace DAL
@@ -6,19 +6,24 @@ namespace DAL
     public class ServerDAL
     {
         private ServiceVocabulary.VocabularyClient vocabularyClient = new ServiceVocabulary.VocabularyClient();
-        public int? CheckCredential(Credential credential)
+        public int? GetUserIdByCredential(CredentialDTO credentialDTO)
         {
-            var credentialDC = MappingCredential.CredentialDMtoDC(credential);
-            return vocabularyClient.CheckCredential(credentialDC);            
+            var credentialDC = MappingCredential.CredentialDTOtoDC(credentialDTO);
+            return vocabularyClient.GetUserIdByCredential(credentialDC);            
         }
         public bool IsEmailAddressFree(string email)
         {
             return vocabularyClient.IsEmailAddressFree(email);
         }
-        public bool AddCredential(Credential credential)
+        public bool AddCredential(CredentialDTO credentialDTO)
         {
-            var credentialDC = MappingCredential.CredentialDMtoDC(credential);
+            var credentialDC = MappingCredential.CredentialDTOtoDC(credentialDTO);
             return vocabularyClient.AddCredential(credentialDC);
+        }
+        public bool AddDictionary(DictionaryDTO dictionaryDTO)
+        {
+            var dictionaryDC = MappingDictionary.CredentialDTOtoDC(dictionaryDTO);
+            return vocabularyClient.AddDictionary(dictionaryDC);
         }
     }
 }

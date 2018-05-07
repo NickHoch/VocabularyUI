@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using BespokeFusion;
 using DAL;
-using DAL.DMs;
+using DAL.DTOs;
 using VocabularyUI.Windows;
 
 namespace VocabularyUI.UserControls
@@ -73,12 +73,12 @@ namespace VocabularyUI.UserControls
 
                     if (String.IsNullOrEmpty(msgErr))
                     {
-                        Credential credential = new Credential
+                        CredentialDTO credentialDTO = new CredentialDTO
                         {
                             Email = loginField.Text,
                             Password = passwordField.Password
                         };
-                        var userId = _dal.CheckCredential(credential);
+                        var userId = _dal.GetUserIdByCredential(credentialDTO);
                         if (userId.HasValue)
                         {
                             var menuWindow = new MenuWindow((int)userId);
