@@ -34,9 +34,6 @@ namespace VocabularyUI.UserControls
         {
             try
             {
-                //string projectPath =
-                //    Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
-                //var path = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.RelativeSearchPath, @"..\..\VocabularyServer\bin\Debug"));
                 string msgErr = String.Empty;
                 string pattern = @"^\w+.*,*@\w+.\w+$";
                 var regex = new Regex(pattern);
