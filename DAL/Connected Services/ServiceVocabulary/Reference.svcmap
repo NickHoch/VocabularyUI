@@ -22,11 +22,12 @@
     <MetadataSource Address="http://localhost:55842/Vocabulary.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
+    <MetadataFile FileName="Vocabulary1.xsd" MetadataType="Schema" ID="2c8e6905-d128-4444-a933-08ed038b6092" SourceId="1" SourceUrl="http://localhost:55842/Vocabulary.svc?xsd=xsd1" />
+    <MetadataFile FileName="Vocabulary.xsd" MetadataType="Schema" ID="1d5ddace-cea0-462d-8bcc-25fd828cd4d6" SourceId="1" SourceUrl="http://localhost:55842/Vocabulary.svc?xsd=xsd0" />
+    <MetadataFile FileName="Vocabulary3.xsd" MetadataType="Schema" ID="e5a5d85c-48b8-4f78-956b-9f117d0444ce" SourceId="1" SourceUrl="http://localhost:55842/Vocabulary.svc?xsd=xsd3" />
+    <MetadataFile FileName="Vocabulary2.xsd" MetadataType="Schema" ID="162723f6-c5a8-4a34-b763-6775fa97a4e9" SourceId="1" SourceUrl="http://localhost:55842/Vocabulary.svc?xsd=xsd2" />
     <MetadataFile FileName="Vocabulary.wsdl" MetadataType="Wsdl" ID="79cf0b21-1669-497f-a432-b98e9b2495ba" SourceId="1" SourceUrl="http://localhost:55842/Vocabulary.svc?wsdl" />
     <MetadataFile FileName="Vocabulary.disco" MetadataType="Disco" ID="57eadb41-177a-493a-aeda-c01e5166ea47" SourceId="1" SourceUrl="http://localhost:55842/Vocabulary.svc?disco" />
-    <MetadataFile FileName="Vocabulary.xsd" MetadataType="Schema" ID="1d5ddace-cea0-462d-8bcc-25fd828cd4d6" SourceId="1" SourceUrl="http://localhost:55842/Vocabulary.svc?xsd=xsd0" />
-    <MetadataFile FileName="Vocabulary1.xsd" MetadataType="Schema" ID="2c8e6905-d128-4444-a933-08ed038b6092" SourceId="1" SourceUrl="http://localhost:55842/Vocabulary.svc?xsd=xsd1" />
-    <MetadataFile FileName="Vocabulary2.xsd" MetadataType="Schema" ID="162723f6-c5a8-4a34-b763-6775fa97a4e9" SourceId="1" SourceUrl="http://localhost:55842/Vocabulary.svc?xsd=xsd2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

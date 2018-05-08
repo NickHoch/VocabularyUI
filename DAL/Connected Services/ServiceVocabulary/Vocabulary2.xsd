@@ -1,10 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/WCF.DCs" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WCF.DCs" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:55842/Vocabulary.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:complexType name="CredentialDC">
     <xs:sequence>
+      <xs:element minOccurs="0" name="Dictionaries" nillable="true" type="tns:ArrayOfDictionaryDC" />
       <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="CredentialDC" nillable="true" type="tns:CredentialDC" />
+  <xs:complexType name="ArrayOfDictionaryDC">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DictionaryDC" nillable="true" type="tns:DictionaryDC" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDictionaryDC" nillable="true" type="tns:ArrayOfDictionaryDC" />
+  <xs:complexType name="DictionaryDC">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Credential" nillable="true" type="tns:CredentialDC" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Words" nillable="true" type="tns:ArrayOfWordDC" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DictionaryDC" nillable="true" type="tns:DictionaryDC" />
+  <xs:complexType name="ArrayOfWordDC">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="WordDC" nillable="true" type="tns:WordDC" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfWordDC" nillable="true" type="tns:ArrayOfWordDC" />
+  <xs:complexType name="WordDC">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Dictionary" nillable="true" type="tns:DictionaryDC" />
+      <xs:element minOccurs="0" name="Image" nillable="true" type="xs:base64Binary" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="IsLearned" nillable="true" type="q1:ArrayOfboolean" />
+      <xs:element minOccurs="0" name="IsLearnedWord" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Sound" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="Transcription" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Translation" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="WordEng" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="WordDC" nillable="true" type="tns:WordDC" />
 </xs:schema>

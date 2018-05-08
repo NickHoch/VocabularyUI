@@ -4,21 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using DAL.DMs;
+using DAL.DTOs;
 using DAL.ServiceVocabulary;
 
 namespace DAL.Mapping
 {
     public static class MappingCredential
     {
-        public static CredentialDC CredentialDMtoDC(Credential credential)
+        public static CredentialDC CredentialDTOtoDC(CredentialDTO credentialDTO)
         {
-            MapperConfiguration configDCtoDM = new MapperConfiguration(cfg =>
+            MapperConfiguration configDTOtoDM = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Credential, CredentialDC>();
+                cfg.CreateMap<CredentialDTO, CredentialDC>();
             });
-            IMapper iMapper = configDCtoDM.CreateMapper();
-            return iMapper.Map<Credential, CredentialDC>(credential);
+            IMapper iMapper = configDTOtoDM.CreateMapper();
+            return iMapper.Map<CredentialDTO, CredentialDC>(credentialDTO);
         }
     }
 }
