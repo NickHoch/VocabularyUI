@@ -41,7 +41,7 @@ namespace VocabularyClient
 
         private void LoginButton(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            //this.Close();
         }
 
         private void ContinueButton(object sender, RoutedEventArgs e)

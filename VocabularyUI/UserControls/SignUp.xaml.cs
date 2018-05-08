@@ -80,7 +80,7 @@ namespace VocabularyUI.UserControls
                         Email = loginField.Text,
                         Password = passwordField.Password
                     };
-                    var res = _dal.AddCredential(credentialDTO);
+                    var res = _dal.AddUser(credentialDTO);
                     if(res)
                     {
                         var userId = _dal.GetUserIdByCredential(credentialDTO);

@@ -15,10 +15,10 @@ namespace DAL
         {
             return vocabularyClient.IsEmailAddressFree(email);
         }
-        public bool AddCredential(CredentialDTO credentialDTO)
+        public bool AddUser(CredentialDTO credentialDTO)
         {
             var credentialDC = MappingCredential.CredentialDTOtoDC(credentialDTO);
-            return vocabularyClient.AddCredential(credentialDC);
+            return vocabularyClient.AddUser(credentialDC);
         }
         public bool AddDictionary(DictionaryDTO dictionaryDTO)
         {

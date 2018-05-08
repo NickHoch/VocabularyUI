@@ -340,11 +340,11 @@ namespace DAL.ServiceVocabulary {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/IsEmailAddressFree", ReplyAction="http://tempuri.org/IVocabulary/IsEmailAddressFreeResponse")]
         System.Threading.Tasks.Task<bool> IsEmailAddressFreeAsync(string email);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/AddCredential", ReplyAction="http://tempuri.org/IVocabulary/AddCredentialResponse")]
-        bool AddCredential(DAL.ServiceVocabulary.CredentialDC credentialDC);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/AddUser", ReplyAction="http://tempuri.org/IVocabulary/AddUserResponse")]
+        bool AddUser(DAL.ServiceVocabulary.CredentialDC credentialDC);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/AddCredential", ReplyAction="http://tempuri.org/IVocabulary/AddCredentialResponse")]
-        System.Threading.Tasks.Task<bool> AddCredentialAsync(DAL.ServiceVocabulary.CredentialDC credentialDC);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/AddUser", ReplyAction="http://tempuri.org/IVocabulary/AddUserResponse")]
+        System.Threading.Tasks.Task<bool> AddUserAsync(DAL.ServiceVocabulary.CredentialDC credentialDC);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/AddDictionary", ReplyAction="http://tempuri.org/IVocabulary/AddDictionaryResponse")]
         bool AddDictionary(DAL.ServiceVocabulary.DictionaryDC dictionaryDC);
@@ -396,12 +396,12 @@ namespace DAL.ServiceVocabulary {
             return base.Channel.IsEmailAddressFreeAsync(email);
         }
         
-        public bool AddCredential(DAL.ServiceVocabulary.CredentialDC credentialDC) {
-            return base.Channel.AddCredential(credentialDC);
+        public bool AddUser(DAL.ServiceVocabulary.CredentialDC credentialDC) {
+            return base.Channel.AddUser(credentialDC);
         }
         
-        public System.Threading.Tasks.Task<bool> AddCredentialAsync(DAL.ServiceVocabulary.CredentialDC credentialDC) {
-            return base.Channel.AddCredentialAsync(credentialDC);
+        public System.Threading.Tasks.Task<bool> AddUserAsync(DAL.ServiceVocabulary.CredentialDC credentialDC) {
+            return base.Channel.AddUserAsync(credentialDC);
         }
         
         public bool AddDictionary(DAL.ServiceVocabulary.DictionaryDC dictionaryDC) {
