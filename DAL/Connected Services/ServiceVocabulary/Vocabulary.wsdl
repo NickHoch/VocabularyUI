@@ -32,6 +32,18 @@
   <wsdl:message name="IVocabulary_AddDictionary_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddDictionaryResponse" />
   </wsdl:message>
+  <wsdl:message name="IVocabulary_GetDictionariesNameByUserId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDictionariesNameByUserId" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_GetDictionariesNameByUserId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDictionariesNameByUserIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_GetNotLearnedWords_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetNotLearnedWords" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_GetNotLearnedWords_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNotLearnedWordsResponse" />
+  </wsdl:message>
   <wsdl:portType name="IVocabulary">
     <wsdl:operation name="GetUserIdByCredential">
       <wsdl:input wsaw:Action="http://tempuri.org/IVocabulary/GetUserIdByCredential" message="tns:IVocabulary_GetUserIdByCredential_InputMessage" />
@@ -48,6 +60,14 @@
     <wsdl:operation name="AddDictionary">
       <wsdl:input wsaw:Action="http://tempuri.org/IVocabulary/AddDictionary" message="tns:IVocabulary_AddDictionary_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IVocabulary/AddDictionaryResponse" message="tns:IVocabulary_AddDictionary_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDictionariesNameByUserId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IVocabulary/GetDictionariesNameByUserId" message="tns:IVocabulary_GetDictionariesNameByUserId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IVocabulary/GetDictionariesNameByUserIdResponse" message="tns:IVocabulary_GetDictionariesNameByUserId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNotLearnedWords">
+      <wsdl:input wsaw:Action="http://tempuri.org/IVocabulary/GetNotLearnedWords" message="tns:IVocabulary_GetNotLearnedWords_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IVocabulary/GetNotLearnedWordsResponse" message="tns:IVocabulary_GetNotLearnedWords_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IVocabulary" type="tns:IVocabulary">
@@ -81,6 +101,24 @@
     </wsdl:operation>
     <wsdl:operation name="AddDictionary">
       <soap:operation soapAction="http://tempuri.org/IVocabulary/AddDictionary" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDictionariesNameByUserId">
+      <soap:operation soapAction="http://tempuri.org/IVocabulary/GetDictionariesNameByUserId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNotLearnedWords">
+      <soap:operation soapAction="http://tempuri.org/IVocabulary/GetNotLearnedWords" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

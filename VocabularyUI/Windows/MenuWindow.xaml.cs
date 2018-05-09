@@ -1,21 +1,24 @@
 ﻿using MahApps.Metro.Controls;
 using System.Windows;
+using DAL;
 
 namespace VocabularyUI.Windows
 {
     public partial class MenuWindow : MetroWindow
     {
         private int userId;
-        public MenuWindow(int userId)
+        private ServerDAL _dal = null;
+        public MenuWindow(ServerDAL _dal, int userId)
         {
             InitializeComponent();
+            this._dal = _dal;
             this.userId = userId;
         }
 
         private void Start_Click(object sender, RoutedEventArgs e)
         {
-            //var startLearnWindow = new StartLearnWindow(userId);
-            //startLearnWindow.Show();
+            var startLearnWindow = new StartLearnWindow(_dal, userId);
+            startLearnWindow.Show();
         }
 
         private void New_Click(object sender, RoutedEventArgs e)

@@ -12,10 +12,11 @@ namespace VocabularyUI.UserControls
 {
     public partial class SignIn : UserControl
     {
-        private ServerDAL _dal = new ServerDAL();
-        public SignIn()
+        private ServerDAL _dal = null;
+        public SignIn(ServerDAL _dal)
         {
             InitializeComponent();
+            this._dal = _dal;
         }
 
         public static readonly RoutedEvent SignUpClick =
@@ -81,7 +82,7 @@ namespace VocabularyUI.UserControls
                         var userId = _dal.GetUserIdByCredential(credentialDTO);
                         if (userId.HasValue)
                         {
-                            var menuWindow = new MenuWindow((int)userId);
+                            var menuWindow = new MenuWindow(_dal, (int)userId);
                             menuWindow.Show();
                             RaiseEvent(new RoutedEventArgs(SignIn.LoginClick, this));
                         }

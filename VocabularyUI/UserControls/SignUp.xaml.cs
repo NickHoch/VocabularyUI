@@ -14,11 +14,12 @@ namespace VocabularyUI.UserControls
 {
     public partial class SignUp : UserControl
     {
-        private readonly ServerDAL _dal = new ServerDAL();
+        private ServerDAL _dal = null;
 
-        public SignUp()
+        public SignUp(ServerDAL _dal)
         {
             InitializeComponent();
+            this._dal = _dal;
         }
 
         public static readonly RoutedEvent ContinueClick =
@@ -43,7 +44,6 @@ namespace VocabularyUI.UserControls
                     msgErr = "Invalid email address\n";
                     loginField.Text = String.Empty;
                 }
-
                 if (String.IsNullOrEmpty(msgErr))
                 {
                     var res = _dal.IsEmailAddressFree(loginField.Text);
@@ -84,7 +84,7 @@ namespace VocabularyUI.UserControls
                     if(res)
                     {
                         var userId = _dal.GetUserIdByCredential(credentialDTO);
-                        var menuWindow = new MenuWindow((int)userId);
+                        var menuWindow = new MenuWindow(_dal, (int)userId);
                         menuWindow.Show();
                         RaiseEvent(new RoutedEventArgs(SignUp.ContinueClick, this));
                     }

@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DAL.DTOs;
+using VocabularyUI.Utils;
 
 namespace VocabularyUI.UserControls
 {
@@ -20,9 +22,13 @@ namespace VocabularyUI.UserControls
     /// </summary>
     public partial class Card1 : UserControl
     {
-        public Card1()
+        public Card1(WordDTO word)
         {
             InitializeComponent();
+            wordEng.Text = word.WordEng;
+            transcription.Text = word.Transcription;
+            translation.Text = word.Translation;
+            DataContext = Helper.LoadImage(word.Image);
         }
     }
 }

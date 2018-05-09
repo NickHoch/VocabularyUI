@@ -50,6 +50,7 @@
     <Compile Include="DTOs\WordDTO.cs" />
     <Compile Include="Mapping\MappingCredential.cs" />
     <Compile Include="Mapping\MappingDictionary.cs" />
+    <Compile Include="Mapping\MappingWord.cs" />
     <Compile Include="ServerDAL.cs" />
     <Compile Include="Connected Services\ServiceVocabulary\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -64,6 +65,9 @@
   <ItemGroup>
     <None Include="app.config">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceVocabulary\DAL.ServiceVocabulary.WordDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ServiceVocabulary\Vocabulary.wsdl" />
     <None Include="Connected Services\ServiceVocabulary\Vocabulary.xsd">

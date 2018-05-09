@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Mapping
 {
-    public static class MappingDictionary
+    public class MappingDictionary
     {
         public static DictionaryDC CredentialDTOtoDC(DictionaryDTO dictionaryDTO)
         {

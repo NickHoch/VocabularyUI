@@ -3,10 +3,61 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}"
              xmlns:local="clr-namespace:VocabularyUI.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="280" d:DesignWidth="300">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height="25*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label 
+            Grid.Row="0"
+            Background="WhiteSmoke"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center">
+            <Viewbox StretchDirection="Both">
+                <TextBlock  x:Name="wordEng"></TextBlock>
+            </Viewbox>
+        </Label>
+        <Label           
+            Grid.Row="1"
+            Background="WhiteSmoke"
+            BorderBrush="Gray"
+            BorderThickness="0,0,0,2"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center">
+            <Viewbox>
+                <TextBlock x:Name="transcription"></TextBlock>
+            </Viewbox>
+        </Label>
+        <Label
+            Grid.Row="2"
+            Background="LightGreen"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center">
+            <Viewbox>
+                <TextBlock x:Name="translation"></TextBlock>
+            </Viewbox>
+        </Label>
+        <Label
+            Grid.Row="3"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center">
+            <Viewbox>
+                <Image Source="{Binding}"/>
+            </Viewbox>
+        </Label>
+        <Border Grid.Row="0" Grid.RowSpan="4" BorderThickness="2" BorderBrush="Black"/>
     </Grid>
 </UserControl>

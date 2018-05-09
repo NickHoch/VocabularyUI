@@ -78,14 +78,30 @@
     <Compile Include="UserControls\Card1.xaml.cs">
       <DependentUpon>Card1.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Card2.xaml.cs">
+      <DependentUpon>Card2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Card3.xaml.cs">
+      <DependentUpon>Card3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Card4.xaml.cs">
+      <DependentUpon>Card4.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Card5.xaml.cs">
+      <DependentUpon>Card5.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\SignIn.xaml.cs">
       <DependentUpon>SignIn.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\SignUp.xaml.cs">
       <DependentUpon>SignUp.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\Helper.cs" />
     <Compile Include="Windows\MenuWindow.xaml.cs">
       <DependentUpon>MenuWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\StartLearnWindow.xaml.cs">
+      <DependentUpon>StartLearnWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -103,6 +119,22 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\Card2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Card3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Card4.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Card5.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\SignIn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -112,6 +144,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\MenuWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\StartLearnWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

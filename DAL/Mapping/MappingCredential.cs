@@ -9,7 +9,7 @@ using DAL.ServiceVocabulary;
 
 namespace DAL.Mapping
 {
-    public static class MappingCredential
+    public class MappingCredential
     {
         public static CredentialDC CredentialDTOtoDC(CredentialDTO credentialDTO)
         {
