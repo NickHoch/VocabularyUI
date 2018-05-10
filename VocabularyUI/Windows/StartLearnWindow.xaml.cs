@@ -53,8 +53,6 @@ namespace VocabularyUI.Windows
         private void ComboBox_Load(object sender, RoutedEventArgs e)
         {
             var comboBox = sender as ComboBox;
-            //vocabularyContext.Dictionaries.Load();
-            //comboBox.ItemsSource = vocabularyContext.Dictionaries.Local.Where(x => x.UserId == userId).Select(x => x.Name).ToList();
             comboBox.ItemsSource = _dal.GetDictionariesNameByUserId(userId);
             comboBox.SelectedIndex = 0;
         }
@@ -62,14 +60,6 @@ namespace VocabularyUI.Windows
         {
             var comboBox = sender as ComboBox;
             selectedDictionaryName = comboBox.SelectedItem as string;
-            
-            //WordsToLearn = vocabularyContext.Words.Where(x => x.DictionaryId == vocabularyContext.Dictionaries.Where(y => y.Name == selectedDictionaryName)
-            //                                                                                                  .Select(y => y.Id)
-            //                                                                                                  .FirstOrDefault())
-            //                                      .ToList()
-            //                                      .SkipWhile(x => x.IsLearnedWord == true)
-            //                                      .Take(10)
-            //                                      .ToList();
         }
         private void Launch_Click(object sender, RoutedEventArgs e)
         {
