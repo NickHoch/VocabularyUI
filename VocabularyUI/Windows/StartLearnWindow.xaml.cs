@@ -63,7 +63,8 @@ namespace VocabularyUI.Windows
         }
         private void Launch_Click(object sender, RoutedEventArgs e)
         {
-            WordsToLearn = _dal.GetNotLearnedWords(10, selectedDictionaryName);
+            int quantityWordsToLearn = 10;
+            WordsToLearn = _dal.GetNotLearnedWords(quantityWordsToLearn, selectedDictionaryName);
             QuantityWordsToLearn = WordsToLearn.Count();
             if (QuantityWordsToLearn == 0)
             {

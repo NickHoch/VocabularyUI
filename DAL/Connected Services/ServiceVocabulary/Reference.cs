@@ -177,6 +177,9 @@ namespace DAL.ServiceVocabulary {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private DAL.ServiceVocabulary.DictionaryDC DictionaryField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private byte[] ImageField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -204,6 +207,19 @@ namespace DAL.ServiceVocabulary {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public DAL.ServiceVocabulary.DictionaryDC Dictionary {
+            get {
+                return this.DictionaryField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DictionaryField, value) != true)) {
+                    this.DictionaryField = value;
+                    this.RaisePropertyChanged("Dictionary");
+                }
             }
         }
         
