@@ -27,7 +27,8 @@ namespace VocabularyUI.Windows
         private int userId = 0;
         private int cardCount = 0;
         private int quantityCard = 0;
-        private int QuantityWordsToLearn = 0;
+        private int quantityWordsToLearn = 10;
+        private int quantityReturnesWords = 0;
         private List<WordDTO> Dictionary = new List<WordDTO>();
         private static MediaPlayer mplayer = new MediaPlayer();
         private List<int> RangeList = new List<int>();
@@ -63,14 +64,13 @@ namespace VocabularyUI.Windows
         }
         private void Launch_Click(object sender, RoutedEventArgs e)
         {
-            int quantityWordsToLearn = 10;
             WordsToLearn = _dal.GetNotLearnedWords(quantityWordsToLearn, selectedDictionaryName);
-            QuantityWordsToLearn = WordsToLearn.Count();
-            if (QuantityWordsToLearn == 0)
+            quantityReturnesWords = WordsToLearn.Count();
+            if (quantityReturnesWords == 0)
             {
                 MaterialMessageBox.ShowError("You have studied all the words from this dictionary. Please choose another dictionary");
             }
-            else if (QuantityWordsToLearn < 3)
+            else if (quantityReturnesWords < 3)
             {
                 MaterialMessageBox.ShowError("You have studied all the words from this dictionary. Please add words to the dictionary");
             }
@@ -93,7 +93,7 @@ namespace VocabularyUI.Windows
         }
         private void FormationCard2()
         {
-            quantityCard = Convert.ToInt32(Math.Ceiling(QuantityWordsToLearn / 5.0));
+            quantityCard = Convert.ToInt32(Math.Ceiling(quantityWordsToLearn / 5.0));
         }
         private void FormationCard3(int indexIsLearnedList, bool translationFromEngToUk)
         {
@@ -123,12 +123,12 @@ namespace VocabularyUI.Windows
         }
         private void NextCardButton_Click(object sender, RoutedEventArgs e)
         {
-            if (cardCount < QuantityWordsToLearn - 1)
+            if (cardCount < quantityWordsToLearn - 1)
             {
                 Helper.PlaySoundFromBytes(WordsToLearn[++cardCount].Sound, WordsToLearn[cardCount].WordEng);
                 contentControl.Content = new UserControls.Card1(WordsToLearn[cardCount]);
             }
-            else if (cardCount < QuantityWordsToLearn - 1 + quantityCard)
+            else if (cardCount < quantityWordsToLearn - 1 + quantityCard)
             {
                 contentControl.Content = new UserControls.Card2(WordsToLearn.Skip(5 * index).Take(5).ToList());
                 index++;
@@ -152,16 +152,8 @@ namespace VocabularyUI.Windows
             }
             else
             {
-                //vocabularyContext.Words.Where(x => x.DictionaryId == vocabularyContext.Dictionaries.Where(y => y.Name == selectedDictionaryName)
-                //                                                                                              .Select(y => y.Id)
-                //                                                                                              .FirstOrDefault())
-                //                                  .ToList()
-                //                                  .SkipWhile(x => x.IsLearnedWord == true)
-                //                                  .Take(10)
-                //                                  .ToList()
-                //                                  .ForEach(x => x.IsLearnedWord = true);
-                //vocabularyContext.SaveChanges();
-                //this.Close();
+                _dal.SetToWordsStatusAsLearned(quantityWordsToLearn, selectedDictionaryName);
+                this.Close();
             }
         }
         void GreeterCard(Object sender, RoutedEventArgs e)

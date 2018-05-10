@@ -43,5 +43,9 @@ namespace DAL
             }
             return listWordsDTO;
         }
+        public void SetToWordsStatusAsLearned(int quantityWords, string dictionaryName)
+        {
+            vocabularyClient.SetToWordsStatusAsLearned(quantityWords, dictionaryName);
+        }
     }
 }

@@ -363,6 +363,12 @@ namespace DAL.ServiceVocabulary {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/GetNotLearnedWords", ReplyAction="http://tempuri.org/IVocabulary/GetNotLearnedWordsResponse")]
         System.Threading.Tasks.Task<DAL.ServiceVocabulary.WordDC[]> GetNotLearnedWordsAsync(int quantityWords, string dictionaryName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/SetToWordsStatusAsLearned", ReplyAction="http://tempuri.org/IVocabulary/SetToWordsStatusAsLearnedResponse")]
+        void SetToWordsStatusAsLearned(int quantityWords, string dictionaryName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/SetToWordsStatusAsLearned", ReplyAction="http://tempuri.org/IVocabulary/SetToWordsStatusAsLearnedResponse")]
+        System.Threading.Tasks.Task SetToWordsStatusAsLearnedAsync(int quantityWords, string dictionaryName);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -438,6 +444,14 @@ namespace DAL.ServiceVocabulary {
         
         public System.Threading.Tasks.Task<DAL.ServiceVocabulary.WordDC[]> GetNotLearnedWordsAsync(int quantityWords, string dictionaryName) {
             return base.Channel.GetNotLearnedWordsAsync(quantityWords, dictionaryName);
+        }
+        
+        public void SetToWordsStatusAsLearned(int quantityWords, string dictionaryName) {
+            base.Channel.SetToWordsStatusAsLearned(quantityWords, dictionaryName);
+        }
+        
+        public System.Threading.Tasks.Task SetToWordsStatusAsLearnedAsync(int quantityWords, string dictionaryName) {
+            return base.Channel.SetToWordsStatusAsLearnedAsync(quantityWords, dictionaryName);
         }
     }
 }
