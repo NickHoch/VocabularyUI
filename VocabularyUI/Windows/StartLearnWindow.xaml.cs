@@ -128,28 +128,28 @@ namespace VocabularyUI.Windows
                 Helper.PlaySoundFromBytes(WordsToLearn[++cardCount].Sound, WordsToLearn[cardCount].WordEng);
                 contentControl.Content = new UserControls.Card1(WordsToLearn[cardCount]);
             }
-            else if (cardCount < quantityWordsToLearn - 1 + quantityCard)
-            {
-                contentControl.Content = new UserControls.Card2(WordsToLearn.Skip(5 * index).Take(5).ToList());
-                index++;
-                cardCount++;
-            }
-            else if (WordsToLearn.Any(item => item.IsLearned[0].Equals(false)))
-            {
-                FormationCard3(0, true);
-            }
-            else if (WordsToLearn.Any(item => item.IsLearned[1].Equals(false)))
-            {
-                FormationCard4();
-            }
-            else if (WordsToLearn.Any(item => item.IsLearned[2].Equals(false)))
-            {
-                FormationCard3(2, false);
-            }
-            else if (WordsToLearn.Any(item => item.IsLearned[3].Equals(false)))
-            {
-                FormationCard5();
-            }
+            //else if (cardCount < quantityWordsToLearn - 1 + quantityCard)
+            //{
+            //    contentControl.Content = new UserControls.Card2(WordsToLearn.Skip(5 * index).Take(5).ToList());
+            //    index++;
+            //    cardCount++;
+            //}
+            //else if (WordsToLearn.Any(item => item.IsLearned[0].Equals(false)))
+            //{
+            //    FormationCard3(0, true);
+            //}
+            //else if (WordsToLearn.Any(item => item.IsLearned[1].Equals(false)))
+            //{
+            //    FormationCard4();
+            //}
+            //else if (WordsToLearn.Any(item => item.IsLearned[2].Equals(false)))
+            //{
+            //    FormationCard3(2, false);
+            //}
+            //else if (WordsToLearn.Any(item => item.IsLearned[3].Equals(false)))
+            //{
+            //    FormationCard5();
+            //}
             else
             {
                 _dal.SetToWordsStatusAsLearned(quantityWordsToLearn, selectedDictionaryName);
