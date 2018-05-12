@@ -32,7 +32,7 @@ namespace VocabularyUI.Windows
         private List<WordDTO> Dictionary = new List<WordDTO>();
         private static MediaPlayer mplayer = new MediaPlayer();
         private List<int> RangeList = new List<int>();
-        private string selectedDictionaryName = String.Empty;
+        private int selectedDictionaryId = 0;
         public List<WordDTO> WordsToLearn = new List<WordDTO>();
 
         public StartLearnWindow(ServerDAL _dal, int userId)
@@ -54,17 +54,19 @@ namespace VocabularyUI.Windows
         private void ComboBox_Load(object sender, RoutedEventArgs e)
         {
             var comboBox = sender as ComboBox;
-            comboBox.ItemsSource = _dal.GetDictionariesNameByUserId(userId);
+            var res = _dal.GetDictionariesNameAndId(userId);
+            comboBox.DisplayMemberPath = "Name";
+            comboBox.ItemsSource = res;
             comboBox.SelectedIndex = 0;
         }
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var comboBox = sender as ComboBox;
-            selectedDictionaryName = comboBox.SelectedItem as string;
+            selectedDictionaryId = (int)(comboBox.SelectedValue as DictionaryDTO).Id;
         }
         private void Launch_Click(object sender, RoutedEventArgs e)
         {
-            WordsToLearn = _dal.GetNotLearnedWords(quantityWordsToLearn, selectedDictionaryName);
+            WordsToLearn = _dal.GetNotLearnedWords(quantityWordsToLearn, selectedDictionaryId);
             quantityReturnesWords = WordsToLearn.Count();
             if (quantityReturnesWords == 0)
             {
@@ -152,7 +154,7 @@ namespace VocabularyUI.Windows
             //}
             else
             {
-                _dal.SetToWordsStatusAsLearned(quantityWordsToLearn, selectedDictionaryName);
+                _dal.SetToWordsStatusAsLearned(quantityWordsToLearn, selectedDictionaryId);
                 this.Close();
             }
         }

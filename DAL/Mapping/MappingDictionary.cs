@@ -13,12 +13,21 @@ namespace DAL.Mapping
     {
         public static DictionaryDC CredentialDTOtoDC(DictionaryDTO dictionaryDTO)
         {
-            MapperConfiguration configDTOtoDM = new MapperConfiguration(cfg =>
+            MapperConfiguration configDTOtoDC = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<DictionaryDTO, DictionaryDC>();
             });
-            IMapper iMapper = configDTOtoDM.CreateMapper();
+            IMapper iMapper = configDTOtoDC.CreateMapper();
             return iMapper.Map<DictionaryDTO, DictionaryDC>(dictionaryDTO);
+        }
+        public static DictionaryDTO CredentialDCtoDTO(DictionaryDC dictionaryDC)
+        {
+            MapperConfiguration configDCtoDTO = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<DictionaryDC, DictionaryDTO>();
+            });
+            IMapper iMapper = configDCtoDTO.CreateMapper();
+            return iMapper.Map<DictionaryDC, DictionaryDTO>(dictionaryDC);
         }
     }
 }

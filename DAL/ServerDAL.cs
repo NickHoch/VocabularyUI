@@ -27,25 +27,23 @@ namespace DAL
             var dictionaryDC = MappingDictionary.CredentialDTOtoDC(dictionaryDTO);
             return vocabularyClient.AddDictionary(dictionaryDC);
         }
-        public List<string> GetDictionariesNameByUserId(int userId)
+        public List<DictionaryDTO> GetDictionariesNameAndId(int userId)
         {
-            return vocabularyClient.GetDictionariesNameByUserId(userId)
-                                   .OfType<string>()
-                                   .ToList();
+            List<DictionaryDTO> listDictionariesDTO = new List<DictionaryDTO>();
+            var listDictionariesDC = vocabularyClient.GetDictionariesNameAndId(userId).ToList();
+            listDictionariesDC.ForEach(x => listDictionariesDTO.Add(MappingDictionary.CredentialDCtoDTO(x)));
+            return listDictionariesDTO;
         }
-        public List<WordDTO> GetNotLearnedWords(int quantityWords, string dictionaryName)
+        public List<WordDTO> GetNotLearnedWords(int quantityWords, int dictionaryId)
         {
-            var listWordsDC = vocabularyClient.GetNotLearnedWords(quantityWords, dictionaryName);
             List<WordDTO> listWordsDTO = new List<WordDTO>();
-            foreach(var item in listWordsDC)
-            {
-                listWordsDTO.Add(MappingWord.MappingDCtoDTO(item));
-            }
+            var listWordsDC = vocabularyClient.GetNotLearnedWords(quantityWords, dictionaryId).ToList();
+            listWordsDC.ForEach(x => listWordsDTO.Add(MappingWord.MappingDCtoDTO(x)));
             return listWordsDTO;
         }
-        public void SetToWordsStatusAsLearned(int quantityWords, string dictionaryName)
+        public void SetToWordsStatusAsLearned(int quantityWords, int dictionaryId)
         {
-            vocabularyClient.SetToWordsStatusAsLearned(quantityWords, dictionaryName);
+            vocabularyClient.SetToWordsStatusAsLearned(quantityWords, dictionaryId);
         }
     }
 }

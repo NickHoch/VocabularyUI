@@ -45,6 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connected Services\ServiceVocabulary\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="DTOs\CredentialDTO.cs" />
     <Compile Include="DTOs\DictionaryDTO.cs" />
     <Compile Include="DTOs\WordDTO.cs" />
@@ -52,11 +57,6 @@
     <Compile Include="Mapping\MappingDictionary.cs" />
     <Compile Include="Mapping\MappingWord.cs" />
     <Compile Include="ServerDAL.cs" />
-    <Compile Include="Connected Services\ServiceVocabulary\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -65,6 +65,9 @@
   <ItemGroup>
     <None Include="app.config">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceVocabulary\DAL.ServiceVocabulary.DictionaryDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ServiceVocabulary\DAL.ServiceVocabulary.WordDC.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
