@@ -196,6 +196,9 @@ namespace DAL.ServiceVocabulary {
         private DAL.ServiceVocabulary.DictionaryDC DictionaryField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private byte[] ImageField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -235,6 +238,19 @@ namespace DAL.ServiceVocabulary {
                 if ((object.ReferenceEquals(this.DictionaryField, value) != true)) {
                     this.DictionaryField = value;
                     this.RaisePropertyChanged("Dictionary");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
                 }
             }
         }
@@ -368,11 +384,35 @@ namespace DAL.ServiceVocabulary {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/AddDictionary", ReplyAction="http://tempuri.org/IVocabulary/AddDictionaryResponse")]
         System.Threading.Tasks.Task<bool> AddDictionaryAsync(DAL.ServiceVocabulary.DictionaryDC dictionaryDC);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/AddWord", ReplyAction="http://tempuri.org/IVocabulary/AddWordResponse")]
+        bool AddWord(DAL.ServiceVocabulary.WordDC wordDC, int dictionaryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/AddWord", ReplyAction="http://tempuri.org/IVocabulary/AddWordResponse")]
+        System.Threading.Tasks.Task<bool> AddWordAsync(DAL.ServiceVocabulary.WordDC wordDC, int dictionaryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/DeleteWord", ReplyAction="http://tempuri.org/IVocabulary/DeleteWordResponse")]
+        bool DeleteWord(int wordId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/DeleteWord", ReplyAction="http://tempuri.org/IVocabulary/DeleteWordResponse")]
+        System.Threading.Tasks.Task<bool> DeleteWordAsync(int wordId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/UpdateWord", ReplyAction="http://tempuri.org/IVocabulary/UpdateWordResponse")]
+        void UpdateWord(DAL.ServiceVocabulary.WordDC wordDC);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/UpdateWord", ReplyAction="http://tempuri.org/IVocabulary/UpdateWordResponse")]
+        System.Threading.Tasks.Task UpdateWordAsync(DAL.ServiceVocabulary.WordDC wordDC);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/GetDictionariesNameAndId", ReplyAction="http://tempuri.org/IVocabulary/GetDictionariesNameAndIdResponse")]
         DAL.ServiceVocabulary.DictionaryDC[] GetDictionariesNameAndId(int userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/GetDictionariesNameAndId", ReplyAction="http://tempuri.org/IVocabulary/GetDictionariesNameAndIdResponse")]
         System.Threading.Tasks.Task<DAL.ServiceVocabulary.DictionaryDC[]> GetDictionariesNameAndIdAsync(int userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/GetWords", ReplyAction="http://tempuri.org/IVocabulary/GetWordsResponse")]
+        DAL.ServiceVocabulary.WordDC[] GetWords(int dictionaryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/GetWords", ReplyAction="http://tempuri.org/IVocabulary/GetWordsResponse")]
+        System.Threading.Tasks.Task<DAL.ServiceVocabulary.WordDC[]> GetWordsAsync(int dictionaryId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/GetNotLearnedWords", ReplyAction="http://tempuri.org/IVocabulary/GetNotLearnedWordsResponse")]
         DAL.ServiceVocabulary.WordDC[] GetNotLearnedWords(int quantityWords, int dictionaryId);
@@ -446,12 +486,44 @@ namespace DAL.ServiceVocabulary {
             return base.Channel.AddDictionaryAsync(dictionaryDC);
         }
         
+        public bool AddWord(DAL.ServiceVocabulary.WordDC wordDC, int dictionaryId) {
+            return base.Channel.AddWord(wordDC, dictionaryId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> AddWordAsync(DAL.ServiceVocabulary.WordDC wordDC, int dictionaryId) {
+            return base.Channel.AddWordAsync(wordDC, dictionaryId);
+        }
+        
+        public bool DeleteWord(int wordId) {
+            return base.Channel.DeleteWord(wordId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteWordAsync(int wordId) {
+            return base.Channel.DeleteWordAsync(wordId);
+        }
+        
+        public void UpdateWord(DAL.ServiceVocabulary.WordDC wordDC) {
+            base.Channel.UpdateWord(wordDC);
+        }
+        
+        public System.Threading.Tasks.Task UpdateWordAsync(DAL.ServiceVocabulary.WordDC wordDC) {
+            return base.Channel.UpdateWordAsync(wordDC);
+        }
+        
         public DAL.ServiceVocabulary.DictionaryDC[] GetDictionariesNameAndId(int userId) {
             return base.Channel.GetDictionariesNameAndId(userId);
         }
         
         public System.Threading.Tasks.Task<DAL.ServiceVocabulary.DictionaryDC[]> GetDictionariesNameAndIdAsync(int userId) {
             return base.Channel.GetDictionariesNameAndIdAsync(userId);
+        }
+        
+        public DAL.ServiceVocabulary.WordDC[] GetWords(int dictionaryId) {
+            return base.Channel.GetWords(dictionaryId);
+        }
+        
+        public System.Threading.Tasks.Task<DAL.ServiceVocabulary.WordDC[]> GetWordsAsync(int dictionaryId) {
+            return base.Channel.GetWordsAsync(dictionaryId);
         }
         
         public DAL.ServiceVocabulary.WordDC[] GetNotLearnedWords(int quantityWords, int dictionaryId) {

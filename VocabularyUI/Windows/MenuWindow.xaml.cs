@@ -29,8 +29,8 @@ namespace VocabularyUI.Windows
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
-            //var editWindow = new EditWindow(userId);
-            //editWindow.Show();
+            var editWindow = new EditWindow(_dal, userId);
+            editWindow.Show();
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)

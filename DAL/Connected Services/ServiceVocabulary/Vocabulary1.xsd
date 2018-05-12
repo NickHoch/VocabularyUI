@@ -57,6 +57,47 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="AddWord">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/WCF.DCs" minOccurs="0" name="wordDC" nillable="true" type="q4:WordDC" />
+        <xs:element minOccurs="0" name="dictionaryId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddWordResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AddWordResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteWord">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="wordId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteWordResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DeleteWordResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateWord">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/WCF.DCs" minOccurs="0" name="wordDC" nillable="true" type="q5:WordDC" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateWordResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetDictionariesNameAndId">
     <xs:complexType>
       <xs:sequence>
@@ -67,7 +108,21 @@
   <xs:element name="GetDictionariesNameAndIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/WCF.DCs" minOccurs="0" name="GetDictionariesNameAndIdResult" nillable="true" type="q4:ArrayOfDictionaryDC" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/WCF.DCs" minOccurs="0" name="GetDictionariesNameAndIdResult" nillable="true" type="q6:ArrayOfDictionaryDC" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetWords">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="dictionaryId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetWordsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/WCF.DCs" minOccurs="0" name="GetWordsResult" nillable="true" type="q7:ArrayOfWordDC" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -82,7 +137,7 @@
   <xs:element name="GetNotLearnedWordsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/WCF.DCs" minOccurs="0" name="GetNotLearnedWordsResult" nillable="true" type="q5:ArrayOfWordDC" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/WCF.DCs" minOccurs="0" name="GetNotLearnedWordsResult" nillable="true" type="q8:ArrayOfWordDC" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

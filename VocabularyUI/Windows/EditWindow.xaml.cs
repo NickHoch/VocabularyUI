@@ -22,10 +22,13 @@ namespace VocabularyUI.Windows
 {
     public partial class EditWindow : MetroWindow
     {
-        private ObservableCollection<WordDTO> wordsObCollection = null;
-        private WordDTO newWord = new WordDTO();
-        private int userId;
+        private int userId = 0;
+        private WordDTO newWord = null;
         private ServerDAL _dal = null;
+        private byte[] soundArr = null;
+        private byte[] imageArr = null;
+        private ObservableCollection<WordDTO> wordsObCollection = null;
+        private int selectedDictionaryId = 0;
 
         public EditWindow(ServerDAL _dal, int userId)
         {
@@ -33,8 +36,8 @@ namespace VocabularyUI.Windows
             this._dal = _dal;
             dataGrid.ItemsSource = null;
             this.userId = userId;
-            this.DataContext = newWord;
-            //wordsObCollection = vocabularyContext.Words.Local;
+            //this.DataContext = new ObservableCollection<WordDTO>(_dal.GetWords(userId));   /// may be problem with initialize     what for this string here?
+            wordsObCollection = new ObservableCollection<WordDTO>(_dal.GetWords(userId));
         }
         private void Add_Click(object sender, RoutedEventArgs e)
         {
@@ -42,84 +45,79 @@ namespace VocabularyUI.Windows
                 || String.IsNullOrWhiteSpace(transcriptionField.Text)
                 || String.IsNullOrWhiteSpace(translationField.Text))
             {
-                MaterialMessageBox.ShowError("Please, fill in all required fields");
+                MaterialMessageBox.ShowError("Please fill in all required fields");
             }
             else
             {
                 var selectedDictionaryName = comboBox.SelectedItem as string;
+                newWord = new WordDTO();
                 newWord.WordEng = wordField.Text;
                 newWord.Transcription = transcriptionField.Text;
                 newWord.Translation = translationField.Text;
-                //newWord.DictionaryId = vocabularyContext.Dictionaries.Where(x => x.Name == selectedDictionaryName).Select(x => x.Id).Single();
-                //vocabularyContext.Words.Add(newWord);
-                //vocabularyContext.SaveChanges();
-                //dataGrid.ItemsSource = null; // refresh datagrid
-                //dataGrid.ItemsSource = vocabularyContext.Words.Where(x => x.DictionaryId == vocabularyContext.Dictionaries.Where(y => y.Name == selectedDictionaryName)
-                //                                                                                                      .Select(y => y.Id)
-                //                                                                                                      .FirstOrDefault())
-                //                                              .ToList();
-                wordField.Text = String.Empty; // refresh textbox
+                newWord.Image = imageArr;
+                newWord.Sound = soundArr;
+                _dal.AddWord(newWord, selectedDictionaryId);
+
+                dataGrid.ItemsSource = null;
+                dataGrid.ItemsSource = _dal.GetWords(selectedDictionaryId);
+                wordField.Text = String.Empty;
                 transcriptionField.Text = String.Empty;
                 translationField.Text = String.Empty;
+                imageArr = null;
+                soundArr = null;
             }
         }
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
             if (dataGrid.SelectedItem != null)
             {
-                var selectedDictionaryName = comboBox.SelectedItem as string;
-                //vocabularyContext.Words.Remove((dataGrid.SelectedItem as Word));
-                //vocabularyContext.SaveChanges();
-
-                //dataGrid.ItemsSource = null; // refresh datagrid
-                //dataGrid.ItemsSource = vocabularyContext.Words.Where(x => x.DictionaryId == vocabularyContext.Dictionaries.Where(y => y.Name == selectedDictionaryName)
-                //                                                                                                      .Select(y => y.Id)
-                //                                                                                                      .FirstOrDefault())
-                //                                              .ToList();
+                int wordId = (dataGrid.SelectedItem as WordDTO).Id;
+                _dal.DeleteWord(wordId);
+                dataGrid.ItemsSource = null;
+                dataGrid.ItemsSource = _dal.GetWords(selectedDictionaryId);
             }
             else
             {
-                MaterialMessageBox.ShowError("Please, choose row to delete");
+                MaterialMessageBox.ShowError("Please choose row to delete");
             }
         }
         private void Update_Click(object sender, RoutedEventArgs e)
         {
             if (dataGrid.SelectedItem != null)
             {
-                //vocabularyContext.SaveChanges();
+                var wordToUpdate = (dataGrid.SelectedItem as WordDTO);
+                wordToUpdate.Dictionary = null;
+                _dal.UpdateWord(wordToUpdate);
                 dataGrid.Items.Refresh();
             }
             else
             {
-                MaterialMessageBox.ShowError("Please, choose row to update");
+                MaterialMessageBox.ShowError("Please choose row to update");
             }
         }
         private void ComboBox_Load(object sender, RoutedEventArgs e)
         {
-            //var comboBox = sender as ComboBox;
-            ////vocabularyContext.Dictionaries.Load(); /// del
-            ////comboBox.ItemsSource = vocabularyContext.Dictionaries.Where(x => x.UserId == userId).Select(x => x.Name).ToList(); /// del
-            //comboBox.ItemsSource = _dal.GetDictionariesNameByUserId(userId);
-            //comboBox.SelectedIndex = 0;
+            var comboBox = sender as ComboBox;
+            var res = _dal.GetDictionariesNameAndId(userId);
+            comboBox.DisplayMemberPath = "Name";
+            comboBox.ItemsSource = res;
+            comboBox.SelectedIndex = 0;
         }
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //var selectedItem = sender as ComboBox;
-            //var selectedDictionaryName = selectedItem.SelectedItem as string;
-            //dataGrid.ItemsSource = vocabularyContext.Words.Where(x => x.DictionaryId == vocabularyContext.Dictionaries.Where(y => y.Name == selectedDictionaryName)
-            //                                                                                                          .Select(y => y.Id)
-            //                                                                                                          .FirstOrDefault())
-            //                                              .ToList();
+            var comboBox = sender as ComboBox;
+            selectedDictionaryId = (int)(comboBox.SelectedValue as DictionaryDTO).Id;
+            dataGrid.ItemsSource = _dal.GetWords(selectedDictionaryId);
         }
         private void Sound_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.DefaultExt = ".mp3";
             dlg.Filter = "Sound files (.mp3)|*.mp3";
-            Nullable<bool> result = dlg.ShowDialog();
+            var result = dlg.ShowDialog();
             if (result == true)
             {
-                newWord.Sound = File.ReadAllBytes(dlg.FileName);
+                soundArr = File.ReadAllBytes(dlg.FileName);
             }
         }
         private void Image_Click(object sender, RoutedEventArgs e)
@@ -127,10 +125,10 @@ namespace VocabularyUI.Windows
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.DefaultExt = ".jpeg";
             dlg.Filter = "Image files (*.jpg, *.jpeg, *.png) | *.jpg; *.jpeg; *.png";
-            Nullable<bool> result = dlg.ShowDialog();
+            var result = dlg.ShowDialog();
             if (result == true)
             {
-                newWord.Image = File.ReadAllBytes(dlg.FileName);
+                imageArr = File.ReadAllBytes(dlg.FileName);
             }
         }
     }

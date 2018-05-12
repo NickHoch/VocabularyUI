@@ -32,14 +32,14 @@
                         Loaded="ComboBox_Load"
                         SelectionChanged="ComboBox_SelectionChanged"/>
                     <DataGrid
-                    x:Name="dataGrid"
-                    CanUserSortColumns="True"
-                    CanUserAddRows="False"
-                    MaxColumnWidth="100"
-                    AutoGenerateColumns="False"
+                        x:Name="dataGrid"
+                        CanUserSortColumns="True"
+                        CanUserAddRows="False"
+                        MaxColumnWidth="100"
+                        AutoGenerateColumns="False"
                         Margin="10,0"
-                    materialDesign:DataGridAssist.CellPadding="10 4 10 2"
-                    materialDesign:DataGridAssist.ColumnHeaderPadding="9 4 9 2">
+                        materialDesign:DataGridAssist.CellPadding="10 4 10 2"
+                        materialDesign:DataGridAssist.ColumnHeaderPadding="9 4 9 2">
                         <DataGrid.Columns>
                             <materialDesign:MaterialDataGridTextColumn
                             Binding="{Binding WordEng}"

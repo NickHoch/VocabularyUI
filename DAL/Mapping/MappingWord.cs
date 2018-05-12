@@ -20,5 +20,14 @@ namespace DAL.Mapping
             IMapper iMapper = configDCtoDTO.CreateMapper();
             return iMapper.Map<WordDC, WordDTO>(wordDC);
         }
+        public static WordDC MappingDTOtoDC(WordDTO wordDTO)
+        {
+            MapperConfiguration configDTOtoDC = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<WordDTO, WordDC>();
+            });
+            IMapper iMapper = configDTOtoDC.CreateMapper();
+            return iMapper.Map<WordDTO, WordDC>(wordDTO);
+        }
     }
 }

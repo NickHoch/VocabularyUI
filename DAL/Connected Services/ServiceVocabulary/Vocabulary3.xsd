@@ -33,6 +33,7 @@
   <xs:complexType name="WordDC">
     <xs:sequence>
       <xs:element minOccurs="0" name="Dictionary" nillable="true" type="tns:DictionaryDC" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="Image" nillable="true" type="xs:base64Binary" />
       <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="IsLearned" nillable="true" type="q1:ArrayOfboolean" />
       <xs:element minOccurs="0" name="IsLearnedWord" type="xs:boolean" />
