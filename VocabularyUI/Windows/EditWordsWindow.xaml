@@ -1,5 +1,5 @@
 ﻿<Controls:MetroWindow
-        x:Class="VocabularyUI.Windows.EditWindow"
+        x:Class="VocabularyUI.Windows.EditWordsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -12,7 +12,7 @@
         GlowBrush="Black"
         ResizeMode="CanResizeWithGrip"
         WindowTransitionsEnabled="False"
-        Title="Edit" Height="400" Width="400" WindowStartupLocation="CenterScreen">
+        Title="Edit words" Height="400" Width="500" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -53,6 +53,15 @@
                             Binding="{Binding Translation}"
                             Header="Translation"
                             EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"/>
+                            <DataGridCheckBoxColumn 
+                                Header="Is learned"
+                                Binding="{Binding IsLearnedWord}" 
+                                ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
+                                EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"/>
+                            <!--<materialDesign:MaterialDataGridCheckBoxColumn
+                            Binding="{Binding IsLearnedWord}"
+                            Header="Is learned"
+                            EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"/>-->
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>

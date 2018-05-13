@@ -41,25 +41,25 @@ namespace VocabularyUI.UserControls
             add { AddHandler(Menu.LogOutClick, value); }
             remove { RemoveHandler(Menu.LogOutClick, value); }
         }
-        private void Start_Click(object sender, RoutedEventArgs e)
+        private void StartLearn_Click(object sender, RoutedEventArgs e)
         {
             var startLearnWindow = new StartLearnWindow(_dal, userId);
             startLearnWindow.Show();
         }
-        private void New_Click(object sender, RoutedEventArgs e)
+        private void AddDictionary_Click(object sender, RoutedEventArgs e)
         {
-            //var newDictionaryWindow = new NewDictionaryWindow(userId);
-            //newDictionaryWindow.Show();
+            var addDictionaryWindow = new AddDictonaryWindow(_dal, userId);
+            addDictionaryWindow.Show();
         }
-        private void Edit_Click(object sender, RoutedEventArgs e)
+        private void EditWords_Click(object sender, RoutedEventArgs e)
         {
-            var editWindow = new EditWindow(_dal, userId);
-            editWindow.Show();
+            var editWordsWindow = new EditWordsWindow(_dal, userId);
+            editWordsWindow.Show();
         }
-        private void Delete_Click(object sender, RoutedEventArgs e)
+        private void DeleteDictionary_Click(object sender, RoutedEventArgs e)
         {
-            //var deleteDictionaryWindow = new DeleteDictionaryWindow(userId);
-            //deleteDictionaryWindow.Show();
+            var deleteDictionaryWindow = new DeleteDictionaryWindow(_dal, userId);
+            deleteDictionaryWindow.Show();
         }
         private void Exit_Click(object sender, RoutedEventArgs e)
         {

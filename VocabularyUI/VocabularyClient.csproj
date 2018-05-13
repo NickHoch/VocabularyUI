@@ -100,8 +100,14 @@
       <DependentUpon>SignUp.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\Helper.cs" />
-    <Compile Include="Windows\EditWindow.xaml.cs">
-      <DependentUpon>EditWindow.xaml</DependentUpon>
+    <Compile Include="Windows\AddDictonaryWindow.xaml.cs">
+      <DependentUpon>AddDictonaryWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\DeleteDictionaryWindow.xaml.cs">
+      <DependentUpon>DeleteDictionaryWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\EditWordsWindow.xaml.cs">
+      <DependentUpon>EditWordsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\StartLearnWindow.xaml.cs">
       <DependentUpon>StartLearnWindow.xaml</DependentUpon>
@@ -150,7 +156,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\EditWindow.xaml">
+    <Page Include="Windows\AddDictonaryWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\DeleteDictionaryWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\EditWordsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

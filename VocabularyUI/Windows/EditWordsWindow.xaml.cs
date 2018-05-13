@@ -20,7 +20,7 @@ using System.Windows.Shapes;
 
 namespace VocabularyUI.Windows
 {
-    public partial class EditWindow : MetroWindow
+    public partial class EditWordsWindow : MetroWindow
     {
         private int userId = 0;
         private WordDTO newWord = null;
@@ -30,14 +30,13 @@ namespace VocabularyUI.Windows
         private ObservableCollection<WordDTO> wordsObCollection = null;
         private int selectedDictionaryId = 0;
 
-        public EditWindow(ServerDAL _dal, int userId)
+        public EditWordsWindow(ServerDAL _dal, int userId)
         {
             InitializeComponent();
             this._dal = _dal;
-            dataGrid.ItemsSource = null;
             this.userId = userId;
             //this.DataContext = new ObservableCollection<WordDTO>(_dal.GetWords(userId));   /// may be problem with initialize     what for this string here?
-            wordsObCollection = new ObservableCollection<WordDTO>(_dal.GetWords(userId));
+            //wordsObCollection = new ObservableCollection<WordDTO>(_dal.GetWords(userId));
         }
         private void Add_Click(object sender, RoutedEventArgs e)
         {

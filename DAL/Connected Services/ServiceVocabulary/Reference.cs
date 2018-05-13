@@ -360,29 +360,29 @@ namespace DAL.ServiceVocabulary {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceVocabulary.IVocabulary")]
     public interface IVocabulary {
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/IsDictionaryNameExists", ReplyAction="http://tempuri.org/IVocabulary/IsDictionaryNameExistsResponse")]
+        bool IsDictionaryNameExists(string email, int userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/IsDictionaryNameExists", ReplyAction="http://tempuri.org/IVocabulary/IsDictionaryNameExistsResponse")]
+        System.Threading.Tasks.Task<bool> IsDictionaryNameExistsAsync(string email, int userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/IsEmailAddressExists", ReplyAction="http://tempuri.org/IVocabulary/IsEmailAddressExistsResponse")]
+        bool IsEmailAddressExists(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/IsEmailAddressExists", ReplyAction="http://tempuri.org/IVocabulary/IsEmailAddressExistsResponse")]
+        System.Threading.Tasks.Task<bool> IsEmailAddressExistsAsync(string email);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/GetUserIdByCredential", ReplyAction="http://tempuri.org/IVocabulary/GetUserIdByCredentialResponse")]
         System.Nullable<int> GetUserIdByCredential(DAL.ServiceVocabulary.CredentialDC credentialDC);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/GetUserIdByCredential", ReplyAction="http://tempuri.org/IVocabulary/GetUserIdByCredentialResponse")]
         System.Threading.Tasks.Task<System.Nullable<int>> GetUserIdByCredentialAsync(DAL.ServiceVocabulary.CredentialDC credentialDC);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/IsEmailAddressFree", ReplyAction="http://tempuri.org/IVocabulary/IsEmailAddressFreeResponse")]
-        bool IsEmailAddressFree(string email);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/IsEmailAddressFree", ReplyAction="http://tempuri.org/IVocabulary/IsEmailAddressFreeResponse")]
-        System.Threading.Tasks.Task<bool> IsEmailAddressFreeAsync(string email);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/AddUser", ReplyAction="http://tempuri.org/IVocabulary/AddUserResponse")]
         bool AddUser(DAL.ServiceVocabulary.CredentialDC credentialDC);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/AddUser", ReplyAction="http://tempuri.org/IVocabulary/AddUserResponse")]
         System.Threading.Tasks.Task<bool> AddUserAsync(DAL.ServiceVocabulary.CredentialDC credentialDC);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/AddDictionary", ReplyAction="http://tempuri.org/IVocabulary/AddDictionaryResponse")]
-        bool AddDictionary(DAL.ServiceVocabulary.DictionaryDC dictionaryDC);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/AddDictionary", ReplyAction="http://tempuri.org/IVocabulary/AddDictionaryResponse")]
-        System.Threading.Tasks.Task<bool> AddDictionaryAsync(DAL.ServiceVocabulary.DictionaryDC dictionaryDC);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/AddWord", ReplyAction="http://tempuri.org/IVocabulary/AddWordResponse")]
         bool AddWord(DAL.ServiceVocabulary.WordDC wordDC, int dictionaryId);
@@ -402,12 +402,6 @@ namespace DAL.ServiceVocabulary {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/UpdateWord", ReplyAction="http://tempuri.org/IVocabulary/UpdateWordResponse")]
         System.Threading.Tasks.Task UpdateWordAsync(DAL.ServiceVocabulary.WordDC wordDC);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/GetDictionariesNameAndId", ReplyAction="http://tempuri.org/IVocabulary/GetDictionariesNameAndIdResponse")]
-        DAL.ServiceVocabulary.DictionaryDC[] GetDictionariesNameAndId(int userId);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/GetDictionariesNameAndId", ReplyAction="http://tempuri.org/IVocabulary/GetDictionariesNameAndIdResponse")]
-        System.Threading.Tasks.Task<DAL.ServiceVocabulary.DictionaryDC[]> GetDictionariesNameAndIdAsync(int userId);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/GetWords", ReplyAction="http://tempuri.org/IVocabulary/GetWordsResponse")]
         DAL.ServiceVocabulary.WordDC[] GetWords(int dictionaryId);
         
@@ -425,6 +419,24 @@ namespace DAL.ServiceVocabulary {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/SetToWordsStatusAsLearned", ReplyAction="http://tempuri.org/IVocabulary/SetToWordsStatusAsLearnedResponse")]
         System.Threading.Tasks.Task SetToWordsStatusAsLearnedAsync(int quantityWords, int dictionaryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/AddDictionary", ReplyAction="http://tempuri.org/IVocabulary/AddDictionaryResponse")]
+        bool AddDictionary(DAL.ServiceVocabulary.DictionaryDC dictionaryDC, int userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/AddDictionary", ReplyAction="http://tempuri.org/IVocabulary/AddDictionaryResponse")]
+        System.Threading.Tasks.Task<bool> AddDictionaryAsync(DAL.ServiceVocabulary.DictionaryDC dictionaryDC, int userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/DeleteDictionary", ReplyAction="http://tempuri.org/IVocabulary/DeleteDictionaryResponse")]
+        bool DeleteDictionary(int dictionaryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/DeleteDictionary", ReplyAction="http://tempuri.org/IVocabulary/DeleteDictionaryResponse")]
+        System.Threading.Tasks.Task<bool> DeleteDictionaryAsync(int dictionaryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/GetDictionariesNameAndId", ReplyAction="http://tempuri.org/IVocabulary/GetDictionariesNameAndIdResponse")]
+        DAL.ServiceVocabulary.DictionaryDC[] GetDictionariesNameAndId(int userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/GetDictionariesNameAndId", ReplyAction="http://tempuri.org/IVocabulary/GetDictionariesNameAndIdResponse")]
+        System.Threading.Tasks.Task<DAL.ServiceVocabulary.DictionaryDC[]> GetDictionariesNameAndIdAsync(int userId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -454,6 +466,22 @@ namespace DAL.ServiceVocabulary {
                 base(binding, remoteAddress) {
         }
         
+        public bool IsDictionaryNameExists(string email, int userId) {
+            return base.Channel.IsDictionaryNameExists(email, userId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> IsDictionaryNameExistsAsync(string email, int userId) {
+            return base.Channel.IsDictionaryNameExistsAsync(email, userId);
+        }
+        
+        public bool IsEmailAddressExists(string email) {
+            return base.Channel.IsEmailAddressExists(email);
+        }
+        
+        public System.Threading.Tasks.Task<bool> IsEmailAddressExistsAsync(string email) {
+            return base.Channel.IsEmailAddressExistsAsync(email);
+        }
+        
         public System.Nullable<int> GetUserIdByCredential(DAL.ServiceVocabulary.CredentialDC credentialDC) {
             return base.Channel.GetUserIdByCredential(credentialDC);
         }
@@ -462,28 +490,12 @@ namespace DAL.ServiceVocabulary {
             return base.Channel.GetUserIdByCredentialAsync(credentialDC);
         }
         
-        public bool IsEmailAddressFree(string email) {
-            return base.Channel.IsEmailAddressFree(email);
-        }
-        
-        public System.Threading.Tasks.Task<bool> IsEmailAddressFreeAsync(string email) {
-            return base.Channel.IsEmailAddressFreeAsync(email);
-        }
-        
         public bool AddUser(DAL.ServiceVocabulary.CredentialDC credentialDC) {
             return base.Channel.AddUser(credentialDC);
         }
         
         public System.Threading.Tasks.Task<bool> AddUserAsync(DAL.ServiceVocabulary.CredentialDC credentialDC) {
             return base.Channel.AddUserAsync(credentialDC);
-        }
-        
-        public bool AddDictionary(DAL.ServiceVocabulary.DictionaryDC dictionaryDC) {
-            return base.Channel.AddDictionary(dictionaryDC);
-        }
-        
-        public System.Threading.Tasks.Task<bool> AddDictionaryAsync(DAL.ServiceVocabulary.DictionaryDC dictionaryDC) {
-            return base.Channel.AddDictionaryAsync(dictionaryDC);
         }
         
         public bool AddWord(DAL.ServiceVocabulary.WordDC wordDC, int dictionaryId) {
@@ -510,14 +522,6 @@ namespace DAL.ServiceVocabulary {
             return base.Channel.UpdateWordAsync(wordDC);
         }
         
-        public DAL.ServiceVocabulary.DictionaryDC[] GetDictionariesNameAndId(int userId) {
-            return base.Channel.GetDictionariesNameAndId(userId);
-        }
-        
-        public System.Threading.Tasks.Task<DAL.ServiceVocabulary.DictionaryDC[]> GetDictionariesNameAndIdAsync(int userId) {
-            return base.Channel.GetDictionariesNameAndIdAsync(userId);
-        }
-        
         public DAL.ServiceVocabulary.WordDC[] GetWords(int dictionaryId) {
             return base.Channel.GetWords(dictionaryId);
         }
@@ -540,6 +544,30 @@ namespace DAL.ServiceVocabulary {
         
         public System.Threading.Tasks.Task SetToWordsStatusAsLearnedAsync(int quantityWords, int dictionaryId) {
             return base.Channel.SetToWordsStatusAsLearnedAsync(quantityWords, dictionaryId);
+        }
+        
+        public bool AddDictionary(DAL.ServiceVocabulary.DictionaryDC dictionaryDC, int userId) {
+            return base.Channel.AddDictionary(dictionaryDC, userId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> AddDictionaryAsync(DAL.ServiceVocabulary.DictionaryDC dictionaryDC, int userId) {
+            return base.Channel.AddDictionaryAsync(dictionaryDC, userId);
+        }
+        
+        public bool DeleteDictionary(int dictionaryId) {
+            return base.Channel.DeleteDictionary(dictionaryId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteDictionaryAsync(int dictionaryId) {
+            return base.Channel.DeleteDictionaryAsync(dictionaryId);
+        }
+        
+        public DAL.ServiceVocabulary.DictionaryDC[] GetDictionariesNameAndId(int userId) {
+            return base.Channel.GetDictionariesNameAndId(userId);
+        }
+        
+        public System.Threading.Tasks.Task<DAL.ServiceVocabulary.DictionaryDC[]> GetDictionariesNameAndIdAsync(int userId) {
+            return base.Channel.GetDictionariesNameAndIdAsync(userId);
         }
     }
 }

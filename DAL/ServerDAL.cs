@@ -8,24 +8,23 @@ namespace DAL
     public class ServerDAL
     {
         private ServiceVocabulary.VocabularyClient vocabularyClient = new ServiceVocabulary.VocabularyClient();
+        public bool IsEmailAddressExists(string email)
+        {
+            return vocabularyClient.IsEmailAddressExists(email);
+        }
+        public bool IsDictionaryNameExists(string dictionaryName, int userId)
+        {
+            return vocabularyClient.IsDictionaryNameExists(dictionaryName, userId);
+        }
         public int? GetUserIdByCredential(CredentialDTO credentialDTO)
         {
             var credentialDC = MappingCredential.CredentialDTOtoDC(credentialDTO);
-            return vocabularyClient.GetUserIdByCredential(credentialDC);            
-        }
-        public bool IsEmailAddressFree(string email)
-        {
-            return vocabularyClient.IsEmailAddressFree(email);
+            return vocabularyClient.GetUserIdByCredential(credentialDC);
         }
         public bool AddUser(CredentialDTO credentialDTO)
         {
             var credentialDC = MappingCredential.CredentialDTOtoDC(credentialDTO);
             return vocabularyClient.AddUser(credentialDC);
-        }
-        public bool AddDictionary(DictionaryDTO dictionaryDTO)
-        {
-            var dictionaryDC = MappingDictionary.CredentialDTOtoDC(dictionaryDTO);
-            return vocabularyClient.AddDictionary(dictionaryDC);
         }
         public bool AddWord(WordDTO wordDTO, int dictionaryId)
         {
@@ -65,6 +64,15 @@ namespace DAL
         public void SetToWordsStatusAsLearned(int quantityWords, int dictionaryId)
         {
             vocabularyClient.SetToWordsStatusAsLearned(quantityWords, dictionaryId);
+        }
+        public bool AddDictionary(DictionaryDTO dictionaryDTO, int userId)
+        {
+            var dictionaryDC = MappingDictionary.CredentialDTOtoDC(dictionaryDTO);
+            return vocabularyClient.AddDictionary(dictionaryDC, userId);
+        }
+        public bool DeleteDictionary(int dictionaryId)
+        {
+            return vocabularyClient.DeleteDictionary(dictionaryId);
         }
     }
 }

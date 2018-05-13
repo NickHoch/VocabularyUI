@@ -53,7 +53,7 @@ namespace VocabularyUI.UserControls
                 }
                 if (String.IsNullOrEmpty(msgErr))
                 {
-                    var res = _dal.IsEmailAddressFree(loginField.Text);
+                    var res = _dal.IsEmailAddressExists(loginField.Text);
                     if (res)
                     {
                         msgErr = String.Concat(msgErr, "Email address already exists. Please, re-enter email address");
