@@ -32,7 +32,6 @@ namespace VocabularyClient
         {
             signUp = new SignUp(_dal);
             contentControl.Content = signUp;
-            //e.Handled = true;
             signUp.AddHandler(SignUp.CancelClick, new RoutedEventHandler(CancelButton));
             signUp.AddHandler(SignUp.ContinueClick, new RoutedEventHandler(ContinueButton));
         }
@@ -48,6 +47,7 @@ namespace VocabularyClient
             signIn = new SignIn(_dal);
             contentControl.Content = signIn;
             signIn.AddHandler(SignIn.SignUpClick, new RoutedEventHandler(SignUpButton));
+            signIn.AddHandler(SignIn.LoginClick, new RoutedEventHandler(LoginButton));
         }
         private void ExitButton(object sender, RoutedEventArgs e)
         {
@@ -58,6 +58,7 @@ namespace VocabularyClient
             signIn = new SignIn(_dal);
             contentControl.Content = signIn;
             signIn.AddHandler(SignIn.SignUpClick, new RoutedEventHandler(SignUpButton));
+            signIn.AddHandler(SignIn.LoginClick, new RoutedEventHandler(LoginButton));
         }
     }
 }

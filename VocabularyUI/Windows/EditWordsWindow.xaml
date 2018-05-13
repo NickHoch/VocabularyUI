@@ -12,9 +12,13 @@
         GlowBrush="Black"
         ResizeMode="CanResizeWithGrip"
         WindowTransitionsEnabled="False"
-        Title="Edit words" Height="400" Width="500" WindowStartupLocation="CenterScreen">
+        Title="Edit words" Height="400" Width="700" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ResourceDictionary>
+            <Style x:Key="DataGridCellCentered" TargetType="DataGridCell">
+                <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
+                <!--<Setter Property="TextBlock.HorizontalAlignment" Value="Center" />-->
+            </Style>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.DataGrid.xaml" />
             </ResourceDictionary.MergedDictionaries>
@@ -35,34 +39,60 @@
                         x:Name="dataGrid"
                         CanUserSortColumns="True"
                         CanUserAddRows="False"
+                        CanUserDeleteRows="False"
                         MaxColumnWidth="100"
                         AutoGenerateColumns="False"
                         Margin="10,0"
                         materialDesign:DataGridAssist.CellPadding="10 4 10 2"
                         materialDesign:DataGridAssist.ColumnHeaderPadding="9 4 9 2">
+                        <!--CellStyle="{StaticResource DataGridCellCentered}"-->
                         <DataGrid.Columns>
                             <materialDesign:MaterialDataGridTextColumn
-                            Binding="{Binding WordEng}"
-                            Header="Word"
-                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
+                                Binding="{Binding WordEng}"
+                                Header="Word"
+                                EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
+                            </materialDesign:MaterialDataGridTextColumn>
                             <materialDesign:MaterialDataGridTextColumn
-                            Binding="{Binding Transcription}"
-                            Header="Transcription"
-                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
+                                Binding="{Binding Transcription}"
+                                Header="Transcription"                                
+                                EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"/>
                             <materialDesign:MaterialDataGridTextColumn
-                            Binding="{Binding Translation}"
-                            Header="Translation"
-                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"/>
+                                Binding="{Binding Translation}"
+                                Header="Translation"                                
+                                EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"/>
                             <DataGridCheckBoxColumn 
                                 Header="Is learned"
                                 Binding="{Binding IsLearnedWord}" 
                                 ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
                                 EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"/>
+                            <DataGridCheckBoxColumn 
+                                Header="Has sound"
+                                Binding="{Binding Sound}" 
+                                ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
+                                EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"/>
+                            <DataGridTemplateColumn
+                                Header="Image" 
+                                Width="SizeToCells"
+                                IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Image}" Height="25"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                             <!--<materialDesign:MaterialDataGridCheckBoxColumn
                             Binding="{Binding IsLearnedWord}"
                             Header="Is learned"
                             EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"/>-->
                         </DataGrid.Columns>
+                        <DataGrid.RowDetailsTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Button>Change</Button>
+                                    <Image Source="{Binding Image}" Height="50"></Image>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGrid.RowDetailsTemplate>
                     </DataGrid>
                 </StackPanel>
                 <Grid Height="350" VerticalAlignment="Top" Margin="5,0,0,0">
@@ -86,7 +116,6 @@
                              materialDesign:HintAssist.Hint="*Word"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                              Margin="10,0">
-
                     </TextBox>
                     <TextBox Grid.Row="2"
                              Grid.Column="1"
@@ -121,25 +150,19 @@
                         Grid.Column="1"
                         Style="{StaticResource MaterialDesignRaisedAccentButton}"
                         materialDesign:RippleAssist.Feedback="#DD000000"
-                        Margin="10,0" Click="Add_Click">
-                        Add
-                    </Button>
+                        Margin="10,0" Click="Add_Click">Add</Button>
                     <Button
                         Grid.Row="9"
                         Grid.Column="1"
                         Style="{StaticResource MaterialDesignRaisedAccentButton}"
                         materialDesign:RippleAssist.Feedback="#DD000000"
-                        Margin="10,0" Click="Delete_Click">
-                        Delete
-                    </Button>
+                        Margin="10,0" Click="Delete_Click">Delete</Button>
                     <Button
                         Grid.Row="10"
                         Grid.Column="1"
                         Style="{StaticResource MaterialDesignRaisedAccentButton}"
                         materialDesign:RippleAssist.Feedback="#DD000000"
-                        Margin="10,0" Click="Update_Click">
-                        Update
-                    </Button>
+                        Margin="10,0" Click="Update_Click">Update</Button>
                 </Grid>
             </StackPanel>
         </ScrollViewer>

@@ -27,7 +27,6 @@ namespace VocabularyUI.Windows
         private ServerDAL _dal = null;
         private byte[] soundArr = null;
         private byte[] imageArr = null;
-        private ObservableCollection<WordDTO> wordsObCollection = null;
         private int selectedDictionaryId = 0;
 
         public EditWordsWindow(ServerDAL _dal, int userId)
@@ -35,8 +34,6 @@ namespace VocabularyUI.Windows
             InitializeComponent();
             this._dal = _dal;
             this.userId = userId;
-            //this.DataContext = new ObservableCollection<WordDTO>(_dal.GetWords(userId));   /// may be problem with initialize     what for this string here?
-            //wordsObCollection = new ObservableCollection<WordDTO>(_dal.GetWords(userId));
         }
         private void Add_Click(object sender, RoutedEventArgs e)
         {
