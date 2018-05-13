@@ -12,7 +12,7 @@
         GlowBrush="Black"
         ResizeMode="CanResizeWithGrip"
         WindowTransitionsEnabled="False"
-        Title="EditWindow" Height="400" Width="400" WindowStartupLocation="CenterScreen">
+        Title="Edit" Height="400" Width="400" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

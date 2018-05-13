@@ -13,6 +13,7 @@ namespace VocabularyUI.UserControls
     public partial class SignIn : UserControl
     {
         private ServerDAL _dal = null;
+        public int? userId = null;
         public SignIn(ServerDAL _dal)
         {
             InitializeComponent();
@@ -79,11 +80,9 @@ namespace VocabularyUI.UserControls
                             Email = loginField.Text,
                             Password = passwordField.Password
                         };
-                        var userId = _dal.GetUserIdByCredential(credentialDTO);
+                        userId = _dal.GetUserIdByCredential(credentialDTO);
                         if (userId.HasValue)
                         {
-                            var menuWindow = new MenuWindow(_dal, (int)userId);
-                            menuWindow.Show();
                             RaiseEvent(new RoutedEventArgs(SignIn.LoginClick, this));
                         }
                         else

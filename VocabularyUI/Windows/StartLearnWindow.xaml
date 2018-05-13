@@ -12,7 +12,7 @@
         GlowBrush="Black"
         ResizeMode="CanResizeWithGrip"
         WindowTransitionsEnabled="False"
-        Title="Vocabulary" Height="400" Width="400" WindowStartupLocation="CenterScreen">
+        Title="Learning" Height="400" Width="400" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>

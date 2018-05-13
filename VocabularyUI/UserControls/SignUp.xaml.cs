@@ -15,7 +15,7 @@ namespace VocabularyUI.UserControls
     public partial class SignUp : UserControl
     {
         private ServerDAL _dal = null;
-
+        public int? userId = null;
         public SignUp(ServerDAL _dal)
         {
             InitializeComponent();
@@ -24,11 +24,18 @@ namespace VocabularyUI.UserControls
 
         public static readonly RoutedEvent ContinueClick =
         EventManager.RegisterRoutedEvent("ContinueClick", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(SignUp));
-
         public event RoutedEventHandler ClickEvent
         {
             add { AddHandler(SignUp.ContinueClick, value); }
             remove { RemoveHandler(SignUp.ContinueClick, value); }
+        }
+
+        public static readonly RoutedEvent CancelClick =
+        EventManager.RegisterRoutedEvent("CancelClick", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(SignUp));
+        public event RoutedEventHandler ClickEvent2
+        {
+            add { AddHandler(SignUp.CancelClick, value); }
+            remove { RemoveHandler(SignUp.CancelClick, value); }
         }
 
         private void Continue_Click(object sender, RoutedEventArgs e)
@@ -83,9 +90,7 @@ namespace VocabularyUI.UserControls
                     var res = _dal.AddUser(credentialDTO);
                     if(res)
                     {
-                        var userId = _dal.GetUserIdByCredential(credentialDTO);
-                        var menuWindow = new MenuWindow(_dal, (int)userId);
-                        menuWindow.Show();
+                        userId = _dal.GetUserIdByCredential(credentialDTO);
                         RaiseEvent(new RoutedEventArgs(SignUp.ContinueClick, this));
                     }
                 }
@@ -105,16 +110,6 @@ namespace VocabularyUI.UserControls
                 MaterialMessageBox.ShowError(ex.Message);
             }
         }
-
-        public static readonly RoutedEvent CancelClick =
-        EventManager.RegisterRoutedEvent("CancelClick", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(SignUp));
-
-        public event RoutedEventHandler ClickEvent2
-        {
-            add { AddHandler(SignUp.CancelClick, value); }
-            remove { RemoveHandler(SignUp.CancelClick, value); }
-        }
-
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             RaiseEvent(new RoutedEventArgs(SignUp.CancelClick, this));
