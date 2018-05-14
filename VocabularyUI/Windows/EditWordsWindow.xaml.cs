@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,6 +28,7 @@ namespace VocabularyUI.Windows
         private ServerDAL _dal = null;
         private byte[] soundArr = null;
         private byte[] imageArr = null;
+        private byte[] bytesArr = null;
         private int selectedDictionaryId = 0;
 
         public EditWordsWindow(ServerDAL _dal, int userId)
@@ -84,7 +86,6 @@ namespace VocabularyUI.Windows
                 var wordToUpdate = (dataGrid.SelectedItem as WordDTO);
                 wordToUpdate.Dictionary = null;
                 _dal.UpdateWord(wordToUpdate);
-                dataGrid.Items.Refresh();
             }
             else
             {
@@ -105,7 +106,7 @@ namespace VocabularyUI.Windows
             selectedDictionaryId = (int)(comboBox.SelectedValue as DictionaryDTO).Id;
             dataGrid.ItemsSource = _dal.GetWords(selectedDictionaryId);
         }
-        private void Sound_Click(object sender, RoutedEventArgs e)
+        private void SoundAdd_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.DefaultExt = ".mp3";
@@ -116,7 +117,7 @@ namespace VocabularyUI.Windows
                 soundArr = File.ReadAllBytes(dlg.FileName);
             }
         }
-        private void Image_Click(object sender, RoutedEventArgs e)
+        private void ImageAdd_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.DefaultExt = ".jpeg";
@@ -125,6 +126,84 @@ namespace VocabularyUI.Windows
             if (result == true)
             {
                 imageArr = File.ReadAllBytes(dlg.FileName);
+            }
+        }
+        private void SoundChange_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.DefaultExt = ".mp3";
+            dlg.Filter = "Sound files (.mp3)|*.mp3";
+            if (dlg.ShowDialog() == true)
+            {
+                var size = new FileInfo(dlg.FileName).Length;
+                if (size > 262144)
+                {
+                    MaterialMessageBox.ShowError("The size of the selected file more than 256KB. Please select another file");
+                    return;
+                }
+                bytesArr = File.ReadAllBytes(dlg.FileName);
+                var word = (dataGrid.SelectedItem as WordDTO);
+                _dal.ChangeSound(word.Id, bytesArr);
+                dataGrid.ItemsSource = null;
+                dataGrid.ItemsSource = _dal.GetWords(selectedDictionaryId);
+            }
+        }
+        private void ImageChange_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.DefaultExt = ".jpeg";
+            dlg.Filter = "Image files (*.jpg, *.jpeg, *.png) | *.jpg; *.jpeg; *.png";
+            if (dlg.ShowDialog() == true)
+            {
+                var size = new FileInfo(dlg.FileName).Length;
+                if (size > 262144)
+                {
+                    MaterialMessageBox.ShowError("The size of the selected file more than 256KB. Please select another file");
+                    return;
+                }
+                bytesArr = File.ReadAllBytes(dlg.FileName);
+                var word = (dataGrid.SelectedItem as WordDTO);
+                _dal.ChangeImage(word.Id, bytesArr);
+                dataGrid.ItemsSource = null;
+                dataGrid.ItemsSource = _dal.GetWords(selectedDictionaryId);
+            }            
+        }
+        private void Play_Click(object sender, RoutedEventArgs e)
+        {
+            var mediaPlayer = new MediaPlayer();
+            var word = (dataGrid.SelectedItem as WordDTO);
+            string path = $@"{word.WordEng}.mp3";
+            try
+            {
+                if (File.Exists(path))
+                {
+                    mediaPlayer.Open(new Uri(path, UriKind.Relative));
+                    mediaPlayer.Play();
+                }
+                else
+                {
+                    using (FileStream fs = File.Create(path))
+                    {
+                        var soundBytes = word.Sound;
+                        fs.Write(soundBytes, 0, soundBytes.Length);
+                    }
+                    mediaPlayer.Open(new Uri(path, UriKind.Relative));
+                    mediaPlayer.Play();
+                }
+            }
+            catch (Exception ex)
+            {
+                MaterialMessageBox.ShowError(ex.Message);
+            }
+        }
+        private void UncheckAllWords_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MaterialMessageBox.ShowWithCancel("Do you want to change status of all words to unlearned?");
+            if(result == MessageBoxResult.OK)
+            {
+                _dal.SetToWordsStatusAsUnlearned(selectedDictionaryId);
+                dataGrid.ItemsSource = null;
+                dataGrid.ItemsSource = _dal.GetWords(selectedDictionaryId);
             }
         }
     }

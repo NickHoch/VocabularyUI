@@ -65,6 +65,18 @@ namespace DAL
         {
             vocabularyClient.SetToWordsStatusAsLearned(quantityWords, dictionaryId);
         }
+        public void SetToWordsStatusAsUnlearned(int dictionaryId)
+        {
+            vocabularyClient.SetToWordsStatusAsUnlearned(dictionaryId);
+        }
+        public void ChangeImage(int wordId, byte[] newImage)
+        {
+            vocabularyClient.ChangeImage(wordId, newImage);
+        }
+        public void ChangeSound(int wordId, byte[] newSound)
+        {
+            vocabularyClient.ChangeSound(wordId, newSound);
+        }
         public bool AddDictionary(DictionaryDTO dictionaryDTO, int userId)
         {
             var dictionaryDC = MappingDictionary.CredentialDTOtoDC(dictionaryDTO);

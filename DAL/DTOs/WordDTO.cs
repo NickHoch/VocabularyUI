@@ -15,7 +15,7 @@ namespace DAL.DTOs
         public byte[] Sound { get; set; }
         public byte[] Image { get; set; }
         public List<Boolean> IsLearned = new List<Boolean>();
-        public bool IsLearnedWord { get; set; } = false;
+        public bool IsLearnedWord { get; set; }
         public DictionaryDTO Dictionary { get; set; }
     }
 }

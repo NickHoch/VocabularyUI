@@ -420,6 +420,24 @@ namespace DAL.ServiceVocabulary {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/SetToWordsStatusAsLearned", ReplyAction="http://tempuri.org/IVocabulary/SetToWordsStatusAsLearnedResponse")]
         System.Threading.Tasks.Task SetToWordsStatusAsLearnedAsync(int quantityWords, int dictionaryId);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/SetToWordsStatusAsUnlearned", ReplyAction="http://tempuri.org/IVocabulary/SetToWordsStatusAsUnlearnedResponse")]
+        void SetToWordsStatusAsUnlearned(int dictionaryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/SetToWordsStatusAsUnlearned", ReplyAction="http://tempuri.org/IVocabulary/SetToWordsStatusAsUnlearnedResponse")]
+        System.Threading.Tasks.Task SetToWordsStatusAsUnlearnedAsync(int dictionaryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/ChangeImage", ReplyAction="http://tempuri.org/IVocabulary/ChangeImageResponse")]
+        void ChangeImage(int wordId, byte[] newImage);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/ChangeImage", ReplyAction="http://tempuri.org/IVocabulary/ChangeImageResponse")]
+        System.Threading.Tasks.Task ChangeImageAsync(int wordId, byte[] newImage);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/ChangeSound", ReplyAction="http://tempuri.org/IVocabulary/ChangeSoundResponse")]
+        void ChangeSound(int wordId, byte[] newSound);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/ChangeSound", ReplyAction="http://tempuri.org/IVocabulary/ChangeSoundResponse")]
+        System.Threading.Tasks.Task ChangeSoundAsync(int wordId, byte[] newSound);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/AddDictionary", ReplyAction="http://tempuri.org/IVocabulary/AddDictionaryResponse")]
         bool AddDictionary(DAL.ServiceVocabulary.DictionaryDC dictionaryDC, int userId);
         
@@ -544,6 +562,30 @@ namespace DAL.ServiceVocabulary {
         
         public System.Threading.Tasks.Task SetToWordsStatusAsLearnedAsync(int quantityWords, int dictionaryId) {
             return base.Channel.SetToWordsStatusAsLearnedAsync(quantityWords, dictionaryId);
+        }
+        
+        public void SetToWordsStatusAsUnlearned(int dictionaryId) {
+            base.Channel.SetToWordsStatusAsUnlearned(dictionaryId);
+        }
+        
+        public System.Threading.Tasks.Task SetToWordsStatusAsUnlearnedAsync(int dictionaryId) {
+            return base.Channel.SetToWordsStatusAsUnlearnedAsync(dictionaryId);
+        }
+        
+        public void ChangeImage(int wordId, byte[] newImage) {
+            base.Channel.ChangeImage(wordId, newImage);
+        }
+        
+        public System.Threading.Tasks.Task ChangeImageAsync(int wordId, byte[] newImage) {
+            return base.Channel.ChangeImageAsync(wordId, newImage);
+        }
+        
+        public void ChangeSound(int wordId, byte[] newSound) {
+            base.Channel.ChangeSound(wordId, newSound);
+        }
+        
+        public System.Threading.Tasks.Task ChangeSoundAsync(int wordId, byte[] newSound) {
+            return base.Channel.ChangeSoundAsync(wordId, newSound);
         }
         
         public bool AddDictionary(DAL.ServiceVocabulary.DictionaryDC dictionaryDC, int userId) {

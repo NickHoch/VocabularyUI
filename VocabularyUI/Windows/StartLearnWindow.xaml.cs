@@ -125,12 +125,12 @@ namespace VocabularyUI.Windows
         }
         private void NextCardButton_Click(object sender, RoutedEventArgs e)
         {
-            if (cardCount < quantityWordsToLearn - 1)
+            if (cardCount < quantityReturnesWords - 1)
             {
                 Helper.PlaySoundFromBytes(WordsToLearn[++cardCount].Sound, WordsToLearn[cardCount].WordEng);
                 contentControl.Content = new UserControls.Card1(WordsToLearn[cardCount]);
             }
-            //else if (cardCount < quantityWordsToLearn - 1 + quantityCard)
+            //else if (cardCount < quantityReturnesWords - 1 + quantityCard)
             //{
             //    contentControl.Content = new UserControls.Card2(WordsToLearn.Skip(5 * index).Take(5).ToList());
             //    index++;
@@ -154,7 +154,7 @@ namespace VocabularyUI.Windows
             //}
             else
             {
-                _dal.SetToWordsStatusAsLearned(quantityWordsToLearn, selectedDictionaryId);
+                _dal.SetToWordsStatusAsLearned(quantityReturnesWords, selectedDictionaryId);
                 this.Close();
             }
         }

@@ -141,6 +141,44 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="SetToWordsStatusAsUnlearned">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="dictionaryId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetToWordsStatusAsUnlearnedResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ChangeImage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="wordId" type="xs:int" />
+        <xs:element minOccurs="0" name="newImage" nillable="true" type="xs:base64Binary" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ChangeImageResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ChangeSound">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="wordId" type="xs:int" />
+        <xs:element minOccurs="0" name="newSound" nillable="true" type="xs:base64Binary" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ChangeSoundResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="AddDictionary">
     <xs:complexType>
       <xs:sequence>
