@@ -34,8 +34,8 @@ namespace VocabularyUI.Utils
         public static void PlaySoundFromBytes(byte[] soundBytes, string word)
         {
             string projectPath = Directory.GetParent(Directory.GetCurrentDirectory())
-                  .Parent
-                  .FullName;
+                                          .Parent
+                                          .FullName;
             string path = String.Concat(projectPath, $@"\bin\Debug\temp\{word}.mp3");
             try
             {

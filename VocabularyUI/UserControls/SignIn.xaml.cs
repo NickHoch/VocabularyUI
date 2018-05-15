@@ -49,7 +49,7 @@ namespace VocabularyUI.UserControls
             {
                 if (String.IsNullOrEmpty(loginField.Text) || String.IsNullOrEmpty(passwordField.Password))
                 {
-                    MaterialMessageBox.ShowError("Please, fill in all login details.");
+                    MaterialMessageBox.ShowError("Please fill in all login details.");
                 }
                 else
                 {
@@ -87,7 +87,7 @@ namespace VocabularyUI.UserControls
                         }
                         else
                         {
-                            MaterialMessageBox.ShowError("Invalid login credentials. Please, try again.");
+                            MaterialMessageBox.ShowError("Invalid login credentials. Please try again.");
                             loginField.Text = String.Empty;
                             passwordField.Password = String.Empty;
                         }

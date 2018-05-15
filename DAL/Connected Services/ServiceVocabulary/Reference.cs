@@ -23,7 +23,7 @@ namespace DAL.ServiceVocabulary {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private DAL.ServiceVocabulary.DictionaryDC[] DictionariesField;
+        private DAL.ServiceVocabulary.DictionaryExtnDC[] DictionariesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string EmailField;
@@ -42,7 +42,7 @@ namespace DAL.ServiceVocabulary {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public DAL.ServiceVocabulary.DictionaryDC[] Dictionaries {
+        public DAL.ServiceVocabulary.DictionaryExtnDC[] Dictionaries {
             get {
                 return this.DictionariesField;
             }
@@ -92,34 +92,15 @@ namespace DAL.ServiceVocabulary {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DictionaryDC", Namespace="http://schemas.datacontract.org/2004/07/WCF.DCs")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DictionaryExtnDC", Namespace="http://schemas.datacontract.org/2004/07/WCF.DCs")]
     [System.SerializableAttribute()]
-    public partial class DictionaryDC : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+    public partial class DictionaryExtnDC : DAL.ServiceVocabulary.DictionaryDC {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private DAL.ServiceVocabulary.CredentialDC CredentialField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string NameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private DAL.ServiceVocabulary.WordDC[] WordsField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public DAL.ServiceVocabulary.CredentialDC Credential {
@@ -131,6 +112,46 @@ namespace DAL.ServiceVocabulary {
                     this.CredentialField = value;
                     this.RaisePropertyChanged("Credential");
                 }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public DAL.ServiceVocabulary.WordDC[] Words {
+            get {
+                return this.WordsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.WordsField, value) != true)) {
+                    this.WordsField = value;
+                    this.RaisePropertyChanged("Words");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DictionaryDC", Namespace="http://schemas.datacontract.org/2004/07/WCF.DCs")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(DAL.ServiceVocabulary.DictionaryExtnDC))]
+    public partial class DictionaryDC : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
             }
         }
         
@@ -160,19 +181,6 @@ namespace DAL.ServiceVocabulary {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public DAL.ServiceVocabulary.WordDC[] Words {
-            get {
-                return this.WordsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.WordsField, value) != true)) {
-                    this.WordsField = value;
-                    this.RaisePropertyChanged("Words");
-                }
-            }
-        }
-        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -193,7 +201,7 @@ namespace DAL.ServiceVocabulary {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private DAL.ServiceVocabulary.DictionaryDC DictionaryField;
+        private DAL.ServiceVocabulary.DictionaryExtnDC DictionaryField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdField;
@@ -230,7 +238,7 @@ namespace DAL.ServiceVocabulary {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public DAL.ServiceVocabulary.DictionaryDC Dictionary {
+        public DAL.ServiceVocabulary.DictionaryExtnDC Dictionary {
             get {
                 return this.DictionaryField;
             }
@@ -439,10 +447,10 @@ namespace DAL.ServiceVocabulary {
         System.Threading.Tasks.Task ChangeSoundAsync(int wordId, byte[] newSound);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/AddDictionary", ReplyAction="http://tempuri.org/IVocabulary/AddDictionaryResponse")]
-        bool AddDictionary(DAL.ServiceVocabulary.DictionaryDC dictionaryDC, int userId);
+        bool AddDictionary(DAL.ServiceVocabulary.DictionaryExtnDC dictionaryDC, int userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/AddDictionary", ReplyAction="http://tempuri.org/IVocabulary/AddDictionaryResponse")]
-        System.Threading.Tasks.Task<bool> AddDictionaryAsync(DAL.ServiceVocabulary.DictionaryDC dictionaryDC, int userId);
+        System.Threading.Tasks.Task<bool> AddDictionaryAsync(DAL.ServiceVocabulary.DictionaryExtnDC dictionaryDC, int userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/DeleteDictionary", ReplyAction="http://tempuri.org/IVocabulary/DeleteDictionaryResponse")]
         bool DeleteDictionary(int dictionaryId);
@@ -450,11 +458,11 @@ namespace DAL.ServiceVocabulary {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/DeleteDictionary", ReplyAction="http://tempuri.org/IVocabulary/DeleteDictionaryResponse")]
         System.Threading.Tasks.Task<bool> DeleteDictionaryAsync(int dictionaryId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/GetDictionariesNameAndId", ReplyAction="http://tempuri.org/IVocabulary/GetDictionariesNameAndIdResponse")]
-        DAL.ServiceVocabulary.DictionaryDC[] GetDictionariesNameAndId(int userId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/GetDictionariesBaseInfo", ReplyAction="http://tempuri.org/IVocabulary/GetDictionariesBaseInfoResponse")]
+        DAL.ServiceVocabulary.DictionaryDC[] GetDictionariesBaseInfo(int userId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/GetDictionariesNameAndId", ReplyAction="http://tempuri.org/IVocabulary/GetDictionariesNameAndIdResponse")]
-        System.Threading.Tasks.Task<DAL.ServiceVocabulary.DictionaryDC[]> GetDictionariesNameAndIdAsync(int userId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/GetDictionariesBaseInfo", ReplyAction="http://tempuri.org/IVocabulary/GetDictionariesBaseInfoResponse")]
+        System.Threading.Tasks.Task<DAL.ServiceVocabulary.DictionaryDC[]> GetDictionariesBaseInfoAsync(int userId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -588,11 +596,11 @@ namespace DAL.ServiceVocabulary {
             return base.Channel.ChangeSoundAsync(wordId, newSound);
         }
         
-        public bool AddDictionary(DAL.ServiceVocabulary.DictionaryDC dictionaryDC, int userId) {
+        public bool AddDictionary(DAL.ServiceVocabulary.DictionaryExtnDC dictionaryDC, int userId) {
             return base.Channel.AddDictionary(dictionaryDC, userId);
         }
         
-        public System.Threading.Tasks.Task<bool> AddDictionaryAsync(DAL.ServiceVocabulary.DictionaryDC dictionaryDC, int userId) {
+        public System.Threading.Tasks.Task<bool> AddDictionaryAsync(DAL.ServiceVocabulary.DictionaryExtnDC dictionaryDC, int userId) {
             return base.Channel.AddDictionaryAsync(dictionaryDC, userId);
         }
         
@@ -604,12 +612,12 @@ namespace DAL.ServiceVocabulary {
             return base.Channel.DeleteDictionaryAsync(dictionaryId);
         }
         
-        public DAL.ServiceVocabulary.DictionaryDC[] GetDictionariesNameAndId(int userId) {
-            return base.Channel.GetDictionariesNameAndId(userId);
+        public DAL.ServiceVocabulary.DictionaryDC[] GetDictionariesBaseInfo(int userId) {
+            return base.Channel.GetDictionariesBaseInfo(userId);
         }
         
-        public System.Threading.Tasks.Task<DAL.ServiceVocabulary.DictionaryDC[]> GetDictionariesNameAndIdAsync(int userId) {
-            return base.Channel.GetDictionariesNameAndIdAsync(userId);
+        public System.Threading.Tasks.Task<DAL.ServiceVocabulary.DictionaryDC[]> GetDictionariesBaseInfoAsync(int userId) {
+            return base.Channel.GetDictionariesBaseInfoAsync(userId);
         }
     }
 }

@@ -95,7 +95,7 @@ namespace VocabularyUI.Windows
         private void ComboBox_Load(object sender, RoutedEventArgs e)
         {
             var comboBox = sender as ComboBox;
-            var res = _dal.GetDictionariesNameAndId(userId);
+            var res = _dal.GetDictionariesBaseInfo(userId);
             comboBox.DisplayMemberPath = "Name";
             comboBox.ItemsSource = res;
             comboBox.SelectedIndex = 0;
@@ -198,7 +198,7 @@ namespace VocabularyUI.Windows
         }
         private void UncheckAllWords_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MaterialMessageBox.ShowWithCancel("Do you want to change status of all words to unlearned?");
+            MessageBoxResult result = MaterialMessageBox.ShowWithCancel("Do you want to change status of all words in this dictionary to unlearned?");
             if(result == MessageBoxResult.OK)
             {
                 _dal.SetToWordsStatusAsUnlearned(selectedDictionaryId);

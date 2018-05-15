@@ -33,7 +33,7 @@ namespace VocabularyUI.Windows
         private void ComboBox_Load(object sender, RoutedEventArgs e)
         {
             var comboBox = sender as ComboBox;
-            var res = _dal.GetDictionariesNameAndId(userId);
+            var res = _dal.GetDictionariesBaseInfo(userId);
             comboBox.DisplayMemberPath = "Name";
             comboBox.ItemsSource = res;
             comboBox.SelectedIndex = 0;

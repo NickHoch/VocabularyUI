@@ -52,9 +52,11 @@
     </Compile>
     <Compile Include="DTOs\CredentialDTO.cs" />
     <Compile Include="DTOs\DictionaryDTO.cs" />
+    <Compile Include="DTOs\DictionaryExtnDTO.cs" />
     <Compile Include="DTOs\WordDTO.cs" />
     <Compile Include="Mapping\MappingCredential.cs" />
     <Compile Include="Mapping\MappingDictionary.cs" />
+    <Compile Include="Mapping\MappingDictionaryExtn.cs" />
     <Compile Include="Mapping\MappingWord.cs" />
     <Compile Include="ServerDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

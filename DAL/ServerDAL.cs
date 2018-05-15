@@ -40,13 +40,6 @@ namespace DAL
             var wordDC = MappingWord.MappingDTOtoDC(wordDTO);
             vocabularyClient.UpdateWord(wordDC);
         }
-        public List<DictionaryDTO> GetDictionariesNameAndId(int userId)
-        {
-            List<DictionaryDTO> listDictionariesDTO = new List<DictionaryDTO>();
-            var listDictionariesDC = vocabularyClient.GetDictionariesNameAndId(userId).ToList();
-            listDictionariesDC.ForEach(x => listDictionariesDTO.Add(MappingDictionary.CredentialDCtoDTO(x)));
-            return listDictionariesDTO;
-        }
         public List<WordDTO> GetWords(int dictionaryId)
         {
             List<WordDTO> listWordsDTO = new List<WordDTO>();
@@ -77,14 +70,21 @@ namespace DAL
         {
             vocabularyClient.ChangeSound(wordId, newSound);
         }
-        public bool AddDictionary(DictionaryDTO dictionaryDTO, int userId)
+        public bool AddDictionary(DictionaryExtnDTO dictionaryDTO, int userId)
         {
-            var dictionaryDC = MappingDictionary.CredentialDTOtoDC(dictionaryDTO);
+            var dictionaryDC = MappingDictionaryExtn.CredentialDTOtoDC(dictionaryDTO);
             return vocabularyClient.AddDictionary(dictionaryDC, userId);
         }
         public bool DeleteDictionary(int dictionaryId)
         {
             return vocabularyClient.DeleteDictionary(dictionaryId);
+        }
+        public List<DictionaryDTO> GetDictionariesBaseInfo(int userId)
+        {
+            List<DictionaryDTO> listDictionariesDTO = new List<DictionaryDTO>();
+            var listDictionariesDC = vocabularyClient.GetDictionariesBaseInfo(userId).ToList();
+            listDictionariesDC.ForEach(x => listDictionariesDTO.Add(MappingDictionary.CredentialDCtoDTO(x)));
+            return listDictionariesDTO;
         }
     }
 }

@@ -41,7 +41,7 @@ namespace VocabularyUI.Windows
             }
             else
             {
-                var newDictionaey = new DictionaryDTO
+                var newDictionaey = new DictionaryExtnDTO
                 {
                     Name = nameField.Text
                 };

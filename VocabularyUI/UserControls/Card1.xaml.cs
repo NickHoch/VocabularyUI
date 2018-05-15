@@ -17,9 +17,6 @@ using VocabularyUI.Utils;
 
 namespace VocabularyUI.UserControls
 {
-    /// <summary>
-    /// Interaction logic for Card1.xaml
-    /// </summary>
     public partial class Card1 : UserControl
     {
         public Card1(WordDTO word)

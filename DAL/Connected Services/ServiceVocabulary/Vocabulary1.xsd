@@ -182,7 +182,7 @@
   <xs:element name="AddDictionary">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/WCF.DCs" minOccurs="0" name="dictionaryDC" nillable="true" type="q7:DictionaryDC" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/WCF.DCs" minOccurs="0" name="dictionaryDC" nillable="true" type="q7:DictionaryExtnDC" />
         <xs:element minOccurs="0" name="userId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -208,17 +208,17 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetDictionariesNameAndId">
+  <xs:element name="GetDictionariesBaseInfo">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="userId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetDictionariesNameAndIdResponse">
+  <xs:element name="GetDictionariesBaseInfoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/WCF.DCs" minOccurs="0" name="GetDictionariesNameAndIdResult" nillable="true" type="q8:ArrayOfDictionaryDC" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/WCF.DCs" minOccurs="0" name="GetDictionariesBaseInfoResult" nillable="true" type="q8:ArrayOfDictionaryDC" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -10,6 +10,6 @@ namespace DAL.DTOs
     {
         public string Email { get; set; }
         public string Password { get; set; }
-        public ICollection<DictionaryDTO> Dictionaries { get; set; }
+        public ICollection<DictionaryExtnDTO> Dictionaries { get; set; }
     }
 }
