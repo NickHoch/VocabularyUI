@@ -39,8 +39,8 @@
                 SelectionChanged="ComboBox_SelectionChanged"/>
             <Button
                 x:Name="launchButton"
-                Margin="10,0,10,0"
-                Width="150"
+                Margin="15,0,10,0"
+                Width="155"
                 Click="Launch_Click"
                 Content="Launch"/>
         </StackPanel>
