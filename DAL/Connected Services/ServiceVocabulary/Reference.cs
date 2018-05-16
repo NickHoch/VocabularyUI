@@ -452,6 +452,12 @@ namespace DAL.ServiceVocabulary {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/AddDictionary", ReplyAction="http://tempuri.org/IVocabulary/AddDictionaryResponse")]
         System.Threading.Tasks.Task<bool> AddDictionaryAsync(DAL.ServiceVocabulary.DictionaryExtnDC dictionaryDC, int userId);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/UpdateDictionary", ReplyAction="http://tempuri.org/IVocabulary/UpdateDictionaryResponse")]
+        void UpdateDictionary(int dictionaryId, string newDictionaryName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/UpdateDictionary", ReplyAction="http://tempuri.org/IVocabulary/UpdateDictionaryResponse")]
+        System.Threading.Tasks.Task UpdateDictionaryAsync(int dictionaryId, string newDictionaryName);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/DeleteDictionary", ReplyAction="http://tempuri.org/IVocabulary/DeleteDictionaryResponse")]
         bool DeleteDictionary(int dictionaryId);
         
@@ -602,6 +608,14 @@ namespace DAL.ServiceVocabulary {
         
         public System.Threading.Tasks.Task<bool> AddDictionaryAsync(DAL.ServiceVocabulary.DictionaryExtnDC dictionaryDC, int userId) {
             return base.Channel.AddDictionaryAsync(dictionaryDC, userId);
+        }
+        
+        public void UpdateDictionary(int dictionaryId, string newDictionaryName) {
+            base.Channel.UpdateDictionary(dictionaryId, newDictionaryName);
+        }
+        
+        public System.Threading.Tasks.Task UpdateDictionaryAsync(int dictionaryId, string newDictionaryName) {
+            return base.Channel.UpdateDictionaryAsync(dictionaryId, newDictionaryName);
         }
         
         public bool DeleteDictionary(int dictionaryId) {

@@ -12,7 +12,7 @@
         GlowBrush="Black"
         ResizeMode="CanResizeWithGrip"
         WindowTransitionsEnabled="False"
-        Title="Edit words" Height="400" Width="490" WindowStartupLocation="CenterScreen">
+        Title="Edit words" Height="550" Width="490" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ResourceDictionary>
             <Style x:Key="DataGridCellCentered" TargetType="DataGridCell">
@@ -38,7 +38,7 @@
                         Loaded="ComboBox_Load"
                         SelectionChanged="ComboBox_SelectionChanged"/>
                         <Button
-                            Width="100"
+                            Width="110"
                             Height="26"
                             Margin="5,5,0,5"
                             Style="{StaticResource MaterialDesignRaisedAccentButton}"

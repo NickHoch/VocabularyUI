@@ -56,6 +56,11 @@ namespace VocabularyUI.UserControls
             var editWordsWindow = new EditWordsWindow(_dal, userId);
             editWordsWindow.Show();
         }
+        private void EditDictionaryName_Click(object sender, RoutedEventArgs e)
+        {
+            var editDictionaryName = new EditDictonaryNameWindow(_dal, userId);
+            editDictionaryName.Show();
+        }
         private void DeleteDictionary_Click(object sender, RoutedEventArgs e)
         {
             var deleteDictionaryWindow = new DeleteDictionaryWindow(_dal, userId);

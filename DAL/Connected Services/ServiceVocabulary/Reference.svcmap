@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="605caea3-c3d6-4263-bf9a-c1afe9ba7c28" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="300e6dc2-bf92-4bf6-af3b-95b67e522bf5" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,12 +22,12 @@
     <MetadataSource Address="http://localhost:55842/Vocabulary.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Vocabulary.xsd" MetadataType="Schema" ID="7a83fb9e-778c-4dda-a0cb-87ffe483e95a" SourceId="1" SourceUrl="http://localhost:55842/Vocabulary.svc?xsd=xsd1" />
-    <MetadataFile FileName="Vocabulary1.xsd" MetadataType="Schema" ID="a88380c5-4f87-42af-a9e1-9f501dad9f15" SourceId="1" SourceUrl="http://localhost:55842/Vocabulary.svc?xsd=xsd0" />
-    <MetadataFile FileName="Vocabulary2.xsd" MetadataType="Schema" ID="7b9dd97a-61a2-4b99-bbd4-c62ec29be64c" SourceId="1" SourceUrl="http://localhost:55842/Vocabulary.svc?xsd=xsd3" />
-    <MetadataFile FileName="Vocabulary3.xsd" MetadataType="Schema" ID="4ece0ac3-5c94-4d79-8779-d6c23524d7b0" SourceId="1" SourceUrl="http://localhost:55842/Vocabulary.svc?xsd=xsd2" />
-    <MetadataFile FileName="Vocabulary.wsdl" MetadataType="Wsdl" ID="59df7d38-03cf-488b-af24-39e9addfd906" SourceId="1" SourceUrl="http://localhost:55842/Vocabulary.svc?wsdl" />
-    <MetadataFile FileName="Vocabulary.disco" MetadataType="Disco" ID="36d426f6-f6dd-48b2-9d85-080a05ca6d39" SourceId="1" SourceUrl="http://localhost:55842/Vocabulary.svc?disco" />
+    <MetadataFile FileName="Vocabulary.xsd" MetadataType="Schema" ID="6bbcf3d9-b2e2-4bb1-84ad-63766dc5a8d1" SourceId="1" SourceUrl="http://localhost:55842/Vocabulary.svc?xsd=xsd1" />
+    <MetadataFile FileName="Vocabulary1.xsd" MetadataType="Schema" ID="6e511384-6a41-4250-a153-980b4cadb658" SourceId="1" SourceUrl="http://localhost:55842/Vocabulary.svc?xsd=xsd0" />
+    <MetadataFile FileName="Vocabulary2.xsd" MetadataType="Schema" ID="b86d2a30-7961-4553-8838-ead580393215" SourceId="1" SourceUrl="http://localhost:55842/Vocabulary.svc?xsd=xsd3" />
+    <MetadataFile FileName="Vocabulary3.xsd" MetadataType="Schema" ID="611754c3-e4bd-4c57-b314-fb5e7f871d3a" SourceId="1" SourceUrl="http://localhost:55842/Vocabulary.svc?xsd=xsd2" />
+    <MetadataFile FileName="Vocabulary.wsdl" MetadataType="Wsdl" ID="7082d1c0-f865-4f03-85bd-19eedfe6bb3a" SourceId="1" SourceUrl="http://localhost:55842/Vocabulary.svc?wsdl" />
+    <MetadataFile FileName="Vocabulary.disco" MetadataType="Disco" ID="76be4951-305c-408d-b54b-343ee8bfc993" SourceId="1" SourceUrl="http://localhost:55842/Vocabulary.svc?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

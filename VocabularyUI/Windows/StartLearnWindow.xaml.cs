@@ -74,7 +74,7 @@ namespace VocabularyUI.Windows
             }
             else if (quantityReturnesWords < 3)
             {
-                MaterialMessageBox.ShowError("You have studied all the words from this dictionary. Please add words to the dictionary");
+                MaterialMessageBox.ShowError("Please add words to the dictionary. Minimum quantity of the words - 3");
             }
             else
             {

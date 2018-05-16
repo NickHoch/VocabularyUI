@@ -1,5 +1,5 @@
-﻿<Controls:MetroWindow 
-        x:Class="VocabularyUI.Windows.DeleteDictionaryWindow"
+﻿<Controls:MetroWindow
+        x:Class="VocabularyUI.Windows.EditDictonaryNameWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -12,7 +12,7 @@
         GlowBrush="Black"
         ResizeMode="CanResizeWithGrip"
         WindowTransitionsEnabled="False"
-        Title="Delete dictionary" Height="200" Width="300" WindowStartupLocation="CenterScreen">
+        Title="Edit dictionary" Height="250" Width="300" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -21,23 +21,28 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="1" Grid.Column="1">
             <ComboBox                        
-                x:Name="comboBox"
+                x:Name="dictNameCmb"
                 Margin="0,20,0,0"
                 materialDesign:HintAssist.Hint="Name"
                 Loaded="ComboBox_Load"
                 SelectionChanged="ComboBox_SelectionChanged"/>
+            <TextBox                 
+                x:Name="nameField"
+                Margin="0,25,0,0"
+                materialDesign:HintAssist.Hint="New name"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
             <Button
                 Grid.Row="3"
                 Grid.Column="1"
                 Style="{StaticResource MaterialDesignRaisedAccentButton}"
                 materialDesign:RippleAssist.Feedback="#DD000000"
-                Margin="0,20"
-                Click="DeleteDictionary_Click">Delete dictionary</Button>
+                Margin="0,25"
+                Click="UpdateDictionaryName_Click">Update name</Button>
         </StackPanel>
     </Grid>
 </Controls:MetroWindow>

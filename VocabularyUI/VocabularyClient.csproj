@@ -106,6 +106,9 @@
     <Compile Include="Windows\DeleteDictionaryWindow.xaml.cs">
       <DependentUpon>DeleteDictionaryWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\EditDictonaryNameWindow.xaml.cs">
+      <DependentUpon>EditDictonaryNameWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\EditWordsWindow.xaml.cs">
       <DependentUpon>EditWordsWindow.xaml</DependentUpon>
     </Compile>
@@ -164,6 +167,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\EditDictonaryNameWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\EditWordsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -208,6 +215,8 @@
       <Name>DAL</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Microsoft\VisualBasic\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -34,23 +34,27 @@
                        HorizontalAlignment="Center">MENU</Label>
                 <Button Style="{StaticResource MaterialDesignRaisedAccentButton}"
                         materialDesign:RippleAssist.Feedback="#DD000000"
-                        Margin="0,10"
+                        Margin="0,5"
                         Click="StartLearn_Click">Start to learn words</Button>
                 <Button Style="{StaticResource MaterialDesignRaisedAccentButton}"
                         materialDesign:RippleAssist.Feedback="#DD000000"
-                        Margin="0,10" 
+                        Margin="0,5" 
                         Click="AddDictionary_Click">Add dictionary</Button>
                 <Button Style="{StaticResource MaterialDesignRaisedAccentButton}"
                         materialDesign:RippleAssist.Feedback="#DD000000"
-                        Margin="0,10" 
-                        Click="EditWords_Click">Edit dictionary</Button>
+                        Margin="0,5" 
+                        Click="EditWords_Click">Edit dictionary content</Button>
                 <Button Style="{StaticResource MaterialDesignRaisedAccentButton}"
                         materialDesign:RippleAssist.Feedback="#DD000000"
-                        Margin="0,10"
+                        Margin="0,5" 
+                        Click="EditDictionaryName_Click">Edit dictionary name</Button>
+                <Button Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                        materialDesign:RippleAssist.Feedback="#DD000000"
+                        Margin="0,5"
                         Click="DeleteDictionary_Click">Delete dictionary</Button>
                 <Button Style="{StaticResource MaterialDesignRaisedAccentButton}"
                         materialDesign:RippleAssist.Feedback="#DD000000"
-                        Margin="0,10"
+                        Margin="0,5"
                         Click="Exit_Click">Exit</Button>
             </StackPanel>
         </Grid>

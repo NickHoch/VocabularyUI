@@ -92,6 +92,12 @@
   <wsdl:message name="IVocabulary_AddDictionary_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddDictionaryResponse" />
   </wsdl:message>
+  <wsdl:message name="IVocabulary_UpdateDictionary_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateDictionary" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_UpdateDictionary_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateDictionaryResponse" />
+  </wsdl:message>
   <wsdl:message name="IVocabulary_DeleteDictionary_InputMessage">
     <wsdl:part name="parameters" element="tns:DeleteDictionary" />
   </wsdl:message>
@@ -160,6 +166,10 @@
     <wsdl:operation name="AddDictionary">
       <wsdl:input wsaw:Action="http://tempuri.org/IVocabulary/AddDictionary" message="tns:IVocabulary_AddDictionary_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IVocabulary/AddDictionaryResponse" message="tns:IVocabulary_AddDictionary_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDictionary">
+      <wsdl:input wsaw:Action="http://tempuri.org/IVocabulary/UpdateDictionary" message="tns:IVocabulary_UpdateDictionary_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IVocabulary/UpdateDictionaryResponse" message="tns:IVocabulary_UpdateDictionary_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="DeleteDictionary">
       <wsdl:input wsaw:Action="http://tempuri.org/IVocabulary/DeleteDictionary" message="tns:IVocabulary_DeleteDictionary_InputMessage" />
@@ -291,6 +301,15 @@
     </wsdl:operation>
     <wsdl:operation name="AddDictionary">
       <soap:operation soapAction="http://tempuri.org/IVocabulary/AddDictionary" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDictionary">
+      <soap:operation soapAction="http://tempuri.org/IVocabulary/UpdateDictionary" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -75,6 +75,10 @@ namespace DAL
             var dictionaryDC = MappingDictionaryExtn.CredentialDTOtoDC(dictionaryDTO);
             return vocabularyClient.AddDictionary(dictionaryDC, userId);
         }
+        public void UpdateDictionary(int dictionaryId, string newDictionaryName)
+        {
+            vocabularyClient.UpdateDictionary(dictionaryId, newDictionaryName);
+        }
         public bool DeleteDictionary(int dictionaryId)
         {
             return vocabularyClient.DeleteDictionary(dictionaryId);
