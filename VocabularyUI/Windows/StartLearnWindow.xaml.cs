@@ -67,6 +67,7 @@ namespace VocabularyUI.Windows
         private void Launch_Click(object sender, RoutedEventArgs e)
         {
             WordsToLearn = _dal.GetNotLearnedWords(quantityWordsToLearn, selectedDictionaryId);
+            WordsToLearn.ForEach(x => x.IsLearned = new List<Boolean>{ false, false, false, false});
             quantityReturnesWords = WordsToLearn.Count();
             if (quantityReturnesWords == 0)
             {
@@ -148,10 +149,10 @@ namespace VocabularyUI.Windows
             //{
             //    FormationCard3(2, false);
             //}
-            //else if (WordsToLearn.Any(item => item.IsLearned[3].Equals(false)))
-            //{
-            //    FormationCard5();
-            //}
+            else if (WordsToLearn.Any(item => item.IsLearned[3].Equals(false)))
+            {
+                FormationCard5();
+            }
             else
             {
                 _dal.SetToWordsStatusAsLearned(quantityReturnesWords, selectedDictionaryId);

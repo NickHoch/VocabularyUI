@@ -60,8 +60,7 @@
                 Margin="50,0"
                 Width="100"
                 HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                HorizontalContentAlignment="Center"/>
         </Viewbox>
         <Viewbox 
             Grid.Row="2"
