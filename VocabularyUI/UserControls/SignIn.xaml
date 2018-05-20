@@ -40,27 +40,50 @@
                              Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
                 <!--<TextBox x:Name="passwordField" materialDesign:HintAssist.Hint="Password"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                 <TextBox x:Name="loginField"  materialDesign:HintAssist.Hint="Email" materialDesign:HintAssist.IsFloating="True"></TextBox>
-                <TextBox x:Name="passwordField" materialDesign:HintAssist.Hint="Password" materialDesign:HintAssist.IsFloating="True"></TextBox>
-                <ProgressBar x:Name="progressBar" IsIndeterminate="True" />-->
+                <TextBox x:Name="passwordField" materialDesign:HintAssist.Hint="Password" materialDesign:HintAssist.IsFloating="True"></TextBox>-->
+                <!--<ProgressBar x:Name="progressBar" IsIndeterminate="True" />-->
                 <Button x:Name="LoginButton"
                         Margin="0,5,0,0"
                         Click="Login_Click">Login</Button>
-                <StackPanel Grid.Row="2" 
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="15*"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    
+                    <StackPanel Grid.Column="1"
+                                HorizontalAlignment="Left" 
+                                Orientation="Horizontal">
+                        <CheckBox x:Name="rememberChk"
+                                  Margin="2,0,0,0"></CheckBox>
+                        <TextBlock FontSize="10" 
+                               FontFamily="Adobe Gotic Std" 
+                               VerticalAlignment="Top" 
+                               HorizontalAlignment="Center"  
+                               Margin="0,10">Remember me</TextBlock>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" 
                             Grid.Column="1" 
                             Orientation="Horizontal" 
-                            HorizontalAlignment="Center" 
-                            Margin="0,15,0,0">
-                    <TextBlock FontSize="10" 
+                            HorizontalAlignment="Center"
+                                >
+                        <TextBlock FontSize="10" 
                                FontFamily="Adobe Gotic Std" 
                                VerticalAlignment="Top" 
                                HorizontalAlignment="Center"  
                                Margin="0,4,0,0">Don`t have an account?</TextBlock>
-                    <Button x:Name="signUp" 
+                        <Button x:Name="signUp" 
                             FontSize="10" 
                             Height="19" 
                             Style="{DynamicResource MaterialDesignFlatButton}" 
                             Click="SignUp_Click">Sign up</Button>
-                </StackPanel>
+                    </StackPanel>
+                </Grid>               
             </StackPanel>
         </Grid>
     </Grid>
