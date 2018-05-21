@@ -14,8 +14,8 @@ namespace VocabularyUI.UserControls
 {
     public partial class SignUp : UserControl
     {
-        private ServerDAL _dal = null;
-        public int? userId = null;
+        private ServerDAL _dal;
+        public int? userId;
         public SignUp(ServerDAL _dal)
         {
             InitializeComponent();
@@ -90,6 +90,7 @@ namespace VocabularyUI.UserControls
                     var res = _dal.AddUser(credentialDTO);
                     if(res)
                     {
+                        //userId = _dal.GetUserIdByCredentialAsync(credentialDTO).GetAwaiter().GetResult();
                         userId = _dal.GetUserIdByCredential(credentialDTO);
                         RaiseEvent(new RoutedEventArgs(SignUp.ContinueClick, this));
                     }

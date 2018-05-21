@@ -2,6 +2,7 @@
 using DAL.Mapping;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DAL
 {
@@ -15,6 +16,14 @@ namespace DAL
         public bool IsDictionaryNameExists(string dictionaryName, int userId)
         {
             return vocabularyClient.IsDictionaryNameExists(dictionaryName, userId);
+        }
+        public async Task<int?> GetUserIdByCredentialAsync(CredentialDTO credentialDTO)
+        {
+            var credentialDC = MappingCredential.CredentialDTOtoDC(credentialDTO);
+            return await Task.Run(() =>
+            {                
+                return vocabularyClient.GetUserIdByCredential(credentialDC);
+            });
         }
         public int? GetUserIdByCredential(CredentialDTO credentialDTO)
         {

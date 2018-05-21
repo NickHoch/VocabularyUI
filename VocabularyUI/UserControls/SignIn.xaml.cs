@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ServiceModel;
 using System.Text.RegularExpressions;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using BespokeFusion;
@@ -80,6 +82,13 @@ namespace VocabularyUI.UserControls
                             Email = loginField.Text,
                             Password = passwordField.Password
                         };
+                        //progressBar.Visibility = Visibility.Visible;
+                        //progressBar.IsIndeterminate = true;
+
+                        //Task<int?> t = _dal.GetUserIdByCredentialAsync(credentialDTO);
+                        //t.Wait();
+                        //int? userId = t.Result;
+
                         userId = _dal.GetUserIdByCredential(credentialDTO);
                         if (userId.HasValue)
                         {

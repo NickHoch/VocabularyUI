@@ -41,26 +41,16 @@
                 <!--<TextBox x:Name="passwordField" materialDesign:HintAssist.Hint="Password"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                 <TextBox x:Name="loginField"  materialDesign:HintAssist.Hint="Email" materialDesign:HintAssist.IsFloating="True"></TextBox>
                 <TextBox x:Name="passwordField" materialDesign:HintAssist.Hint="Password" materialDesign:HintAssist.IsFloating="True"></TextBox>-->
-                <!--<ProgressBar x:Name="progressBar" IsIndeterminate="True" />-->
+                <ProgressBar x:Name="progressBar" IsIndeterminate="False" Visibility="Hidden"/>
                 <Button x:Name="LoginButton"
                         Margin="0,5,0,0"
                         Click="Login_Click">Login</Button>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition Width="15*"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
+
                     
                     <StackPanel Grid.Column="1"
                                 HorizontalAlignment="Left" 
                                 Orientation="Horizontal">
-                        <CheckBox x:Name="rememberChk"
-                                  Margin="2,0,0,0"></CheckBox>
+                        <CheckBox x:Name="rememberChk"></CheckBox>
                         <TextBlock FontSize="10" 
                                FontFamily="Adobe Gotic Std" 
                                VerticalAlignment="Top" 
@@ -70,8 +60,7 @@
                     <StackPanel Grid.Row="2" 
                             Grid.Column="1" 
                             Orientation="Horizontal" 
-                            HorizontalAlignment="Center"
-                                >
+                            HorizontalAlignment="Left">
                         <TextBlock FontSize="10" 
                                FontFamily="Adobe Gotic Std" 
                                VerticalAlignment="Top" 
@@ -83,7 +72,7 @@
                             Style="{DynamicResource MaterialDesignFlatButton}" 
                             Click="SignUp_Click">Sign up</Button>
                     </StackPanel>
-                </Grid>               
+               
             </StackPanel>
         </Grid>
     </Grid>
