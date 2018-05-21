@@ -8,23 +8,27 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO.IsolatedStorage;
 using System.IO;
 using DAL.DTOs;
+using Microsoft.Win32;
 
 namespace VocabularyClient
 {
     public partial class MainWindow : MetroWindow
     {
-        private SignIn signIn = null;
-        private SignUp signUp = null;
-        private Menu menu = null;
+        private SignIn signIn;
+        private SignUp signUp;
+        private Menu menu;
         private ServerDAL _dal = new ServerDAL();
         public static Random rand = new Random();
+        private string path;
+        private string fileName;
         private IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForAssembly();
         public MainWindow()
         {
             InitializeComponent();
+            GetExeLocation();
+            StartExeWhenPcStartup(fileName, path);
             BinaryFormatter formatter = new BinaryFormatter();
             CredentialDTO credential = new CredentialDTO();
-
             using (var stream = store.OpenFile("credential.cfg", FileMode.OpenOrCreate, FileAccess.Read))
             {
                 if(stream.Length != 0)
@@ -47,6 +51,16 @@ namespace VocabularyClient
                 signIn.AddHandler(SignIn.SignUpClick, new RoutedEventHandler(SignUpButton));
                 signIn.AddHandler(SignIn.LoginClick, new RoutedEventHandler(LoginButton));
             }         
+        }
+        public void GetExeLocation()
+        {
+            path = System.Reflection.Assembly.GetEntryAssembly().Location;
+            fileName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;            
+        }
+        public void StartExeWhenPcStartup(string filename, string filepath)
+        {
+            Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            key.SetValue(filename, filepath);
         }
         private void LoginButton(object sender, RoutedEventArgs e)
         {
