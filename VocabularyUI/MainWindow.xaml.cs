@@ -18,37 +18,27 @@ namespace VocabularyClient
         private Menu menu = null;
         private ServerDAL _dal = new ServerDAL();
         public static Random rand = new Random();
-        private static string projectPath = Directory.GetParent(Directory.GetCurrentDirectory())
-                                         .Parent
-                                         .FullName;
-        private string pathCfg = Path.Combine(projectPath, $@"bin\Debug\credential.txt");
+        private IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForAssembly();
         public MainWindow()
         {
             InitializeComponent();
-            var store = IsolatedStorageFile.GetUserStoreForAssembly();
             BinaryFormatter formatter = new BinaryFormatter();
             CredentialDTO credential = new CredentialDTO();
-            if(File.Exists("credential.txt"))
+
+            using (var stream = store.OpenFile("credential.cfg", FileMode.OpenOrCreate, FileAccess.Read))
             {
-                using (var stream = store.OpenFile("credential.txt", FileMode.OpenOrCreate, FileAccess.Read))
+                if(stream.Length != 0)
                 {
                     credential = (CredentialDTO)formatter.Deserialize(stream);
-                }
-                var userId = _dal.GetUserIdByCredential(credential);
-                if (userId.HasValue)
-                {
-                    menu = new Menu(_dal, (int)signIn.userId);
-                    contentControl.Content = menu;
-                    menu.AddHandler(Menu.ExitClick, new RoutedEventHandler(ExitButton));
-                    menu.AddHandler(Menu.LogOutClick, new RoutedEventHandler(LogOutButton));
-                }
-                //else
-                //{
-                //    signIn = new SignIn(_dal);
-                //    contentControl.Content = signIn;
-                //    signIn.AddHandler(SignIn.SignUpClick, new RoutedEventHandler(SignUpButton));
-                //    signIn.AddHandler(SignIn.LoginClick, new RoutedEventHandler(LoginButton));
-                //}
+                }                
+            }
+            var userId = _dal.GetUserIdByCredential(credential);
+            if (userId.HasValue)
+            {
+                menu = new Menu(_dal, (int)userId);
+                contentControl.Content = menu;
+                menu.AddHandler(Menu.ExitClick, new RoutedEventHandler(ExitButton));
+                menu.AddHandler(Menu.LogOutClick, new RoutedEventHandler(LogOutButton));
             }
             else
             {
@@ -56,8 +46,7 @@ namespace VocabularyClient
                 contentControl.Content = signIn;
                 signIn.AddHandler(SignIn.SignUpClick, new RoutedEventHandler(SignUpButton));
                 signIn.AddHandler(SignIn.LoginClick, new RoutedEventHandler(LoginButton));
-            }
-          
+            }         
         }
         private void LoginButton(object sender, RoutedEventArgs e)
         {
@@ -69,8 +58,7 @@ namespace VocabularyClient
                     Password = signIn.passwordField.Password
                 };
                 BinaryFormatter formatter = new BinaryFormatter();
-                var store = IsolatedStorageFile.GetUserStoreForAssembly();
-                using (var stream = store.OpenFile("credential.txt", FileMode.OpenOrCreate, FileAccess.Write))
+                using (var stream = store.OpenFile("credential.cfg", FileMode.OpenOrCreate, FileAccess.Write))
                 {
                     formatter.Serialize(stream, credential);
                 }
@@ -107,6 +95,7 @@ namespace VocabularyClient
         }
         private void LogOutButton(object sender, RoutedEventArgs e)
         {
+            store.DeleteFile("credential.cfg");
             signIn = new SignIn(_dal);
             contentControl.Content = signIn;
             signIn.AddHandler(SignIn.SignUpClick, new RoutedEventHandler(SignUpButton));
