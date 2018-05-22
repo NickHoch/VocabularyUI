@@ -90,7 +90,6 @@ namespace VocabularyUI.UserControls
                     var res = _dal.AddUser(credentialDTO);
                     if(res)
                     {
-                        //userId = _dal.GetUserIdByCredentialAsync(credentialDTO).GetAwaiter().GetResult();
                         userId = _dal.GetUserIdByCredential(credentialDTO);
                         RaiseEvent(new RoutedEventArgs(SignUp.ContinueClick, this));
                     }
@@ -113,7 +112,14 @@ namespace VocabularyUI.UserControls
         }
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            RaiseEvent(new RoutedEventArgs(SignUp.CancelClick, this));
+            try
+            {
+                RaiseEvent(new RoutedEventArgs(SignUp.CancelClick, this));
+            }
+            catch(Exception ex)
+            {
+                MaterialMessageBox.ShowError(ex.Message);
+            }
         }
     }
 }

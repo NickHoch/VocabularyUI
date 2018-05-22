@@ -11,6 +11,7 @@ namespace VocabularyClient
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            log4net.Config.XmlConfigurator.Configure();
             this.ShutdownMode = System.Windows.ShutdownMode.OnMainWindowClose;
             MainWindow = new MainWindow();
             MainWindow.Closing += MainWindow_Closing;

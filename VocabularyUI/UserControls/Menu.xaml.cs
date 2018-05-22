@@ -1,4 +1,5 @@
-﻿using DAL;
+﻿using BespokeFusion;
+using DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,36 +44,85 @@ namespace VocabularyUI.UserControls
         }
         private void StartLearn_Click(object sender, RoutedEventArgs e)
         {
-            var startLearnWindow = new StartLearnWindow(_dal, userId);
-            startLearnWindow.Show();
+            try
+            {
+                var startLearnWindow = new StartLearnWindow(_dal, userId);
+                startLearnWindow.Show();
+            }
+            catch (Exception ex)
+            {
+                MaterialMessageBox.ShowError(ex.Message);
+            }
         }
         private void AddDictionary_Click(object sender, RoutedEventArgs e)
         {
-            var addDictionaryWindow = new AddDictonaryWindow(_dal, userId);
-            addDictionaryWindow.Show();
+            try
+            {
+                var addDictionaryWindow = new AddDictonaryWindow(_dal, userId);
+                addDictionaryWindow.Show();
+            }
+            catch (Exception ex)
+            {
+                MaterialMessageBox.ShowError(ex.Message);
+            }            
         }
         private void EditWords_Click(object sender, RoutedEventArgs e)
         {
-            var editWordsWindow = new EditWordsWindow(_dal, userId);
-            editWordsWindow.Show();
+            try
+            {
+                var editWordsWindow = new EditWordsWindow(_dal, userId);
+                editWordsWindow.Show();
+            }
+            catch (Exception ex)
+            {
+                MaterialMessageBox.ShowError(ex.Message);
+            }           
         }
         private void EditDictionaryName_Click(object sender, RoutedEventArgs e)
         {
-            var editDictionaryName = new EditDictonaryNameWindow(_dal, userId);
-            editDictionaryName.Show();
+            try
+            {
+                var editDictionaryName = new EditDictonaryNameWindow(_dal, userId);
+                editDictionaryName.Show();
+            }
+            catch (Exception ex)
+            {
+                MaterialMessageBox.ShowError(ex.Message);
+            }          
         }
         private void DeleteDictionary_Click(object sender, RoutedEventArgs e)
         {
-            var deleteDictionaryWindow = new DeleteDictionaryWindow(_dal, userId);
-            deleteDictionaryWindow.Show();
+            try
+            {
+                var deleteDictionaryWindow = new DeleteDictionaryWindow(_dal, userId);
+                deleteDictionaryWindow.Show();
+            }
+            catch (Exception ex)
+            {
+                MaterialMessageBox.ShowError(ex.Message);
+            }           
         }
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-            RaiseEvent(new RoutedEventArgs(Menu.ExitClick, this));
+            try
+            {
+                RaiseEvent(new RoutedEventArgs(Menu.ExitClick, this));
+            }
+            catch (Exception ex)
+            {
+                MaterialMessageBox.ShowError(ex.Message);
+            }            
         }
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
-            RaiseEvent(new RoutedEventArgs(Menu.LogOutClick, this));
+            try
+            {
+                RaiseEvent(new RoutedEventArgs(Menu.LogOutClick, this));
+            }
+            catch(Exception ex)
+            {
+                MaterialMessageBox.ShowError(ex.Message);
+            }           
         }
     }
 }

@@ -17,14 +17,6 @@ namespace DAL
         {
             return vocabularyClient.IsDictionaryNameExists(dictionaryName, userId);
         }
-        public async Task<int?> GetUserIdByCredentialAsync(CredentialDTO credentialDTO)
-        {
-            var credentialDC = MappingCredential.CredentialDTOtoDC(credentialDTO);
-            return await Task.Run(() =>
-            {                
-                return vocabularyClient.GetUserIdByCredential(credentialDC);
-            });
-        }
         public int? GetUserIdByCredential(CredentialDTO credentialDTO)
         {
             var credentialDC = MappingCredential.CredentialDTOtoDC(credentialDTO);

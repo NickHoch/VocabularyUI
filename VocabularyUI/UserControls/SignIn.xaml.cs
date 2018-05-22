@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.ServiceModel;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -8,6 +9,7 @@ using System.Windows.Controls;
 using BespokeFusion;
 using DAL;
 using DAL.DTOs;
+using log4net;
 using VocabularyUI.Windows;
 
 namespace VocabularyUI.UserControls
@@ -15,6 +17,7 @@ namespace VocabularyUI.UserControls
     public partial class SignIn : UserControl
     {
         private ServerDAL _dal = null;
+        private readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public int? userId = null;
         public SignIn(ServerDAL _dal)
         {
@@ -45,7 +48,7 @@ namespace VocabularyUI.UserControls
             remove { RemoveHandler(SignIn.LoginClick, value); }
         }
 
-        private void Login_Click(object sender, RoutedEventArgs e)
+        private async void Login_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -82,20 +85,22 @@ namespace VocabularyUI.UserControls
                             Email = loginField.Text,
                             Password = passwordField.Password
                         };
-                        //progressBar.Visibility = Visibility.Visible;
-                        //progressBar.IsIndeterminate = true;
-
-                        //Task<int?> t = _dal.GetUserIdByCredentialAsync(credentialDTO);
-                        //t.Wait();
-                        //int? userId = t.Result;
-
-                        userId = _dal.GetUserIdByCredential(credentialDTO);
+                        progressBar.Visibility = Visibility.Visible;
+                        progressBar.IsIndeterminate = true;
+                        await Task.Run(() =>
+                        {
+                            userId = _dal.GetUserIdByCredential(credentialDTO);
+                        });
+                        progressBar.IsIndeterminate = false;
+                        progressBar.Visibility = Visibility.Hidden;
                         if (userId.HasValue)
                         {
+                            log.Info($"User with id: {userId} has been sign in");
                             RaiseEvent(new RoutedEventArgs(SignIn.LoginClick, this));
                         }
                         else
                         {
+                            log.Info($"Email: {loginField.Text}. Password: {passwordField.Password}. Invalid login credentials");
                             MaterialMessageBox.ShowError("Invalid login credentials. Please try again.");
                             loginField.Text = String.Empty;
                             passwordField.Password = String.Empty;

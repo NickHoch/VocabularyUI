@@ -210,9 +210,6 @@ namespace DAL.ServiceVocabulary {
         private byte[] ImageField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool[] IsLearnedField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsLearnedWordField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -272,19 +269,6 @@ namespace DAL.ServiceVocabulary {
                 if ((object.ReferenceEquals(this.ImageField, value) != true)) {
                     this.ImageField = value;
                     this.RaisePropertyChanged("Image");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool[] IsLearned {
-            get {
-                return this.IsLearnedField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.IsLearnedField, value) != true)) {
-                    this.IsLearnedField = value;
-                    this.RaisePropertyChanged("IsLearned");
                 }
             }
         }

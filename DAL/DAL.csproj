@@ -74,26 +74,20 @@
     <None Include="Connected Services\ServiceVocabulary\DAL.ServiceVocabulary.WordDC.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\ServiceVocabulary\Vocabulary.wsdl" />
-    <None Include="Connected Services\ServiceVocabulary\Vocabulary.xsd">
+    <None Include="Connected Services\ServiceVocabulary\service.wsdl" />
+    <None Include="Connected Services\ServiceVocabulary\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServiceVocabulary\Vocabulary1.xsd">
+    <None Include="Connected Services\ServiceVocabulary\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServiceVocabulary\Vocabulary2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ServiceVocabulary\Vocabulary3.xsd">
+    <None Include="Connected Services\ServiceVocabulary\WCF.DCs.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ServiceVocabulary\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ServiceVocabulary\Vocabulary.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ServiceVocabulary\configuration91.svcinfo" />

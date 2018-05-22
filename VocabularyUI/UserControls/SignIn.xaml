@@ -41,7 +41,9 @@
                 <!--<TextBox x:Name="passwordField" materialDesign:HintAssist.Hint="Password"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                 <TextBox x:Name="loginField"  materialDesign:HintAssist.Hint="Email" materialDesign:HintAssist.IsFloating="True"></TextBox>
                 <TextBox x:Name="passwordField" materialDesign:HintAssist.Hint="Password" materialDesign:HintAssist.IsFloating="True"></TextBox>-->
-                <ProgressBar x:Name="progressBar" IsIndeterminate="False" Visibility="Hidden"/>
+                <ProgressBar x:Name="progressBar"
+                             Visibility="Hidden"
+                             IsIndeterminate="False"/>
                 <Button x:Name="LoginButton"
                         Margin="0,5,0,0"
                         Click="Login_Click">Login</Button>

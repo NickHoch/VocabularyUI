@@ -36,11 +36,7 @@ namespace VocabularyClient
                 {
                     credential = (CredentialDTO)formatter.Deserialize(stream);
                 }                
-            }
-            //Task<int?> t = _dal.GetUserIdByCredentialAsync(credential);
-            //t.Wait();
-            //int? userId = t.Result;
-            
+            }            
             var userId = _dal.GetUserIdByCredential(credential);
             if (userId.HasValue)
             {
