@@ -74,14 +74,14 @@
     <None Include="Connected Services\ServiceVocabulary\DAL.ServiceVocabulary.WordDC.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\ServiceVocabulary\service.wsdl" />
-    <None Include="Connected Services\ServiceVocabulary\service.xsd">
+    <None Include="Connected Services\ServiceVocabulary\service1.wsdl" />
+    <None Include="Connected Services\ServiceVocabulary\service2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServiceVocabulary\service1.xsd">
+    <None Include="Connected Services\ServiceVocabulary\service21.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServiceVocabulary\WCF.DCs.xsd">
+    <None Include="Connected Services\ServiceVocabulary\WCF.DCs1.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />

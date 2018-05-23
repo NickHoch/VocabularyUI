@@ -19,13 +19,13 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:55842/Vocabulary.svc/mex" Protocol="mex" SourceId="1" />
+    <MetadataSource Address="http://localhost:55842/Vocabulary.svc/mex/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="047bc317-fa20-4aa0-9e2e-6852ff15d734" SourceId="1" SourceUrl="http://localhost:55842/Vocabulary.svc/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="a3168411-9fe0-46a5-9b77-c2a6562ff4ee" SourceId="1" SourceUrl="http://localhost:55842/Vocabulary.svc/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="b4566d0f-8206-4a12-868f-40e2626728ed" SourceId="1" SourceUrl="http://localhost:55842/Vocabulary.svc/mex" />
-    <MetadataFile FileName="WCF.DCs.xsd" MetadataType="Schema" ID="c85dfaf9-aeb9-44b5-8d05-e8ba801172fd" SourceId="1" SourceUrl="http://localhost:55842/Vocabulary.svc/mex" />
+    <MetadataFile FileName="service1.wsdl" MetadataType="Wsdl" ID="7cdbeecb-391f-4265-9670-d02411478b60" SourceId="1" SourceUrl="http://localhost:55842/Vocabulary.svc/mex/mex" />
+    <MetadataFile FileName="service2.xsd" MetadataType="Schema" ID="937d2afe-7825-4609-95b6-a17e9f9aba24" SourceId="1" SourceUrl="http://localhost:55842/Vocabulary.svc/mex/mex" />
+    <MetadataFile FileName="service21.xsd" MetadataType="Schema" ID="2b84d35a-f2c5-46a9-a748-5c441433eb1a" SourceId="1" SourceUrl="http://localhost:55842/Vocabulary.svc/mex/mex" />
+    <MetadataFile FileName="WCF.DCs1.xsd" MetadataType="Schema" ID="7587cb0c-153e-4d13-9c95-2b94e4a2a43c" SourceId="1" SourceUrl="http://localhost:55842/Vocabulary.svc/mex/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
