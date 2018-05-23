@@ -114,11 +114,11 @@ namespace VocabularyUI.UserControls
             }
             catch (FaultException ex)
             {
-                MaterialMessageBox.ShowError(ex.Message);
+                MaterialMessageBox.ShowError(ex.ToString());
             }
             catch(Exception ex)
             {
-                MaterialMessageBox.ShowError(ex.Message);
+                MaterialMessageBox.ShowError(ex.ToString());
             }
         }
 

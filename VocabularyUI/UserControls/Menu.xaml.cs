@@ -51,7 +51,7 @@ namespace VocabularyUI.UserControls
             }
             catch (Exception ex)
             {
-                MaterialMessageBox.ShowError(ex.Message);
+                MaterialMessageBox.ShowError(ex.ToString());
             }
         }
         private void AddDictionary_Click(object sender, RoutedEventArgs e)
@@ -63,7 +63,7 @@ namespace VocabularyUI.UserControls
             }
             catch (Exception ex)
             {
-                MaterialMessageBox.ShowError(ex.Message);
+                MaterialMessageBox.ShowError(ex.ToString());
             }            
         }
         private void EditWords_Click(object sender, RoutedEventArgs e)
@@ -75,7 +75,7 @@ namespace VocabularyUI.UserControls
             }
             catch (Exception ex)
             {
-                MaterialMessageBox.ShowError(ex.Message);
+                MaterialMessageBox.ShowError(ex.ToString());
             }           
         }
         private void EditDictionaryName_Click(object sender, RoutedEventArgs e)
@@ -87,7 +87,7 @@ namespace VocabularyUI.UserControls
             }
             catch (Exception ex)
             {
-                MaterialMessageBox.ShowError(ex.Message);
+                MaterialMessageBox.ShowError(ex.ToString());
             }          
         }
         private void DeleteDictionary_Click(object sender, RoutedEventArgs e)
@@ -99,7 +99,7 @@ namespace VocabularyUI.UserControls
             }
             catch (Exception ex)
             {
-                MaterialMessageBox.ShowError(ex.Message);
+                MaterialMessageBox.ShowError(ex.ToString());
             }           
         }
         private void Exit_Click(object sender, RoutedEventArgs e)
@@ -110,7 +110,7 @@ namespace VocabularyUI.UserControls
             }
             catch (Exception ex)
             {
-                MaterialMessageBox.ShowError(ex.Message);
+                MaterialMessageBox.ShowError(ex.ToString());
             }            
         }
         private void LogOut_Click(object sender, RoutedEventArgs e)
@@ -121,7 +121,7 @@ namespace VocabularyUI.UserControls
             }
             catch(Exception ex)
             {
-                MaterialMessageBox.ShowError(ex.Message);
+                MaterialMessageBox.ShowError(ex.ToString());
             }           
         }
     }

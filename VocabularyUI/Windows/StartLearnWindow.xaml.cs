@@ -16,6 +16,8 @@ using MahApps.Metro.Controls;
 using DAL.DTOs;
 using VocabularyUI.Utils;
 using DAL;
+using System.IO;
+using System.Media;
 
 namespace VocabularyUI.Windows
 {
@@ -34,6 +36,7 @@ namespace VocabularyUI.Windows
         private List<int> RangeList = new List<int>();
         private int selectedDictionaryId = 0;
         public List<WordDTO> WordsToLearn = new List<WordDTO>();
+        private System.Media.SoundPlayer player = new System.Media.SoundPlayer();
 
         public StartLearnWindow(ServerDAL _dal, int userId)
         {
@@ -128,7 +131,13 @@ namespace VocabularyUI.Windows
         {
             if (cardCount < quantityReturnesWords - 1)
             {
-                Helper.PlaySoundFromBytes(WordsToLearn[++cardCount].Sound, WordsToLearn[cardCount].WordEng);
+                using (MemoryStream ms = new MemoryStream(WordsToLearn[++cardCount].Sound))
+                {
+                    // Construct the sound player
+                    player.Stream = ms;
+                    player.Play();
+                }
+                //Helper.PlaySoundFromBytes(WordsToLearn[++cardCount].Sound, WordsToLearn[cardCount].WordEng);
                 contentControl.Content = new UserControls.Card1(WordsToLearn[cardCount]);
             }
             //else if (cardCount < quantityReturnesWords - 1 + quantityCard)

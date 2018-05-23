@@ -10,6 +10,8 @@ using System.IO;
 using DAL.DTOs;
 using Microsoft.Win32;
 using System.Threading.Tasks;
+using System.ServiceModel;
+using BespokeFusion;
 
 namespace VocabularyClient
 {
@@ -25,33 +27,44 @@ namespace VocabularyClient
         private IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForAssembly();
         public MainWindow()
         {
-            InitializeComponent();
-            GetExeLocation();
-            StartExeWhenPcStartup(fileName, path);
-            BinaryFormatter formatter = new BinaryFormatter();
-            CredentialDTO credential = new CredentialDTO();
-            using (var stream = store.OpenFile("credential.cfg", FileMode.OpenOrCreate, FileAccess.Read))
+            try
             {
-                if(stream.Length != 0)
+                InitializeComponent();
+                GetExeLocation();
+                StartExeWhenPcStartup(fileName, path);
+                BinaryFormatter formatter = new BinaryFormatter();
+                CredentialDTO credential = new CredentialDTO();
+                using (var stream = store.OpenFile("credential.cfg", FileMode.OpenOrCreate, FileAccess.Read))
                 {
-                    credential = (CredentialDTO)formatter.Deserialize(stream);
-                }                
-            }            
-            var userId = _dal.GetUserIdByCredential(credential);
-            if (userId.HasValue)
-            {
-                menu = new Menu(_dal, (int)userId);
-                contentControl.Content = menu;
-                menu.AddHandler(Menu.ExitClick, new RoutedEventHandler(ExitButton));
-                menu.AddHandler(Menu.LogOutClick, new RoutedEventHandler(LogOutButton));
+                    if (stream.Length != 0)
+                    {
+                        credential = (CredentialDTO)formatter.Deserialize(stream);
+                    }
+                }
+                var userId = _dal.GetUserIdByCredential(credential);
+                if (userId.HasValue)
+                {
+                    menu = new Menu(_dal, (int)userId);
+                    contentControl.Content = menu;
+                    menu.AddHandler(Menu.ExitClick, new RoutedEventHandler(ExitButton));
+                    menu.AddHandler(Menu.LogOutClick, new RoutedEventHandler(LogOutButton));
+                }
+                else
+                {
+                    signIn = new SignIn(_dal);
+                    contentControl.Content = signIn;
+                    signIn.AddHandler(SignIn.SignUpClick, new RoutedEventHandler(SignUpButton));
+                    signIn.AddHandler(SignIn.LoginClick, new RoutedEventHandler(LoginButton));
+                }
             }
-            else
+            catch (FaultException ex)
             {
-                signIn = new SignIn(_dal);
-                contentControl.Content = signIn;
-                signIn.AddHandler(SignIn.SignUpClick, new RoutedEventHandler(SignUpButton));
-                signIn.AddHandler(SignIn.LoginClick, new RoutedEventHandler(LoginButton));
-            }         
+                MaterialMessageBox.ShowError(ex.ToString());
+            }
+            catch (Exception ex)
+            {
+                MaterialMessageBox.ShowError(ex.Message);
+            }
         }
         public void GetExeLocation()
         {
@@ -65,7 +78,7 @@ namespace VocabularyClient
         }
         private void LoginButton(object sender, RoutedEventArgs e)
         {
-            if(signIn.rememberChk.IsChecked == true)
+            if (signIn.rememberChk.IsChecked == true)
             {
                 CredentialDTO credential = new CredentialDTO
                 {
