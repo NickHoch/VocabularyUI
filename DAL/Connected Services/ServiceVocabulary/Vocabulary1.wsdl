@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://Microsoft.ServiceModel.Samples" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://Microsoft.ServiceModel.Samples" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://Microsoft.ServiceModel.Samples/Imports">
+      <xsd:import schemaLocation="http://localhost:55842/Vocabulary.svc?xsd=xsd0" namespace="http://Microsoft.ServiceModel.Samples" />
+      <xsd:import schemaLocation="http://localhost:55842/Vocabulary.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:55842/Vocabulary.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/WCF.DCs" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IVocabulary_IsDictionaryNameExists_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsDictionaryNameExists" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_IsDictionaryNameExists_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsDictionaryNameExistsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_IsEmailAddressExists_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsEmailAddressExists" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_IsEmailAddressExists_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsEmailAddressExistsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_GetUserIdByCredential_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserIdByCredential" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_GetUserIdByCredential_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserIdByCredentialResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_AddUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddUser" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_AddUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_AddWord_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddWord" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_AddWord_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddWordResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_DeleteWord_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteWord" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_DeleteWord_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteWordResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_UpdateWord_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateWord" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_UpdateWord_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateWordResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_GetWords_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWords" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_GetWords_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWordsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_GetNotLearnedWords_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetNotLearnedWords" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_GetNotLearnedWords_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNotLearnedWordsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_SetToWordsStatusAsLearned_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetToWordsStatusAsLearned" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_SetToWordsStatusAsLearned_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetToWordsStatusAsLearnedResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_SetToWordsStatusAsUnlearned_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetToWordsStatusAsUnlearned" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_SetToWordsStatusAsUnlearned_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetToWordsStatusAsUnlearnedResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_ChangeImage_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeImage" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_ChangeImage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeImageResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_ChangeSound_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeSound" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_ChangeSound_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeSoundResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_AddDictionary_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddDictionary" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_AddDictionary_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddDictionaryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_UpdateDictionary_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateDictionary" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_UpdateDictionary_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateDictionaryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_DeleteDictionary_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteDictionary" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_DeleteDictionary_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteDictionaryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_GetDictionariesBaseInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDictionariesBaseInfo" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_GetDictionariesBaseInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDictionariesBaseInfoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IVocabulary">
+    <wsdl:operation name="IsDictionaryNameExists">
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/IsDictionaryNameExists" message="tns:IVocabulary_IsDictionaryNameExists_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/IsDictionaryNameExistsResponse" message="tns:IVocabulary_IsDictionaryNameExists_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsEmailAddressExists">
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/IsEmailAddressExists" message="tns:IVocabulary_IsEmailAddressExists_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/IsEmailAddressExistsResponse" message="tns:IVocabulary_IsEmailAddressExists_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserIdByCredential">
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetUserIdByCredential" message="tns:IVocabulary_GetUserIdByCredential_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetUserIdByCredentialResponse" message="tns:IVocabulary_GetUserIdByCredential_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUser">
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/AddUser" message="tns:IVocabulary_AddUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/AddUserResponse" message="tns:IVocabulary_AddUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddWord">
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/AddWord" message="tns:IVocabulary_AddWord_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/AddWordResponse" message="tns:IVocabulary_AddWord_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteWord">
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/DeleteWord" message="tns:IVocabulary_DeleteWord_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/DeleteWordResponse" message="tns:IVocabulary_DeleteWord_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateWord">
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/UpdateWord" message="tns:IVocabulary_UpdateWord_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/UpdateWordResponse" message="tns:IVocabulary_UpdateWord_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWords">
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetWords" message="tns:IVocabulary_GetWords_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetWordsResponse" message="tns:IVocabulary_GetWords_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNotLearnedWords">
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetNotLearnedWords" message="tns:IVocabulary_GetNotLearnedWords_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetNotLearnedWordsResponse" message="tns:IVocabulary_GetNotLearnedWords_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetToWordsStatusAsLearned">
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsLearned" message="tns:IVocabulary_SetToWordsStatusAsLearned_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsLearnedResponse" message="tns:IVocabulary_SetToWordsStatusAsLearned_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetToWordsStatusAsUnlearned">
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsUnlearned" message="tns:IVocabulary_SetToWordsStatusAsUnlearned_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsUnlearnedResponse" message="tns:IVocabulary_SetToWordsStatusAsUnlearned_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeImage">
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeImage" message="tns:IVocabulary_ChangeImage_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeImageResponse" message="tns:IVocabulary_ChangeImage_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeSound">
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeSound" message="tns:IVocabulary_ChangeSound_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeSoundResponse" message="tns:IVocabulary_ChangeSound_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddDictionary">
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/AddDictionary" message="tns:IVocabulary_AddDictionary_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/AddDictionaryResponse" message="tns:IVocabulary_AddDictionary_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDictionary">
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/UpdateDictionary" message="tns:IVocabulary_UpdateDictionary_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/UpdateDictionaryResponse" message="tns:IVocabulary_UpdateDictionary_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteDictionary">
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/DeleteDictionary" message="tns:IVocabulary_DeleteDictionary_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/DeleteDictionaryResponse" message="tns:IVocabulary_DeleteDictionary_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDictionariesBaseInfo">
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetDictionariesBaseInfo" message="tns:IVocabulary_GetDictionariesBaseInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetDictionariesBaseInfoResponse" message="tns:IVocabulary_GetDictionariesBaseInfo_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

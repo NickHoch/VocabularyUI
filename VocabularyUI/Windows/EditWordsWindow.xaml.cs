@@ -12,6 +12,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Win32;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -24,11 +25,11 @@ namespace VocabularyUI.Windows
     public partial class EditWordsWindow : MetroWindow
     {
         private int userId = 0;
-        private WordDTO newWord = null;
-        private ServerDAL _dal = null;
-        private byte[] soundArr = null;
-        private byte[] imageArr = null;
-        private byte[] bytesArr = null;
+        private WordDTO newWord;
+        private ServerDAL _dal;
+        private byte[] soundArr;
+        private byte[] imageArr;
+        private byte[] bytesArr;
         private int selectedDictionaryId = 0;
 
         public EditWordsWindow(ServerDAL _dal, int userId)
@@ -42,8 +43,8 @@ namespace VocabularyUI.Windows
             try
             {
                 if (String.IsNullOrWhiteSpace(wordField.Text)
-               || String.IsNullOrWhiteSpace(transcriptionField.Text)
-               || String.IsNullOrWhiteSpace(translationField.Text))
+                    || String.IsNullOrWhiteSpace(transcriptionField.Text)
+                    || String.IsNullOrWhiteSpace(translationField.Text))
                 {
                     MaterialMessageBox.ShowError("Please fill in all required fields");
                 }
@@ -69,7 +70,7 @@ namespace VocabularyUI.Windows
             }
             catch(Exception ex)
             {
-                MaterialMessageBox.ShowError(ex.Message);
+                MaterialMessageBox.ShowError(ex.ToString());
             }
         }
         private void Delete_Click(object sender, RoutedEventArgs e)
@@ -90,7 +91,7 @@ namespace VocabularyUI.Windows
             }
             catch (Exception ex)
             {
-                MaterialMessageBox.ShowError(ex.Message);
+                MaterialMessageBox.ShowError(ex.ToString());
             }
         }
         private void Update_Click(object sender, RoutedEventArgs e)
@@ -110,7 +111,7 @@ namespace VocabularyUI.Windows
             }
             catch (Exception ex)
             {
-                MaterialMessageBox.ShowError(ex.Message);
+                MaterialMessageBox.ShowError(ex.ToString());
             }
         }
         private void ComboBox_Load(object sender, RoutedEventArgs e)
@@ -125,7 +126,7 @@ namespace VocabularyUI.Windows
             }
             catch(Exception ex)
             {
-                MaterialMessageBox.ShowError(ex.Message);
+                MaterialMessageBox.ShowError(ex.ToString());
             }
         }
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -138,14 +139,14 @@ namespace VocabularyUI.Windows
             }
             catch(Exception ex)
             {
-                MaterialMessageBox.Show(ex.Message);
+                MaterialMessageBox.Show(ex.ToString());
             }
         }
         private void SoundAdd_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+                OpenFileDialog dlg = new OpenFileDialog();
                 dlg.DefaultExt = ".mp3";
                 dlg.Filter = "Sound files (.mp3)|*.mp3";
                 var result = dlg.ShowDialog();
@@ -156,14 +157,14 @@ namespace VocabularyUI.Windows
             }
             catch(Exception ex)
             {
-                MaterialMessageBox.Show(ex.Message);
+                MaterialMessageBox.Show(ex.ToString());
             }
         }
         private void ImageAdd_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+                OpenFileDialog dlg = new OpenFileDialog();
                 dlg.DefaultExt = ".jpeg";
                 dlg.Filter = "Image files (*.jpg, *.jpeg, *.png) | *.jpg; *.jpeg; *.png";
                 var result = dlg.ShowDialog();
@@ -174,18 +175,19 @@ namespace VocabularyUI.Windows
             }
             catch(Exception ex)
             {
-                MaterialMessageBox.Show(ex.Message);
+                MaterialMessageBox.Show(ex.ToString());
             }
         }
         private void SoundChange_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+                OpenFileDialog dlg = new OpenFileDialog();
                 dlg.DefaultExt = ".mp3";
                 dlg.Filter = "Sound files (.mp3)|*.mp3";
                 if (dlg.ShowDialog() == true)
                 {
+                    Update_Click(sender, e);
                     var size = new FileInfo(dlg.FileName).Length;
                     if (size > 262144)
                     {
@@ -201,18 +203,19 @@ namespace VocabularyUI.Windows
             }
             catch(Exception ex)
             {
-                MaterialMessageBox.ShowError(ex.Message);
+                MaterialMessageBox.ShowError(ex.ToString());
             }
         }
         private void ImageChange_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+                OpenFileDialog dlg = new OpenFileDialog();
                 dlg.DefaultExt = ".jpeg";
                 dlg.Filter = "Image files (*.jpg, *.jpeg, *.png) | *.jpg; *.jpeg; *.png";
                 if (dlg.ShowDialog() == true)
                 {
+                    Update_Click(sender, e);
                     var size = new FileInfo(dlg.FileName).Length;
                     if (size > 262144)
                     {
@@ -228,29 +231,7 @@ namespace VocabularyUI.Windows
             }
             catch(Exception ex)
             {
-                MaterialMessageBox.ShowError(ex.Message);
-            }
-        }
-        public class MediaPlayer
-        {
-            System.Media.SoundPlayer soundPlayer;
-
-            public MediaPlayer(byte[] buffer)
-            {
-                var memoryStream = new MemoryStream(buffer, true);
-                soundPlayer = new System.Media.SoundPlayer(memoryStream);
-            }
-
-            public void Play()
-            {
-                soundPlayer.Play();
-            }
-
-            public void Play(byte[] buffer)
-            {
-                soundPlayer.Stream.Seek(0, SeekOrigin.Begin);
-                soundPlayer.Stream.Write(buffer, 0, buffer.Length);
-                soundPlayer.Play();
+                MaterialMessageBox.ShowError(ex.ToString());
             }
         }
         private void Play_Click(object sender, RoutedEventArgs e)
@@ -260,12 +241,12 @@ namespace VocabularyUI.Windows
                 var word = (dataGrid.SelectedItem as WordDTO);
                 if (word.Sound != null)
                 {
-                    Utils.Helper.PlaySoundFromBytes(word.Sound, word.WordEng);
+                    Utils.Helper.PlaySoundFromBytes(word.Sound);
                 }           
             }
             catch(Exception ex)
             {
-                MaterialMessageBox.ShowError(ex.Message);
+                MaterialMessageBox.ShowError(ex.ToString());
             }
         }
         private void UncheckAllWords_Click(object sender, RoutedEventArgs e)
@@ -282,7 +263,7 @@ namespace VocabularyUI.Windows
             }
             catch(Exception ex)
             {
-                MaterialMessageBox.ShowError(ex.Message);
+                MaterialMessageBox.ShowError(ex.ToString());
             }
         }
     }

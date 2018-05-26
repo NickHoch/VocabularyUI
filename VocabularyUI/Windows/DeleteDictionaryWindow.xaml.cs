@@ -32,35 +32,56 @@ namespace VocabularyUI.Windows
         }
         private void ComboBox_Load(object sender, RoutedEventArgs e)
         {
-            var comboBox = sender as ComboBox;
-            var res = _dal.GetDictionariesBaseInfo(userId);
-            comboBox.DisplayMemberPath = "Name";
-            comboBox.ItemsSource = res;
-            comboBox.SelectedIndex = 0;
-            selectedDictionaryId = (int)(comboBox.SelectedValue as DictionaryDTO).Id;
+            try
+            {
+                var comboBox = sender as ComboBox;
+                var res = _dal.GetDictionariesBaseInfo(userId);
+                comboBox.DisplayMemberPath = "Name";
+                comboBox.ItemsSource = res;
+                comboBox.SelectedIndex = 0;
+                selectedDictionaryId = (int)(comboBox.SelectedValue as DictionaryDTO).Id;
+            }
+            catch (Exception ex)
+            {
+                MaterialMessageBox.ShowError(ex.ToString());
+            }
         }
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var comboBox = sender as ComboBox;
-            selectedDictionaryId = (int)(comboBox.SelectedValue as DictionaryDTO).Id;
+            try
+            {
+                var comboBox = sender as ComboBox;
+                selectedDictionaryId = (int)(comboBox.SelectedValue as DictionaryDTO).Id;
+            }
+            catch(Exception ex)
+            {
+                MaterialMessageBox.ShowError(ex.ToString());
+            }
         }
         private void DeleteDictionary_Click(object sender, RoutedEventArgs e)
         {
-            if (comboBox.SelectedItem == null)
+            try
             {
-                MaterialMessageBox.ShowError("Please choose dictionary to delete");
-            }
-            else
-            {
-                var res = _dal.DeleteDictionary(selectedDictionaryId);
-                if(res)
+                if (comboBox.SelectedItem == null)
                 {
-                    this.Close();
+                    MaterialMessageBox.ShowError("Please choose dictionary to delete");
                 }
                 else
                 {
-                    MaterialMessageBox.ShowError("Removal procedure ended accidentally");
+                    var res = _dal.DeleteDictionary(selectedDictionaryId);
+                    if (res)
+                    {
+                        this.Close();
+                    }
+                    else
+                    {
+                        MaterialMessageBox.ShowError("Removal procedure ended accidentally");
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MaterialMessageBox.ShowError(ex.ToString());
             }
         }
     }

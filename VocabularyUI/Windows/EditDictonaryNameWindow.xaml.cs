@@ -36,59 +36,80 @@ namespace VocabularyUI.Windows
         }
         private void ComboBox_Load(object sender, RoutedEventArgs e)
         {
-            var comboBox = sender as ComboBox;
-            var res = _dal.GetDictionariesBaseInfo(userId);
-            comboBox.DisplayMemberPath = "Name";
-            comboBox.ItemsSource = res;
-            comboBox.SelectedIndex = 0;
+            try
+            {
+                var comboBox = sender as ComboBox;
+                var res = _dal.GetDictionariesBaseInfo(userId);
+                comboBox.DisplayMemberPath = "Name";
+                comboBox.ItemsSource = res;
+                comboBox.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                MaterialMessageBox.ShowError(ex.ToString());
+            }
         }
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var comboBox = sender as ComboBox;
-            selectedDictionaryId = (int)(comboBox.SelectedValue as DictionaryDTO).Id;
+            try
+            {
+                var comboBox = sender as ComboBox;
+                selectedDictionaryId = (int)(comboBox.SelectedValue as DictionaryDTO).Id;
+            }
+            catch (Exception ex)
+            {
+                MaterialMessageBox.ShowError(ex.ToString());
+            }
         }
         private void UpdateDictionaryName_Click(object sender, RoutedEventArgs e)
         {
-            if (dictNameCmb.SelectedItem == null)
+            try
             {
-                MaterialMessageBox.ShowError("Please choose dictionary to update");
-            }
-            else if (nameField.Text == String.Empty)
-            {
-                MaterialMessageBox.ShowError("Please enter new name of the dictionary");
-            }
-            else if (_dal.IsDictionaryNameExists(nameField.Text, userId))
-            {
-                MaterialMessageBox.ShowError("Dictionary with the name you entered exists. Please enter another name");
-            }
-            else
-            {
-                _dal.UpdateDictionary(selectedDictionaryId, nameField.Text);
-                try
+                if (dictNameCmb.SelectedItem == null)
                 {
-                    int currentValue = -1;
-                    if (dictNameCmb.SelectedValue != null)
+                    MaterialMessageBox.ShowError("Please choose dictionary to update");
+                }
+                else if (nameField.Text == String.Empty)
+                {
+                    MaterialMessageBox.ShowError("Please enter new name of the dictionary");
+                }
+                else if (_dal.IsDictionaryNameExists(nameField.Text, userId))
+                {
+                    MaterialMessageBox.ShowError("Dictionary with the name you entered exists. Please enter another name");
+                }
+                else
+                {
+                    try
                     {
-                        currentValue = (int)(dictNameCmb.SelectedValue as DictionaryDTO).Id;
+                        _dal.UpdateDictionary(selectedDictionaryId, nameField.Text);
+                        int currentValue = -1;
+                        if (dictNameCmb.SelectedValue != null)
+                        {
+                            currentValue = (int)(dictNameCmb.SelectedValue as DictionaryDTO).Id;
+                        }
+                        dictNameCmb.SelectionChanged -= ComboBox_SelectionChanged;
+                        var ds = _dal.GetDictionariesBaseInfo(userId);
+                        dictNameCmb.ItemsSource = ds;
+                        dictNameCmb.DisplayMemberPath = "Name";
+                        if (currentValue != -1)
+                        {
+                            dictNameCmb.SelectedValue = currentValue;
+                        }
+                        dictNameCmb.SelectedIndex = 0;
                     }
-                    dictNameCmb.SelectionChanged -= ComboBox_SelectionChanged;
-                    var ds = _dal.GetDictionariesBaseInfo(userId);
-                    dictNameCmb.ItemsSource = ds;
-                    dictNameCmb.DisplayMemberPath = "Name";
-                    if (currentValue != -1)
+                    catch (Exception ex)
                     {
-                        dictNameCmb.SelectedValue = currentValue;
+                        MaterialMessageBox.ShowError(ex.ToString());
                     }
-                    dictNameCmb.SelectedIndex = 0;
+                    finally
+                    {
+                        dictNameCmb.SelectionChanged += ComboBox_SelectionChanged;
+                    }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally
-                {
-                    dictNameCmb.SelectionChanged += ComboBox_SelectionChanged;
-                }
+            }
+            catch(Exception ex)
+            {
+                MaterialMessageBox.ShowError(ex.ToString());
             }
         }
     }

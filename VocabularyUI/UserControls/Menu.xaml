@@ -27,36 +27,55 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="1"
               Grid.Column="1">
-            <StackPanel Orientation="Vertical">
-                <Label FontSize="15" 
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.25*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.25*"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="0.25*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.25*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.25*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock  HorizontalAlignment="Center"
+                       VerticalAlignment="Center">
+                     <Label FontSize="15" 
                        FontFamily="Adobe Gotic Std"
                        FontWeight="DemiBold"
-                       HorizontalAlignment="Center">MENU</Label>
-                <Button Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                      >MENU</Label>
+                </TextBlock>
+               
+                <Button Grid.Row="1"
+                        Style="{StaticResource MaterialDesignRaisedAccentButton}"
                         materialDesign:RippleAssist.Feedback="#DD000000"
-                        Margin="0,5"
                         Click="StartLearn_Click">Start to learn words</Button>
-                <Button Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                <Button Grid.Row="3"
+                        Style="{StaticResource MaterialDesignRaisedAccentButton}"
                         materialDesign:RippleAssist.Feedback="#DD000000"
-                        Margin="0,5" 
                         Click="AddDictionary_Click">Add dictionary</Button>
-                <Button Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                <Button Grid.Row="5"
+                        Style="{StaticResource MaterialDesignRaisedAccentButton}"
                         materialDesign:RippleAssist.Feedback="#DD000000"
-                        Margin="0,5" 
                         Click="EditWords_Click">Edit dictionary content</Button>
-                <Button Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                <Button Grid.Row="7"
+                        Style="{StaticResource MaterialDesignRaisedAccentButton}"
                         materialDesign:RippleAssist.Feedback="#DD000000"
-                        Margin="0,5" 
                         Click="EditDictionaryName_Click">Edit dictionary name</Button>
-                <Button Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                <Button Grid.Row="9"
+                        Style="{StaticResource MaterialDesignRaisedAccentButton}"
                         materialDesign:RippleAssist.Feedback="#DD000000"
-                        Margin="0,5"
                         Click="DeleteDictionary_Click">Delete dictionary</Button>
-                <Button Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                <Button Grid.Row="11"
+                        Style="{StaticResource MaterialDesignRaisedAccentButton}"
                         materialDesign:RippleAssist.Feedback="#DD000000"
-                        Margin="0,5"
                         Click="Exit_Click">Exit</Button>
-            </StackPanel>
+            </Grid>
         </Grid>
         <Button Grid.Column="2"
                 Margin="40,10,0,0"

@@ -53,6 +53,7 @@
                         CanUserAddRows="False"
                         CanUserDeleteRows="False"
                         MaxColumnWidth="100"
+                        Width="Auto"
                         AutoGenerateColumns="False"
                         Margin="10,0"
                         materialDesign:DataGridAssist.CellPadding="10 4 10 2"

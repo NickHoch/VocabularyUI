@@ -30,23 +30,30 @@ namespace VocabularyUI.Windows
         }
         private void AddDictionary_Click(object sender, RoutedEventArgs e)
         {
-            if (_dal.IsDictionaryNameExists(nameField.Text, userId))
+            try
             {
-                MaterialMessageBox.ShowError("Dictionary with this name already exists. Please re-enter name of the dictionary");
-                nameField.Text = String.Empty;
-            }
-            else if (String.IsNullOrWhiteSpace(nameField.Text))
-            {
-                MaterialMessageBox.ShowError("Please fill in name of the dictionary");
-            }
-            else
-            {
-                var newDictionaey = new DictionaryExtnDTO
+                if (_dal.IsDictionaryNameExists(nameField.Text, userId))
                 {
-                    Name = nameField.Text
-                };
-                _dal.AddDictionary(newDictionaey, userId);
-                this.Close();
+                    MaterialMessageBox.ShowError("Dictionary with this name already exists. Please re-enter name of the dictionary");
+                    nameField.Text = String.Empty;
+                }
+                else if (String.IsNullOrWhiteSpace(nameField.Text))
+                {
+                    MaterialMessageBox.ShowError("Please fill in name of the dictionary");
+                }
+                else
+                {
+                    var newDictionaey = new DictionaryExtnDTO
+                    {
+                        Name = nameField.Text
+                    };
+                    _dal.AddDictionary(newDictionaey, userId);
+                    this.Close();
+                }
+            }
+            catch(Exception ex)
+            {
+                MaterialMessageBox.ShowError(ex.ToString());
             }
         }
     }

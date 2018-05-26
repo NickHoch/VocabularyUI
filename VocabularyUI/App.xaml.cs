@@ -1,5 +1,7 @@
 ﻿using System.Windows;
 using System.ComponentModel;
+using BespokeFusion;
+using System;
 
 namespace VocabularyClient
 {
@@ -10,53 +12,90 @@ namespace VocabularyClient
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            base.OnStartup(e);
-            log4net.Config.XmlConfigurator.Configure();
-            this.ShutdownMode = System.Windows.ShutdownMode.OnMainWindowClose;
-            MainWindow = new MainWindow();
-            MainWindow.Closing += MainWindow_Closing;
-            _notifyIcon = new System.Windows.Forms.NotifyIcon();
-            _notifyIcon.DoubleClick += (s, args) => ShowMainWindow();
-            _notifyIcon.Icon = VocabularyUI.Properties.Resources.icon;
-            _notifyIcon.Visible = true;
-            _notifyIcon.Text = "Vocabulary";
-            CreateContextMenu();
+            try
+            {
+                base.OnStartup(e);
+                ShutdownMode = ShutdownMode.OnMainWindowClose;
+
+                log4net.Config.XmlConfigurator.Configure();
+
+                MainWindow = new MainWindow();
+                MainWindow.Closing += MainWindow_Closing;
+                _notifyIcon = new System.Windows.Forms.NotifyIcon();
+                _notifyIcon.DoubleClick += (s, args) => ShowMainWindow();
+                _notifyIcon.Icon = VocabularyUI.Properties.Resources.icon;
+                _notifyIcon.Visible = true;
+                _notifyIcon.Text = "Vocabulary";
+                CreateContextMenu();
+            }
+            catch(Exception ex)
+            {
+                MaterialMessageBox.ShowError(ex.ToString());
+            }
         }
         private void CreateContextMenu()
         {
-            _notifyIcon.ContextMenuStrip =
-              new System.Windows.Forms.ContextMenuStrip();
-            _notifyIcon.ContextMenuStrip.Items.Add("Open...").Click += (s, e) => ShowMainWindow();
-            _notifyIcon.ContextMenuStrip.Items.Add("Exit").Click += (s, e) => ExitApplication();
+            try
+            {
+                _notifyIcon.ContextMenuStrip =
+                  new System.Windows.Forms.ContextMenuStrip();
+                _notifyIcon.ContextMenuStrip.Items.Add("Open...").Click += (s, e) => ShowMainWindow();
+                _notifyIcon.ContextMenuStrip.Items.Add("Exit").Click += (s, e) => ExitApplication();
+            }
+            catch (Exception ex)
+            {
+                MaterialMessageBox.ShowError(ex.ToString());
+            }
         }
         private void ExitApplication()
         {
-            _isExit = true;
-            MainWindow.Close();
-            _notifyIcon.Dispose();
-            _notifyIcon = null;
+            try
+            {
+                _isExit = true;
+                MainWindow.Close();
+                _notifyIcon.Dispose();
+                _notifyIcon = null;
+            }
+            catch (Exception ex)
+            {
+                MaterialMessageBox.ShowError(ex.ToString());
+            }
         }
         private void ShowMainWindow()
         {
-            if (MainWindow.IsVisible)
+            try
             {
-                if (MainWindow.WindowState == WindowState.Minimized)
+                if (MainWindow.IsVisible)
                 {
-                    MainWindow.WindowState = WindowState.Normal;
+                    if (MainWindow.WindowState == WindowState.Minimized)
+                    {
+                        MainWindow.WindowState = WindowState.Normal;
+                    }
+                    MainWindow.Activate();
                 }
-                MainWindow.Activate();
+                else
+                {
+                    MainWindow.Show();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MainWindow.Show();
+                MaterialMessageBox.ShowError(ex.ToString());
             }
         }
         private void MainWindow_Closing(object sender, CancelEventArgs e)
         {
-            if (!_isExit)
+            try
             {
-                e.Cancel = true;
-                MainWindow.Hide(); // A hidden window can be shown again, a closed one not
+                if (!_isExit)
+                {
+                    e.Cancel = true;
+                    MainWindow.Hide();
+                }
+            }
+            catch (Exception ex)
+            {
+                MaterialMessageBox.ShowError(ex.ToString());
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using BespokeFusion;
+using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,78 +17,55 @@ namespace VocabularyUI.Utils
 {
     public class Helper
     {
-        public static MediaPlayer mediaPlayer = new MediaPlayer();
+        private static Mp3FileReader mp3FileReader;
+        private static WaveOut waveOut;
+
         public static BitmapImage LoadImage(byte[] imageData)
         {
-            if (imageData == null || imageData.Length == 0) return null;
-            var image = new BitmapImage();
-            using (var mem = new MemoryStream(imageData))
-            {
-                mem.Position = 0;
-                image.BeginInit();
-                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
-                image.CacheOption = BitmapCacheOption.OnLoad;
-                image.UriSource = null;
-                image.StreamSource = mem;
-                image.EndInit();
-            }
-            image.Freeze();
-            return image;
-        }
-
-        public static void PlaySoundFromBytes(byte[] soundBytes, string word)
-        {
-            string projectPath = Directory.GetParent(Directory.GetCurrentDirectory())
-                                          .Parent
-                                          .FullName;
-            string path = String.Concat(projectPath, $@"\bin\Debug\temp\{word}.mp3");
             try
             {
-                if (File.Exists(path))
+                if (imageData == null || imageData.Length == 0) return null;
+                var image = new BitmapImage();
+                using (var mem = new MemoryStream(imageData))
                 {
-                    byte[] temp = null;
-                    using (FileStream fs = File.OpenRead(path))
-                    {
-                        temp = new byte[(int)fs.Length];
-                        fs.Read(temp, 0, (int)fs.Length);
-                    }
-                    byte[] firstHash = MD5.Create().ComputeHash(temp);
-                    byte[] secondHash = MD5.Create().ComputeHash(soundBytes);
-
-                    bool flag = true;
-                    for (int i = 0; i < firstHash.Length; i++)
-                    {
-                        if (firstHash[i] != secondHash[i])
-                        {
-                            path = String.Concat(projectPath, $@"\bin\Debug\temp\{Guid.NewGuid()}.mp3");
-                            using (FileStream fs = File.Create(path))
-                            {
-                                fs.Write(soundBytes, 0, soundBytes.Length);
-                            }
-                            mediaPlayer.Open(new Uri(path, UriKind.Relative));
-                            mediaPlayer.Play();
-                            break;
-                        }
-                    }
-                    if (flag)
-                    {
-                        mediaPlayer.Open(new Uri(path, UriKind.Relative));
-                        mediaPlayer.Play();
-                    }
+                    mem.Position = 0;
+                    image.BeginInit();
+                    image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                    image.CacheOption = BitmapCacheOption.OnLoad;
+                    image.UriSource = null;
+                    image.StreamSource = mem;
+                    image.EndInit();
                 }
-                else
-                {
-                    using (FileStream fs = File.Create(path))
-                    {
-                        fs.Write(soundBytes, 0, soundBytes.Length);
-                    }
-                    mediaPlayer.Open(new Uri(path, UriKind.Relative));
-                    mediaPlayer.Play();
-                }
+                image.Freeze();
+                return image;
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                MaterialMessageBox.ShowError(ex.Message);
+                MaterialMessageBox.ShowError(ex.ToString());
+                return null;
+            }
+         
+        }
+        public static void PlaySoundFromBytes(byte[] soundBytes)
+        {
+            try
+            {
+                Task.Run(() =>
+                {
+                    using (MemoryStream ms = new MemoryStream(soundBytes))
+                    {
+                        mp3FileReader = new Mp3FileReader(ms);
+                        waveOut = new WaveOut();
+                        waveOut.Stop();
+                        waveOut.Init(mp3FileReader);
+                        waveOut.Play();
+                        while(waveOut.PlaybackState == PlaybackState.Playing) { }
+                    }
+                });
+            }
+            catch(Exception ex)
+            {
+                MaterialMessageBox.ShowError(ex.ToString());
             }
         }
     }

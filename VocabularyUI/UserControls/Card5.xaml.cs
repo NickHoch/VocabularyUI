@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using BespokeFusion;
 using DAL.DTOs;
 using VocabularyUI.Windows;
 
@@ -24,20 +25,27 @@ namespace VocabularyUI.UserControls
         private StartLearnWindow parentWindow = Application.Current.Windows.OfType<StartLearnWindow>().FirstOrDefault();
         public Card5(WordDTO wordToLearn)
         {
-            InitializeComponent();
-            border.Background = new SolidColorBrush(Color.FromArgb(177, 204, 229, 255));
-            this.wordToLearn = wordToLearn;
-            translation.Text = wordToLearn.Translation;
-            StringBuilder starsString = new StringBuilder();
-            for (int i = 0; i < wordToLearn.WordEng.Count(); i++)
+            try
             {
-                starsString.Append('*');
-            }
-            stars.Text = starsString.ToString();
+                InitializeComponent();
+                border.Background = new SolidColorBrush(Color.FromArgb(177, 204, 229, 255));
+                this.wordToLearn = wordToLearn;
+                translation.Text = wordToLearn.Translation;
+                StringBuilder starsString = new StringBuilder();
+                for (int i = 0; i < wordToLearn.WordEng.Count(); i++)
+                {
+                    starsString.Append('*');
+                }
+                stars.Text = starsString.ToString();
 
-            Dispatcher.BeginInvoke(DispatcherPriority.Input,
-            new Action(delegate () { enteredWord.Focus(); Keyboard.Focus(enteredWord); }));
-            parentWindow.nextCardButton.IsEnabled = false;
+                Dispatcher.BeginInvoke(DispatcherPriority.Input,
+                new Action(delegate () { enteredWord.Focus(); Keyboard.Focus(enteredWord); }));
+                parentWindow.nextCardButton.IsEnabled = false;
+            }
+            catch(Exception ex)
+            {
+                MaterialMessageBox.ShowError(ex.ToString());
+            }
         }
 
         public static readonly RoutedEvent GreetEventCard = EventManager.RegisterRoutedEvent(
@@ -50,30 +58,43 @@ namespace VocabularyUI.UserControls
         }
         private void answerButton_Click(object sender, RoutedEventArgs e)
         {
-            wordEng.Text = wordToLearn.WordEng;
-            enteredWord.IsReadOnly = true;
-            answerButton.IsEnabled = false;
-            compareButton.IsEnabled = false;
-            parentWindow.nextCardButton.IsEnabled = true;
+            try
+            {
+                wordEng.Text = wordToLearn.WordEng;
+                enteredWord.IsReadOnly = true;
+                answerButton.IsEnabled = false;
+                compareButton.IsEnabled = false;
+                parentWindow.nextCardButton.IsEnabled = true;
+            }
+            catch (Exception ex)
+            {
+                MaterialMessageBox.ShowError(ex.ToString());
+            }
         }
         private async void compareButton_Click(object sender, RoutedEventArgs e)
         {
-            enteredWord.IsReadOnly = true;
-            answerButton.IsEnabled = false;
-            compareButton.IsEnabled = false;
-
-            if (wordToLearn.WordEng.Equals(enteredWord.Text, StringComparison.InvariantCultureIgnoreCase))
+            try
             {
-                parentWindow.WordsToLearn.Where(item => item.WordEng.Equals(wordToLearn.WordEng)).Single().IsLearned[3] = true;
-                wordEng.Text = "true";
-                await Task.Delay(500);
-                RaiseEvent(new RoutedEventArgs(GreetEventCard, this));
-            }
-            else
-            {
+                enteredWord.IsReadOnly = true;
+                answerButton.IsEnabled = false;
                 compareButton.IsEnabled = false;
-                wordEng.Text = wordToLearn.WordEng;
-                parentWindow.nextCardButton.IsEnabled = true;
+                if (wordToLearn.WordEng.Equals(enteredWord.Text, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    parentWindow.WordsToLearn.Where(item => item.WordEng.Equals(wordToLearn.WordEng)).Single().IsLearned[3] = true;
+                    wordEng.Text = "true";
+                    await Task.Delay(500);
+                    RaiseEvent(new RoutedEventArgs(GreetEventCard, this));
+                }
+                else
+                {
+                    compareButton.IsEnabled = false;
+                    wordEng.Text = wordToLearn.WordEng;
+                    parentWindow.nextCardButton.IsEnabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MaterialMessageBox.ShowError(ex.ToString());
             }
         }
     }

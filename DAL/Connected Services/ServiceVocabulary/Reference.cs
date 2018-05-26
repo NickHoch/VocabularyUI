@@ -349,109 +349,115 @@ namespace DAL.ServiceVocabulary {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceVocabulary.IVocabulary")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://Microsoft.ServiceModel.Samples", ConfigurationName="ServiceVocabulary.IVocabulary")]
     public interface IVocabulary {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/IsDictionaryNameExists", ReplyAction="http://tempuri.org/IVocabulary/IsDictionaryNameExistsResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/IsDictionaryNameExists", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/IsDictionaryNameExistsResponse")]
         bool IsDictionaryNameExists(string email, int userId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/IsDictionaryNameExists", ReplyAction="http://tempuri.org/IVocabulary/IsDictionaryNameExistsResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/IsDictionaryNameExists", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/IsDictionaryNameExistsResponse")]
         System.Threading.Tasks.Task<bool> IsDictionaryNameExistsAsync(string email, int userId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/IsEmailAddressExists", ReplyAction="http://tempuri.org/IVocabulary/IsEmailAddressExistsResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/IsEmailAddressExists", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/IsEmailAddressExistsResponse")]
         bool IsEmailAddressExists(string email);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/IsEmailAddressExists", ReplyAction="http://tempuri.org/IVocabulary/IsEmailAddressExistsResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/IsEmailAddressExists", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/IsEmailAddressExistsResponse")]
         System.Threading.Tasks.Task<bool> IsEmailAddressExistsAsync(string email);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/GetUserIdByCredential", ReplyAction="http://tempuri.org/IVocabulary/GetUserIdByCredentialResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetUserIdByCredential", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/GetUserIdByCredentialResponse")]
         System.Nullable<int> GetUserIdByCredential(DAL.ServiceVocabulary.CredentialDC credentialDC);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/GetUserIdByCredential", ReplyAction="http://tempuri.org/IVocabulary/GetUserIdByCredentialResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetUserIdByCredential", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/GetUserIdByCredentialResponse")]
         System.Threading.Tasks.Task<System.Nullable<int>> GetUserIdByCredentialAsync(DAL.ServiceVocabulary.CredentialDC credentialDC);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/AddUser", ReplyAction="http://tempuri.org/IVocabulary/AddUserResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/AddUser", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/AddUserResponse")]
         bool AddUser(DAL.ServiceVocabulary.CredentialDC credentialDC);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/AddUser", ReplyAction="http://tempuri.org/IVocabulary/AddUserResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/AddUser", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/AddUserResponse")]
         System.Threading.Tasks.Task<bool> AddUserAsync(DAL.ServiceVocabulary.CredentialDC credentialDC);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/AddWord", ReplyAction="http://tempuri.org/IVocabulary/AddWordResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/AddWord", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/AddWordResponse")]
         bool AddWord(DAL.ServiceVocabulary.WordDC wordDC, int dictionaryId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/AddWord", ReplyAction="http://tempuri.org/IVocabulary/AddWordResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/AddWord", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/AddWordResponse")]
         System.Threading.Tasks.Task<bool> AddWordAsync(DAL.ServiceVocabulary.WordDC wordDC, int dictionaryId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/DeleteWord", ReplyAction="http://tempuri.org/IVocabulary/DeleteWordResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/DeleteWord", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/DeleteWordResponse")]
         bool DeleteWord(int wordId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/DeleteWord", ReplyAction="http://tempuri.org/IVocabulary/DeleteWordResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/DeleteWord", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/DeleteWordResponse")]
         System.Threading.Tasks.Task<bool> DeleteWordAsync(int wordId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/UpdateWord", ReplyAction="http://tempuri.org/IVocabulary/UpdateWordResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/UpdateWord", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/UpdateWordResponse")]
         void UpdateWord(DAL.ServiceVocabulary.WordDC wordDC);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/UpdateWord", ReplyAction="http://tempuri.org/IVocabulary/UpdateWordResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/UpdateWord", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/UpdateWordResponse")]
         System.Threading.Tasks.Task UpdateWordAsync(DAL.ServiceVocabulary.WordDC wordDC);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/GetWords", ReplyAction="http://tempuri.org/IVocabulary/GetWordsResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetWords", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/GetWordsResponse")]
         DAL.ServiceVocabulary.WordDC[] GetWords(int dictionaryId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/GetWords", ReplyAction="http://tempuri.org/IVocabulary/GetWordsResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetWords", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/GetWordsResponse")]
         System.Threading.Tasks.Task<DAL.ServiceVocabulary.WordDC[]> GetWordsAsync(int dictionaryId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/GetNotLearnedWords", ReplyAction="http://tempuri.org/IVocabulary/GetNotLearnedWordsResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetNotLearnedWords", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/GetNotLearnedWordsResponse")]
         DAL.ServiceVocabulary.WordDC[] GetNotLearnedWords(int quantityWords, int dictionaryId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/GetNotLearnedWords", ReplyAction="http://tempuri.org/IVocabulary/GetNotLearnedWordsResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetNotLearnedWords", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/GetNotLearnedWordsResponse")]
         System.Threading.Tasks.Task<DAL.ServiceVocabulary.WordDC[]> GetNotLearnedWordsAsync(int quantityWords, int dictionaryId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/SetToWordsStatusAsLearned", ReplyAction="http://tempuri.org/IVocabulary/SetToWordsStatusAsLearnedResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsLearned", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsLearnedRespon" +
+            "se")]
         void SetToWordsStatusAsLearned(int quantityWords, int dictionaryId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/SetToWordsStatusAsLearned", ReplyAction="http://tempuri.org/IVocabulary/SetToWordsStatusAsLearnedResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsLearned", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsLearnedRespon" +
+            "se")]
         System.Threading.Tasks.Task SetToWordsStatusAsLearnedAsync(int quantityWords, int dictionaryId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/SetToWordsStatusAsUnlearned", ReplyAction="http://tempuri.org/IVocabulary/SetToWordsStatusAsUnlearnedResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsUnlearned", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsUnlearnedResp" +
+            "onse")]
         void SetToWordsStatusAsUnlearned(int dictionaryId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/SetToWordsStatusAsUnlearned", ReplyAction="http://tempuri.org/IVocabulary/SetToWordsStatusAsUnlearnedResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsUnlearned", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsUnlearnedResp" +
+            "onse")]
         System.Threading.Tasks.Task SetToWordsStatusAsUnlearnedAsync(int dictionaryId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/ChangeImage", ReplyAction="http://tempuri.org/IVocabulary/ChangeImageResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeImage", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeImageResponse")]
         void ChangeImage(int wordId, byte[] newImage);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/ChangeImage", ReplyAction="http://tempuri.org/IVocabulary/ChangeImageResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeImage", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeImageResponse")]
         System.Threading.Tasks.Task ChangeImageAsync(int wordId, byte[] newImage);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/ChangeSound", ReplyAction="http://tempuri.org/IVocabulary/ChangeSoundResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeSound", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeSoundResponse")]
         void ChangeSound(int wordId, byte[] newSound);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/ChangeSound", ReplyAction="http://tempuri.org/IVocabulary/ChangeSoundResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeSound", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeSoundResponse")]
         System.Threading.Tasks.Task ChangeSoundAsync(int wordId, byte[] newSound);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/AddDictionary", ReplyAction="http://tempuri.org/IVocabulary/AddDictionaryResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/AddDictionary", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/AddDictionaryResponse")]
         bool AddDictionary(DAL.ServiceVocabulary.DictionaryExtnDC dictionaryDC, int userId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/AddDictionary", ReplyAction="http://tempuri.org/IVocabulary/AddDictionaryResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/AddDictionary", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/AddDictionaryResponse")]
         System.Threading.Tasks.Task<bool> AddDictionaryAsync(DAL.ServiceVocabulary.DictionaryExtnDC dictionaryDC, int userId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/UpdateDictionary", ReplyAction="http://tempuri.org/IVocabulary/UpdateDictionaryResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/UpdateDictionary", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/UpdateDictionaryResponse")]
         void UpdateDictionary(int dictionaryId, string newDictionaryName);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/UpdateDictionary", ReplyAction="http://tempuri.org/IVocabulary/UpdateDictionaryResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/UpdateDictionary", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/UpdateDictionaryResponse")]
         System.Threading.Tasks.Task UpdateDictionaryAsync(int dictionaryId, string newDictionaryName);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/DeleteDictionary", ReplyAction="http://tempuri.org/IVocabulary/DeleteDictionaryResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/DeleteDictionary", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/DeleteDictionaryResponse")]
         bool DeleteDictionary(int dictionaryId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/DeleteDictionary", ReplyAction="http://tempuri.org/IVocabulary/DeleteDictionaryResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/DeleteDictionary", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/DeleteDictionaryResponse")]
         System.Threading.Tasks.Task<bool> DeleteDictionaryAsync(int dictionaryId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/GetDictionariesBaseInfo", ReplyAction="http://tempuri.org/IVocabulary/GetDictionariesBaseInfoResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetDictionariesBaseInfo", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/GetDictionariesBaseInfoResponse" +
+            "")]
         DAL.ServiceVocabulary.DictionaryDC[] GetDictionariesBaseInfo(int userId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVocabulary/GetDictionariesBaseInfo", ReplyAction="http://tempuri.org/IVocabulary/GetDictionariesBaseInfoResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetDictionariesBaseInfo", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/GetDictionariesBaseInfoResponse" +
+            "")]
         System.Threading.Tasks.Task<DAL.ServiceVocabulary.DictionaryDC[]> GetDictionariesBaseInfoAsync(int userId);
     }
     
