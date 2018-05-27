@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 namespace DAL.DTOs
 {
     [Serializable]
-    public class CredentialDTO
+    public class CredentialExtnDTO : CredentialDTO
     {
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public CredentialDTO() { }
+        public ICollection<DictionaryExtnDTO> Dictionaries { get; set; }
+        public CredentialExtnDTO() { }
     }
 }

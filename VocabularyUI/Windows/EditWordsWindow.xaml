@@ -12,12 +12,11 @@
         GlowBrush="Black"
         ResizeMode="CanResizeWithGrip"
         WindowTransitionsEnabled="False"
-        Title="Edit words" Height="550" Width="490" WindowStartupLocation="CenterScreen">
+        Title="Edit words" Height="450" Width="490" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ResourceDictionary>
             <Style x:Key="DataGridCellCentered" TargetType="DataGridCell">
                 <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
-                <!--<Setter Property="TextBlock.HorizontalAlignment" Value="Center" />-->
             </Style>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.DataGrid.xaml" />
@@ -26,183 +25,166 @@
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="2.75*"></ColumnDefinition>
+            <ColumnDefinition Width="1.25*"></ColumnDefinition>
+            <ColumnDefinition Width="1.01*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-            <StackPanel Orientation="Horizontal">
-                <StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <ComboBox                        
-                        x:Name="comboBox"
-                            Width="265"
-                        Loaded="ComboBox_Load"
-                        SelectionChanged="ComboBox_SelectionChanged"/>
-                        <Button
-                            Width="110"
-                            Height="26"
-                            Margin="5,5,0,5"
-                            Style="{StaticResource MaterialDesignRaisedAccentButton}"
-                            materialDesign:RippleAssist.Feedback="#DD000000"
-                            ToolTip="Changes status of all words to unlearned"
-                            Click="UncheckAllWords_Click"
-                            >Uncheck</Button>                        
-                    </StackPanel>                   
-                    <DataGrid
-                        x:Name="dataGrid"
-                        CanUserSortColumns="True"
-                        CanUserAddRows="False"
-                        CanUserDeleteRows="False"
-                        MaxColumnWidth="100"
-                        Width="Auto"
-                        AutoGenerateColumns="False"
-                        Margin="10,0"
-                        materialDesign:DataGridAssist.CellPadding="10 4 10 2"
-                        materialDesign:DataGridAssist.ColumnHeaderPadding="9 4 9 2">
-                        <!--CellStyle="{StaticResource DataGridCellCentered}"-->
-                        <DataGrid.Columns>
-                            <materialDesign:MaterialDataGridTextColumn
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="11*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.ColumnSpan="3" Grid.RowSpan="2" VerticalScrollBarVisibility="Auto"/>
+        <ComboBox x:Name="comboBox"
+                  Loaded="ComboBox_Load"
+                  SelectionChanged="ComboBox_SelectionChanged"/>
+        <Button Grid.Column="1"
+                Margin="3"
+                Style="{StaticResource AccentedSquareButtonStyle}"
+                Click="UncheckAllWords_Click">Uncheck</Button>
+        <DataGrid x:Name="dataGrid"
+                  Grid.Row="1"
+                  Grid.ColumnSpan="2"
+                  CanUserSortColumns="True"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  MaxColumnWidth="100"
+                  AutoGenerateColumns="False"
+                  Margin="10,0"
+                  materialDesign:DataGridAssist.CellPadding="10 4 10 2"
+                  materialDesign:DataGridAssist.ColumnHeaderPadding="9 4 9 2">
+            <!--CellStyle="{StaticResource DataGridCellCentered}"-->
+            <DataGrid.Columns>
+                <materialDesign:MaterialDataGridTextColumn
                                 Binding="{Binding WordEng}"
                                 Header="Word"
                                 EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
-                            </materialDesign:MaterialDataGridTextColumn>
-                            <materialDesign:MaterialDataGridTextColumn
+                </materialDesign:MaterialDataGridTextColumn>
+                <materialDesign:MaterialDataGridTextColumn
                                 Binding="{Binding Transcription}"
                                 Header="Transcription"                                
                                 EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"/>
-                            <materialDesign:MaterialDataGridTextColumn
+                <materialDesign:MaterialDataGridTextColumn
                                 Binding="{Binding Translation}"
                                 Header="Translation"                                
                                 EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"/>
-                            <DataGridCheckBoxColumn 
+                <DataGridCheckBoxColumn 
                                 Header="Is learned"
                                 Binding="{Binding IsLearnedWord}" 
                                 ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
                                 EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"/>
-                        </DataGrid.Columns>
-                        <DataGrid.RowDetailsTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition></ColumnDefinition>
-                                        <ColumnDefinition></ColumnDefinition>
-                                        <ColumnDefinition></ColumnDefinition>
-                                        <ColumnDefinition></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <Button 
-                                        Margin="5,30"
-                                        Height="28"
-                                        Style="{StaticResource MaterialDesignRaisedAccentButton}"
-                                        materialDesign:RippleAssist.Feedback="#DD000000"
-                                        Click="ImageChange_Click"
-                                        >Change</Button>
-                                    <Image 
-                                        Grid.Column="1"
-                                        Source="{Binding Image}"
-                                        Height="80"
-                                        Width="80"></Image>
-                                    <Button
-                                        Grid.Column="2"
-                                        Height="28"
-                                        Margin="5,30"
-                                        Style="{StaticResource MaterialDesignRaisedAccentButton}"
-                                        materialDesign:RippleAssist.Feedback="#DD000000"
-                                        Click="SoundChange_Click">Change</Button>
-                                    <Button
-                                        Grid.Column="3"
-                                        Click="Play_Click"
-                                        Content="{materialDesign:PackIcon Play}"
-                                        Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
-                                        ToolTip="MaterialDesignFloatingActionMiniAccentButton"/>
-                                </Grid>
-                            </DataTemplate>
-                        </DataGrid.RowDetailsTemplate>
-                    </DataGrid>
-                </StackPanel>
-                <Grid Height="350" VerticalAlignment="Top" Margin="0,0,0,0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="0.2*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="0.5*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="0.05*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Border 
-                        Grid.Row="0"
-                        Grid.RowSpan="7"
-                        BorderThickness="1"
-                        Margin="5,5,5,-2"
-                        BorderBrush="LimeGreen"></Border>
-                    <TextBox 
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        x:Name="wordField"
-                        materialDesign:HintAssist.Hint="*Word"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Margin="10,0">
-                    </TextBox>
-                    <TextBox 
-                        Grid.Row="2"
-                        Grid.Column="1"
-                        x:Name="transcriptionField"
-                        materialDesign:HintAssist.Hint="*Transcription"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Margin="10,0">
-                    </TextBox>
-                    <TextBox 
-                        Grid.Row="3" 
-                        Grid.Column="1"
-                        x:Name="translationField"
-                        materialDesign:HintAssist.Hint="*Translation"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Margin="10,0">
-                    </TextBox>
-                    <Button
-                        Grid.Row="5"
-                        Grid.Column="1"
-                        Content="{materialDesign:PackIcon FileMusic}"
-                        Style="{StaticResource MaterialDesignRaisedAccentButton}"
-                        materialDesign:RippleAssist.Feedback="#DD000000"
-                        ToolTip="Adds sound to word"
-                        Margin="10,0" 
-                        Click="SoundAdd_Click"/>
-                    <Button
-                        Grid.Row="6"
-                        Grid.Column="1"
-                        Content="{materialDesign:PackIcon FileImage}"
-                        Style="{StaticResource MaterialDesignRaisedAccentButton}"
-                        materialDesign:RippleAssist.Feedback="#DD000000"
-                        ToolTip="Adds image to word"
-                        Margin="10,0"
-                        Click="ImageAdd_Click"/>
-                    <Button
-                        Grid.Row="8"
-                        Grid.Column="1"
-                        Style="{StaticResource MaterialDesignRaisedAccentButton}"
-                        materialDesign:RippleAssist.Feedback="#DD000000"
-                        Margin="10,0" 
-                        Click="Add_Click">Add</Button>
-                    <Button
-                        Grid.Row="9"
-                        Grid.Column="1"
-                        Style="{StaticResource MaterialDesignRaisedAccentButton}"
-                        materialDesign:RippleAssist.Feedback="#DD000000"
-                        Margin="10,0" 
-                        Click="Delete_Click">Delete</Button>
-                    <Button
-                        Grid.Row="10"
-                        Grid.Column="1"
-                        Style="{StaticResource MaterialDesignRaisedAccentButton}"
-                        materialDesign:RippleAssist.Feedback="#DD000000"
-                        Margin="10,0" 
-                        Click="Update_Click">Update</Button>
-                </Grid>
-            </StackPanel>
-        </ScrollViewer>
-    </Grid>
+            </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button Margin="5,30"
+                                Height="28"
+                                Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                                materialDesign:RippleAssist.Feedback="#DD000000"
+                                Click="ImageChange_Click"
+                                >Change</Button>
+                        <Image Grid.Column="1"
+                               Source="{Binding Image}"
+                               Height="80"
+                               Width="80"></Image>
+                        <Button Grid.Column="2"
+                                Height="28"
+                                Margin="5,30"
+                                Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                                materialDesign:RippleAssist.Feedback="#DD000000"
+                                Click="SoundChange_Click">Change</Button>
+                        <Button Grid.Column="3"
+                                Click="Play_Click"
+                                Content="{materialDesign:PackIcon Play}"
+                                Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                                ToolTip="MaterialDesignFloatingActionMiniAccentButton"/>
+                    </Grid>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>          
+        </DataGrid>
+        <Grid Grid.Column="2"
+              Grid.RowSpan="2"
+              VerticalAlignment="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.2*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="0.5*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="0.05*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0"
+                    Grid.RowSpan="7"
+                    BorderThickness="1"
+                    Margin="5,5,5,-2"
+                    BorderBrush="LimeGreen">
+                
+            </Border>
+            <TextBox Grid.Row="1"
+                     Grid.Column="1"
+                     x:Name="wordField"
+                     materialDesign:HintAssist.Hint="*Word"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     Margin="10,0">
+            </TextBox>
+            <TextBox Grid.Row="2"
+                     Grid.Column="1"
+                     x:Name="transcriptionField"
+                     materialDesign:HintAssist.Hint="*Transcription"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     Margin="10,0">
+            </TextBox>
+            <TextBox Grid.Row="3" 
+                     Grid.Column="1"
+                     x:Name="translationField"
+                     materialDesign:HintAssist.Hint="*Translation"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     Margin="10,0">
+            </TextBox>
+            <Button Grid.Row="5"
+                    Grid.Column="1"
+                    Content="{materialDesign:PackIcon FileMusic}"
+                    Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                    materialDesign:RippleAssist.Feedback="#DD000000"
+                    ToolTip="Adds sound to word"
+                    Margin="10,5" 
+                    Click="SoundAdd_Click"/>
+            <Button Grid.Row="6"
+                    Grid.Column="1"
+                    Content="{materialDesign:PackIcon FileImage}"
+                    Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                    materialDesign:RippleAssist.Feedback="#DD000000"
+                    ToolTip="Adds image to word"
+                    Margin="11,0,9,5" 
+                    Click="ImageAdd_Click"/>
+            <Button Grid.Row="8"
+                    Grid.Column="1"
+                    Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                    materialDesign:RippleAssist.Feedback="#DD000000"
+                    Margin="10,0" 
+                    Click="Add_Click">Add</Button>
+            <Button Grid.Row="9"
+                    Grid.Column="1"
+                    Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                    materialDesign:RippleAssist.Feedback="#DD000000"
+                    Margin="10,0" 
+                    Click="Delete_Click">Delete</Button>
+            <Button Grid.Row="10"
+                    Grid.Column="1"
+                    Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                    materialDesign:RippleAssist.Feedback="#DD000000"
+                    Margin="10,0" 
+                    Click="Update_Click">Update</Button>
+        </Grid>
+    </Grid>          
 </Controls:MetroWindow>

@@ -22,9 +22,9 @@ namespace DAL
             var credentialDC = MappingCredential.CredentialDTOtoDC(credentialDTO);
             return vocabularyClient.GetUserIdByCredential(credentialDC);
         }
-        public bool AddUser(CredentialDTO credentialDTO)
+        public bool AddUser(CredentialExtnDTO credentialDTO)
         {
-            var credentialDC = MappingCredential.CredentialDTOtoDC(credentialDTO);
+            var credentialDC = MappingCredentialExtn.CredentialDTOtoDC(credentialDTO);
             return vocabularyClient.AddUser(credentialDC);
         }
         public bool AddWord(WordDTO wordDTO, int dictionaryId)

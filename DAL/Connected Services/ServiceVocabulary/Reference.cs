@@ -17,13 +17,11 @@ namespace DAL.ServiceVocabulary {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="CredentialDC", Namespace="http://schemas.datacontract.org/2004/07/WCF.DCs")]
     [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(DAL.ServiceVocabulary.CredentialExtnDC))]
     public partial class CredentialDC : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private DAL.ServiceVocabulary.DictionaryExtnDC[] DictionariesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string EmailField;
@@ -38,19 +36,6 @@ namespace DAL.ServiceVocabulary {
             }
             set {
                 this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public DAL.ServiceVocabulary.DictionaryExtnDC[] Dictionaries {
-            get {
-                return this.DictionariesField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DictionariesField, value) != true)) {
-                    this.DictionariesField = value;
-                    this.RaisePropertyChanged("Dictionaries");
-                }
             }
         }
         
@@ -86,6 +71,29 @@ namespace DAL.ServiceVocabulary {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CredentialExtnDC", Namespace="http://schemas.datacontract.org/2004/07/WCF.DCs")]
+    [System.SerializableAttribute()]
+    public partial class CredentialExtnDC : DAL.ServiceVocabulary.CredentialDC {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private DAL.ServiceVocabulary.DictionaryExtnDC[] DictionariesField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public DAL.ServiceVocabulary.DictionaryExtnDC[] Dictionaries {
+            get {
+                return this.DictionariesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DictionariesField, value) != true)) {
+                    this.DictionariesField = value;
+                    this.RaisePropertyChanged("Dictionaries");
+                }
             }
         }
     }
@@ -371,10 +379,10 @@ namespace DAL.ServiceVocabulary {
         System.Threading.Tasks.Task<System.Nullable<int>> GetUserIdByCredentialAsync(DAL.ServiceVocabulary.CredentialDC credentialDC);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/AddUser", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/AddUserResponse")]
-        bool AddUser(DAL.ServiceVocabulary.CredentialDC credentialDC);
+        bool AddUser(DAL.ServiceVocabulary.CredentialExtnDC credentialDC);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/AddUser", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/AddUserResponse")]
-        System.Threading.Tasks.Task<bool> AddUserAsync(DAL.ServiceVocabulary.CredentialDC credentialDC);
+        System.Threading.Tasks.Task<bool> AddUserAsync(DAL.ServiceVocabulary.CredentialExtnDC credentialDC);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/AddWord", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/AddWordResponse")]
         bool AddWord(DAL.ServiceVocabulary.WordDC wordDC, int dictionaryId);
@@ -512,11 +520,11 @@ namespace DAL.ServiceVocabulary {
             return base.Channel.GetUserIdByCredentialAsync(credentialDC);
         }
         
-        public bool AddUser(DAL.ServiceVocabulary.CredentialDC credentialDC) {
+        public bool AddUser(DAL.ServiceVocabulary.CredentialExtnDC credentialDC) {
             return base.Channel.AddUser(credentialDC);
         }
         
-        public System.Threading.Tasks.Task<bool> AddUserAsync(DAL.ServiceVocabulary.CredentialDC credentialDC) {
+        public System.Threading.Tasks.Task<bool> AddUserAsync(DAL.ServiceVocabulary.CredentialExtnDC credentialDC) {
             return base.Channel.AddUserAsync(credentialDC);
         }
         

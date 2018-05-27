@@ -51,10 +51,12 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="DTOs\CredentialDTO.cs" />
+    <Compile Include="DTOs\CredentialExtnDTO.cs" />
     <Compile Include="DTOs\DictionaryDTO.cs" />
     <Compile Include="DTOs\DictionaryExtnDTO.cs" />
     <Compile Include="DTOs\WordDTO.cs" />
     <Compile Include="Mapping\MappingCredential.cs" />
+    <Compile Include="Mapping\MappingCredentialExtn.cs" />
     <Compile Include="Mapping\MappingDictionary.cs" />
     <Compile Include="Mapping\MappingDictionaryExtn.cs" />
     <Compile Include="Mapping\MappingWord.cs" />

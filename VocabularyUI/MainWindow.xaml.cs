@@ -26,8 +26,8 @@ namespace VocabularyClient
         public static Random rand = new Random();
         private IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForAssembly();
         //autorun
-        //private string path;
-        //private string fileName;
+        private string path;
+        private string fileName;
 
         public MainWindow()
         {
@@ -35,8 +35,8 @@ namespace VocabularyClient
             {
                 InitializeComponent();
                 //autorun
-                //GetExeLocation();
-                //StartExeWhenPcStartup(fileName, path);
+                GetExeLocation();
+                StartExeWhenPcStartup(fileName, path);
                 this.ResizeMode = System.Windows.ResizeMode.NoResize;
                 BinaryFormatter formatter = new BinaryFormatter();
                 CredentialDTO credential = new CredentialDTO();
@@ -74,30 +74,30 @@ namespace VocabularyClient
         }
         //autorun
         #region
-        //public void GetExeLocation()
-        //{
-        //    try
-        //    {
-        //        path = System.Reflection.Assembly.GetEntryAssembly().Location;
-        //        fileName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MaterialMessageBox.ShowError(ex.ToString());
-        //    }
-        //}
-        //public void StartExeWhenPcStartup(string filename, string filepath)
-        //{
-        //    try
-        //    {
-        //        Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-        //        key.SetValue(filename, filepath);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MaterialMessageBox.ShowError(ex.ToString());
-        //    }
-        //}
+        public void GetExeLocation()
+        {
+            try
+            {
+                path = System.Reflection.Assembly.GetEntryAssembly().Location;
+                fileName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
+            }
+            catch (Exception ex)
+            {
+                MaterialMessageBox.ShowError(ex.ToString());
+            }
+        }
+        public void StartExeWhenPcStartup(string filename, string filepath)
+        {
+            try
+            {
+                RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+                key.SetValue(filename, filepath);
+            }
+            catch (Exception ex)
+            {
+                MaterialMessageBox.ShowError(ex.ToString());
+            }
+        }
         #endregion autorun // autorun
         private void LoginButton(object sender, RoutedEventArgs e)
         {

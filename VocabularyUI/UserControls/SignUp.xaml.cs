@@ -82,7 +82,7 @@ namespace VocabularyUI.UserControls
                 }
                 if (String.IsNullOrEmpty(msgErr))
                 {
-                    CredentialDTO credentialDTO = new CredentialDTO
+                    CredentialExtnDTO credentialDTO = new CredentialExtnDTO
                     {
                         Email = loginField.Text,
                         Password = passwordField.Password
