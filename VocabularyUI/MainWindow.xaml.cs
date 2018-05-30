@@ -14,6 +14,9 @@ using System.ServiceModel;
 using BespokeFusion;
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
+using log4net;
+using System.Reflection;
+using VocabularyUI.Utils;
 
 namespace VocabularyClient
 {
@@ -24,7 +27,7 @@ namespace VocabularyClient
         private Menu menu;
         private ServerDAL _dal = new ServerDAL();
         public static Random rand = new Random();
-        private IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForAssembly();
+        private IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForAssembly(); // strorage to user`s credential file
         //autorun
         private string path;
         private string fileName;
@@ -37,10 +40,10 @@ namespace VocabularyClient
                 //autorun
                 GetExeLocation();
                 StartExeWhenPcStartup(fileName, path);
-                this.ResizeMode = System.Windows.ResizeMode.NoResize;
+                ResizeMode = ResizeMode.NoResize;
                 BinaryFormatter formatter = new BinaryFormatter();
                 CredentialDTO credential = new CredentialDTO();
-                using (var stream = store.OpenFile("credential.cfg", FileMode.OpenOrCreate, FileAccess.Read))
+                using (var stream = store.OpenFile("credential.cfg", FileMode.OpenOrCreate, FileAccess.Read)) // this snipet of the code checks for the file user`s credential and decides how to start app
                 {
                     if (stream.Length != 0)
                     {
@@ -50,6 +53,7 @@ namespace VocabularyClient
                 var userId = _dal.GetUserIdByCredential(credential);
                 if (userId.HasValue)
                 {
+                    Helper.log.Info($"Login: {credential.Email} Password: {credential.Password} UserId: {userId} entered in the app");
                     menu = new Menu(_dal, (int)userId);
                     contentControl.Content = menu;
                     menu.AddHandler(Menu.ExitClick, new RoutedEventHandler(ExitButton));
@@ -65,16 +69,18 @@ namespace VocabularyClient
             }
             catch (FaultException ex)
             {
+                Helper.log.Error($"Exception: {ex.ToString()}");
                 MaterialMessageBox.ShowError(ex.ToString());
             }
             catch (Exception ex)
             {
+                Helper.log.Error($"Exception: {ex.ToString()}");
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
         //autorun
         #region
-        public void GetExeLocation()
+        public void GetExeLocation() //mathods puts app in autorun folder
         {
             try
             {
@@ -83,6 +89,7 @@ namespace VocabularyClient
             }
             catch (Exception ex)
             {
+                Helper.log.Error($"Exception: {ex.ToString()}");
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -95,15 +102,16 @@ namespace VocabularyClient
             }
             catch (Exception ex)
             {
+                Helper.log.Error($"Exception: {ex.ToString()}");
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
-        #endregion autorun // autorun
+        #endregion
         private void LoginButton(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (signIn.rememberChk.IsChecked == true)
+                if (signIn.rememberChk.IsChecked == true) // method creates or refreshes user`s config file if checkbox is elect
                 {
                     CredentialDTO credential = new CredentialDTO
                     {
@@ -123,6 +131,7 @@ namespace VocabularyClient
             }
             catch(Exception ex)
             {
+                Helper.log.Error($"Exception: {ex.ToString()}");
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -137,6 +146,7 @@ namespace VocabularyClient
             }
             catch (Exception ex)
             {
+                Helper.log.Error($"Exception: {ex.ToString()}");
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -151,6 +161,7 @@ namespace VocabularyClient
             }
             catch (Exception ex)
             {
+                Helper.log.Error($"Exception: {ex.ToString()}");
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -165,14 +176,15 @@ namespace VocabularyClient
             }
             catch (Exception ex)
             {
+                Helper.log.Error($"Exception: {ex.ToString()}");
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
-        private void ExitButton(object sender, RoutedEventArgs e)
+        private void ExitButton(object sender, RoutedEventArgs e) // methods closes app. Doesn`t hide app in tray
         {
             Application.Current.Shutdown();
         }
-        private void LogOutButton(object sender, RoutedEventArgs e)
+        private void LogOutButton(object sender, RoutedEventArgs e) // method deletes user`s config file with cedential
         {
             try
             {
@@ -184,6 +196,7 @@ namespace VocabularyClient
             }
             catch (Exception ex)
             {
+                Helper.log.Error($"Exception: {ex.ToString()}");
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }

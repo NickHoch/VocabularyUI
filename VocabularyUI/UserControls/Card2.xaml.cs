@@ -30,7 +30,6 @@ namespace VocabularyUI.UserControls
         private Button wordEngButtom;
 
         private StartLearnWindow parentWindow = Application.Current.Windows.OfType<StartLearnWindow>().FirstOrDefault();
-        private MediaPlayer mplayer = new MediaPlayer();
         public Card2(List<WordDTO> wordsToLearn)
         {
             try
@@ -51,7 +50,7 @@ namespace VocabularyUI.UserControls
                     }
                     if (Grid.GetColumn(item).Equals(0) && item is Button)
                     {
-                        (item as Button).Content = wordsToLearn[indeciesList[i++]].WordEng;
+                        (((((item as Button).Content)as Viewbox).Child)as TextBlock).Text = wordsToLearn[indeciesList[i++]].WordEng;
                     }
                 }
 
@@ -66,7 +65,7 @@ namespace VocabularyUI.UserControls
                     }
                     if (Grid.GetColumn(item).Equals(1) && item is Button)
                     {
-                        (item as Button).Content = wordsToLearn[indeciesList[i++]].Translation;
+                        (((((item as Button).Content) as Viewbox).Child) as TextBlock).Text = wordsToLearn[indeciesList[i++]].Translation;
                     }
                 }
                 parentWindow.nextCardButton.IsEnabled = false;
@@ -81,6 +80,7 @@ namespace VocabularyUI.UserControls
             }
             catch (Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -101,6 +101,7 @@ namespace VocabularyUI.UserControls
             }
             catch (Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -109,13 +110,14 @@ namespace VocabularyUI.UserControls
         {
             try
             {
-                wordEng = (sender as Button).Content.ToString();
+                wordEng = (((((sender as Button).Content) as Viewbox).Child) as TextBlock).Text;
                 wordEngButtom = (sender as Button);
                 var word = wordsToLearn.Where(item => item.WordEng.Equals(wordEng)).FirstOrDefault();
                 Helper.PlaySoundFromBytes(word.Sound);
             }
             catch (Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -126,7 +128,7 @@ namespace VocabularyUI.UserControls
             {
                 if (wordEng != null)
                 {
-                    translation = (sender as Button).Content.ToString();
+                    translation = (((((sender as Button).Content) as Viewbox).Child) as TextBlock).Text;
                     WordDTO word = wordsToLearn.Where(item => item.WordEng.Equals(wordEng)).Single();
                     if (word.Translation.Equals(translation))
                     {
@@ -160,6 +162,7 @@ namespace VocabularyUI.UserControls
             }
             catch(Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }

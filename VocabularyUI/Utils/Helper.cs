@@ -1,9 +1,11 @@
 ﻿using BespokeFusion;
+using log4net;
 using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
@@ -19,6 +21,7 @@ namespace VocabularyUI.Utils
     {
         private static Mp3FileReader mp3FileReader;
         private static WaveOut waveOut;
+        public static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public static BitmapImage LoadImage(byte[] imageData)
         {
@@ -41,6 +44,7 @@ namespace VocabularyUI.Utils
             }
             catch(Exception ex)
             {
+                log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
                 return null;
             }
@@ -56,7 +60,7 @@ namespace VocabularyUI.Utils
                     {
                         mp3FileReader = new Mp3FileReader(ms);
                         waveOut = new WaveOut();
-                        waveOut.Stop();
+                        waveOut.Stop(); 
                         waveOut.Init(mp3FileReader);
                         waveOut.Play();
                         while(waveOut.PlaybackState == PlaybackState.Playing) { }
@@ -65,6 +69,7 @@ namespace VocabularyUI.Utils
             }
             catch(Exception ex)
             {
+                log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }

@@ -16,6 +16,7 @@ using System.Windows.Threading;
 using VocabularyUI.Windows;
 using DAL.DTOs;
 using BespokeFusion;
+using VocabularyUI.Utils;
 
 namespace VocabularyUI.UserControls
 {
@@ -45,6 +46,7 @@ namespace VocabularyUI.UserControls
             }  
             catch(Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
 }
@@ -92,6 +94,7 @@ namespace VocabularyUI.UserControls
             }
             catch (Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -111,6 +114,7 @@ namespace VocabularyUI.UserControls
             }
             catch(Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }

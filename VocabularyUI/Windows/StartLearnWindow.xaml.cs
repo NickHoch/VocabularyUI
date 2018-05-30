@@ -58,6 +58,7 @@ namespace VocabularyUI.Windows
             }
             catch (Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
                 return null;
             }
@@ -74,6 +75,7 @@ namespace VocabularyUI.Windows
             }
             catch (Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -86,6 +88,7 @@ namespace VocabularyUI.Windows
             }
             catch (Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -98,7 +101,7 @@ namespace VocabularyUI.Windows
                 quantityReturnesWords = WordsToLearn.Count();
                 if (quantityReturnesWords == 0)
                 {
-                    MaterialMessageBox.ShowError("You have studied all the words from this dictionary. Please choose another dictionary");
+                    MaterialMessageBox.ShowError("You have studied all the words from the dictionary or the dictionary is empty");
                 }
                 else if (quantityReturnesWords < 3)
                 {
@@ -123,6 +126,7 @@ namespace VocabularyUI.Windows
             }
             catch (Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -149,6 +153,7 @@ namespace VocabularyUI.Windows
             }
             catch (Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -162,7 +167,8 @@ namespace VocabularyUI.Windows
             }
             catch(Exception ex)
             {
-                ex.ToString();
+                Helper.log.Error(ex.ToString());
+                MaterialMessageBox.ShowError(ex.ToString());
             }          
         }
         private void FormationCard5()
@@ -174,7 +180,8 @@ namespace VocabularyUI.Windows
             }
             catch (Exception ex)
             {
-                ex.ToString();
+                Helper.log.Error(ex.ToString());
+                MaterialMessageBox.ShowError(ex.ToString());
             }
         }
         private void NextCardButton_Click(object sender, RoutedEventArgs e)
@@ -186,24 +193,24 @@ namespace VocabularyUI.Windows
                     Helper.PlaySoundFromBytes(WordsToLearn[++cardCount].Sound);
                     contentControl.Content = new UserControls.Card1(WordsToLearn[cardCount]);
                 }
-                //else if (cardCount < quantityReturnesWords - 1 + quantityCard)
-                //{
-                //    contentControl.Content = new UserControls.Card2(WordsToLearn.Skip(5 * index).Take(5).ToList());
-                //    index++;
-                //    cardCount++;
-                //}
-                //else if (WordsToLearn.Any(item => item.IsLearned[0].Equals(false)))
-                //{
-                //    FormationCard3(0, true);
-                //}
-                //else if (WordsToLearn.Any(item => item.IsLearned[1].Equals(false)))
-                //{
-                //    FormationCard4();
-                //}
-                //else if (WordsToLearn.Any(item => item.IsLearned[2].Equals(false)))
-                //{
-                //    FormationCard3(2, false);
-                //}
+                else if (cardCount < quantityReturnesWords - 1 + quantityCard)
+                {
+                    contentControl.Content = new UserControls.Card2(WordsToLearn.Skip(5 * index).Take(5).ToList());
+                    index++;
+                    cardCount++;
+                }
+                else if (WordsToLearn.Any(item => item.IsLearned[0].Equals(false)))
+                {
+                    FormationCard3(0, true);
+                }
+                else if (WordsToLearn.Any(item => item.IsLearned[1].Equals(false)))
+                {
+                    FormationCard4();
+                }
+                else if (WordsToLearn.Any(item => item.IsLearned[2].Equals(false)))
+                {
+                    FormationCard3(2, false);
+                }
                 else if (WordsToLearn.Any(item => item.IsLearned[3].Equals(false)))
                 {
                     FormationCard5();
@@ -211,11 +218,13 @@ namespace VocabularyUI.Windows
                 else
                 {
                     _dal.SetToWordsStatusAsLearned(quantityReturnesWords, selectedDictionaryId);
+                    Helper.log.Info($"User with id: {userId} has studied {quantityReturnesWords} words in the dictionary, which id is: {selectedDictionaryId}");
                     this.Close();
                 }
             }
             catch (Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }

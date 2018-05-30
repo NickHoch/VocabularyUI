@@ -59,26 +59,25 @@ namespace VocabularyUI.UserControls
                         if (item is Button && index.Equals(randIndex))
                         {
                             index++;
-                            (item as Button).Content = wordToLearn.Translation;
+                            (((((item as Button).Content) as Viewbox).Child) as TextBlock).Text = wordToLearn.Translation;
                         }
                         else if (item is Button)
                         {
                             index++;
-                            (item as Button).Content = wordsList[i++].Translation;
+                            (((((item as Button).Content) as Viewbox).Child) as TextBlock).Text = wordsList[i++].Translation;
                         }
-                        Helper.PlaySoundFromBytes(wordToLearn.Sound);
                     }
                     else
                     {
                         if (item is Button && index.Equals(randIndex))
                         {
                             index++;
-                            (item as Button).Content = wordToLearn.WordEng;
+                            (((((item as Button).Content) as Viewbox).Child) as TextBlock).Text = wordToLearn.WordEng;
                         }
                         else if (item is Button)
                         {
                             index++;
-                            (item as Button).Content = wordsList[i++].WordEng;
+                            (((((item as Button).Content) as Viewbox).Child) as TextBlock).Text = wordsList[i++].WordEng;
                         }
                     }
                 }
@@ -93,6 +92,7 @@ namespace VocabularyUI.UserControls
             }
             catch(Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -119,6 +119,7 @@ namespace VocabularyUI.UserControls
             }
             catch (Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -139,6 +140,7 @@ namespace VocabularyUI.UserControls
             }
             catch (Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -152,6 +154,7 @@ namespace VocabularyUI.UserControls
             }
             catch (Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -161,7 +164,7 @@ namespace VocabularyUI.UserControls
             {
                 if (translationFromEngToUk)
                 {
-                    if ((sender as Button).Content.Equals(wordToLearn.Translation))
+                    if ((((((sender as Button).Content) as Viewbox).Child) as TextBlock).Text.Equals(wordToLearn.Translation))
                     {
                         if (!wasError)
                         {
@@ -178,7 +181,7 @@ namespace VocabularyUI.UserControls
                 }
                 else
                 {
-                    if ((sender as Button).Content.Equals(wordToLearn.WordEng))
+                    if ((((((sender as Button).Content) as Viewbox).Child) as TextBlock).Text.Equals(wordToLearn.WordEng))
                     {
                         if (!wasError)
                         {
@@ -196,6 +199,7 @@ namespace VocabularyUI.UserControls
             }
             catch (Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }

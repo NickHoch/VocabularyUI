@@ -21,36 +21,44 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="3.5*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="30*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="3*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel 
-            Grid.Row="1"
-            Grid.Column="1"
-            Orientation="Horizontal">
+        <Grid Grid.Row="1"
+              Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
             <ComboBox                        
-                x:Name="comboBox"
-                Width="200"
+                x:Name="comboBox"            
                 Loaded="ComboBox_Load"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
                 SelectionChanged="ComboBox_SelectionChanged"/>
             <Button
                 x:Name="launchButton"
-                Margin="15,0,10,0"
-                Width="155"
-                Click="Launch_Click"
-                Content="Launch"/>
-        </StackPanel>
+                Grid.Column="1"
+                Margin="10,2,2,2"
+                Click="Launch_Click">
+                <Viewbox StretchDirection="Both">
+                    <TextBlock>Launch</TextBlock>
+                </Viewbox>
+            </Button>
+        </Grid>
         <ContentControl x:Name="contentControl" Grid.Row="3" Grid.Column="1"/>
         <Button x:Name="nextCardButton"
                 Grid.Row="5"
                 Grid.Column="1"  
                 Margin="120,0"                   
-                Content="Next card"
-                Click="NextCardButton_Click" Height="27" VerticalAlignment="Top">
+                Click="NextCardButton_Click">
+            <Viewbox StretchDirection="Both">
+                <TextBlock>Next card</TextBlock>
+            </Viewbox>
         </Button>
     </Grid>
 </Controls:MetroWindow>
