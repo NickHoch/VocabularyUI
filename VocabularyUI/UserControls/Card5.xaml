@@ -41,13 +41,20 @@
             <Button 
                 x:Name="answerButton"
                 Grid.Column="1"
-                Content="Answer"
-                Click="answerButton_Click"/>
+                Click="answerButton_Click">
+                <Viewbox StretchDirection="Both">
+                    <TextBlock>Answer</TextBlock>
+                </Viewbox>
+            </Button>
+
             <Button 
                 x:Name="compareButton"
                 Grid.Column="3"
-                Content="Compare"
-                Click="compareButton_Click"/>
+                Click="compareButton_Click">
+                <Viewbox StretchDirection="Both">
+                    <TextBlock>Compare</TextBlock>
+                </Viewbox>
+            </Button>
         </Grid>
         <Viewbox 
             HorizontalAlignment="Center"

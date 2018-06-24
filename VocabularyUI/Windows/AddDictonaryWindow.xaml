@@ -12,7 +12,7 @@
         GlowBrush="Black"
         ResizeMode="CanResizeWithGrip"
         WindowTransitionsEnabled="False"
-        Title="Add dictonary" Height="200" Width="300" WindowStartupLocation="CenterScreen">
+        Title="Add dictonary" Height="180" Width="250" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -27,7 +27,7 @@
         <StackPanel Grid.Row="1" Grid.Column="1">
             <TextBox                 
                 x:Name="nameField"
-                Margin="0,20,0,0"
+                Margin="0,10,0,0"
                 materialDesign:HintAssist.Hint="Name"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
             <Button

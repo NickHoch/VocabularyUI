@@ -12,7 +12,7 @@
         GlowBrush="Black"
         ResizeMode="CanResizeWithGrip"
         WindowTransitionsEnabled="False"
-        Title="Delete dictionary" Height="200" Width="300" WindowStartupLocation="CenterScreen">
+        Title="Delete dictionary" Height="180" Width="250" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -27,7 +27,7 @@
         <StackPanel Grid.Row="1" Grid.Column="1">
             <ComboBox                        
                 x:Name="comboBox"
-                Margin="0,20,0,0"
+                Margin="0,10,0,0"
                 materialDesign:HintAssist.Hint="Name"
                 Loaded="ComboBox_Load"
                 SelectionChanged="ComboBox_SelectionChanged"/>
@@ -36,7 +36,7 @@
                 Grid.Column="1"
                 Style="{StaticResource MaterialDesignRaisedAccentButton}"
                 materialDesign:RippleAssist.Feedback="#DD000000"
-                Margin="0,20"
+                Margin="0,30"
                 Click="DeleteDictionary_Click">Delete dictionary</Button>
         </StackPanel>
     </Grid>

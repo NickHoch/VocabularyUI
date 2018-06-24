@@ -14,7 +14,7 @@ namespace DAL.DTOs
         public string Translation { get; set; }
         public byte[] Sound { get; set; }
         public byte[] Image { get; set; }
-        public List<Boolean> IsLearned = new List<Boolean>();
+        public List<Boolean> IsCardPassed = new List<Boolean>();
         public bool IsLearnedWord { get; set; }
         public DictionaryExtnDTO Dictionary { get; set; }
     }

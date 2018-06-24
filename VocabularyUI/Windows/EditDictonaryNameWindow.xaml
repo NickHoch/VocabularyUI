@@ -12,7 +12,7 @@
         GlowBrush="Black"
         ResizeMode="CanResizeWithGrip"
         WindowTransitionsEnabled="False"
-        Title="Edit dictionary" Height="250" Width="300" WindowStartupLocation="CenterScreen">
+        Title="Edit dictionary" Height="220" Width="250" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -27,13 +27,13 @@
         <StackPanel Grid.Row="1" Grid.Column="1">
             <ComboBox                        
                 x:Name="dictNameCmb"
-                Margin="0,20,0,0"
+                Margin="0,0,0,0"
                 materialDesign:HintAssist.Hint="Name"
                 Loaded="ComboBox_Load"
                 SelectionChanged="ComboBox_SelectionChanged"/>
             <TextBox                 
                 x:Name="nameField"
-                Margin="0,25,0,0"
+                Margin="0,15,0,0"
                 materialDesign:HintAssist.Hint="New name"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
             <Button

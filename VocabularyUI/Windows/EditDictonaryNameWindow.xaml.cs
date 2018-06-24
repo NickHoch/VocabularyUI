@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using VocabularyUI.Utils;
 
 namespace VocabularyUI.Windows
 {
@@ -31,6 +32,7 @@ namespace VocabularyUI.Windows
         public EditDictonaryNameWindow(ServerDAL _dal, int userId)
         {
             InitializeComponent();
+            ResizeMode = ResizeMode.NoResize;
             this._dal = _dal;
             this.userId = userId;
         }
@@ -46,6 +48,7 @@ namespace VocabularyUI.Windows
             }
             catch (Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -58,6 +61,7 @@ namespace VocabularyUI.Windows
             }
             catch (Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -99,16 +103,19 @@ namespace VocabularyUI.Windows
                     }
                     catch (Exception ex)
                     {
+                        Helper.log.Error(ex.ToString());
                         MaterialMessageBox.ShowError(ex.ToString());
                     }
                     finally
                     {
+                        Helper.log.Info($"User with id: {userId} has update dictionary name. Dictionary id: {(dictNameCmb.SelectedValue as DictionaryDTO).Id} New name: {nameField.Text}");
                         dictNameCmb.SelectionChanged += ComboBox_SelectionChanged;
                     }
                 }
             }
             catch(Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }

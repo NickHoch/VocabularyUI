@@ -10,6 +10,7 @@ using BespokeFusion;
 using DAL;
 using DAL.DTOs;
 using log4net;
+using VocabularyUI.Utils;
 using VocabularyUI.Windows;
 
 namespace VocabularyUI.UserControls
@@ -17,7 +18,6 @@ namespace VocabularyUI.UserControls
     public partial class SignIn : UserControl
     {
         private ServerDAL _dal = null;
-        private readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public int? userId = null;
         public SignIn(ServerDAL _dal)
         {
@@ -64,7 +64,7 @@ namespace VocabularyUI.UserControls
                     var match = regex.Match(loginField.Text);
                     if (!match.Success)
                     {
-                        msgErr = "Invalid email address\n";
+                        msgErr = "Invalid email address. \n";
                         loginField.Text = String.Empty;
                         passwordField.Password = String.Empty;
                     }
@@ -74,7 +74,7 @@ namespace VocabularyUI.UserControls
                     match = regex.Match(passwordField.Password);
                     if (!match.Success)
                     {
-                        msgErr = String.Concat(msgErr, "Password must contain only numbers and letters\n");
+                        msgErr = String.Concat(msgErr, "Password must contain only numbers and letters. \n");
                         passwordField.Password = String.Empty;
                     }
 
@@ -95,12 +95,12 @@ namespace VocabularyUI.UserControls
                         progressBar.Visibility = Visibility.Hidden;
                         if (userId.HasValue)
                         {
-                            log.Info($"User with id: {userId} has been sign in");
+                            Helper.log.Info($"Email: {loginField.Text} Password: {passwordField.Password} User id: {userId} has been sign in");
                             RaiseEvent(new RoutedEventArgs(SignIn.LoginClick, this));
                         }
                         else
                         {
-                            log.Info($"Email: {loginField.Text}. Password: {passwordField.Password}. Invalid login credentials");
+                            Helper.log.Error($"Invalid login credentials. Email: {loginField.Text} Password: {passwordField.Password}");
                             MaterialMessageBox.ShowError("Invalid login credentials. Please try again.");
                             loginField.Text = String.Empty;
                             passwordField.Password = String.Empty;
@@ -108,19 +108,25 @@ namespace VocabularyUI.UserControls
                     }
                     else
                     {
+                        Helper.log.Error(msgErr);
                         MaterialMessageBox.ShowError(msgErr);
                     }
                 }
             }
             catch (FaultException ex)
             {
+                progressBar.IsIndeterminate = false;
+                progressBar.Visibility = Visibility.Hidden;
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
             catch(Exception ex)
             {
+                progressBar.IsIndeterminate = false;
+                progressBar.Visibility = Visibility.Hidden;
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
-
     }
 }

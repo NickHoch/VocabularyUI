@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VocabularyUI.Utils;
 using VocabularyUI.Windows;
 
 namespace VocabularyUI.UserControls
@@ -48,9 +49,11 @@ namespace VocabularyUI.UserControls
             {
                 var startLearnWindow = new StartLearnWindow(_dal, userId);
                 startLearnWindow.Show();
+                Helper.log.Info($"User with id {userId} start to learn words");
             }
             catch (Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -63,6 +66,7 @@ namespace VocabularyUI.UserControls
             }
             catch (Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }            
         }
@@ -75,6 +79,7 @@ namespace VocabularyUI.UserControls
             }
             catch (Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }           
         }
@@ -87,6 +92,7 @@ namespace VocabularyUI.UserControls
             }
             catch (Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }          
         }
@@ -99,6 +105,7 @@ namespace VocabularyUI.UserControls
             }
             catch (Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }           
         }
@@ -106,10 +113,12 @@ namespace VocabularyUI.UserControls
         {
             try
             {
+                Helper.log.Info($"User with id {userId} log out");
                 RaiseEvent(new RoutedEventArgs(Menu.ExitClick, this));
             }
             catch (Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }            
         }
@@ -117,10 +126,12 @@ namespace VocabularyUI.UserControls
         {
             try
             {
+                Helper.log.Info($"User with id {userId} log out");
                 RaiseEvent(new RoutedEventArgs(Menu.LogOutClick, this));
             }
             catch(Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }           
         }
