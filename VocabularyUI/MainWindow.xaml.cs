@@ -163,7 +163,7 @@ namespace VocabularyClient
                         formatter.Serialize(stream, credential);
                     }
                 }
-                StartCounting((int)signUp.userId);
+                //StartCounting((int)signUp.userId);
                 menu = new Menu(_dal, (int)signIn.userId);
                 contentControl.Content = menu;
                 menu.AddHandler(Menu.ExitClick, new RoutedEventHandler(ExitButton));

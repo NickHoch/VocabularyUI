@@ -97,12 +97,58 @@ namespace VocabularyUI.Windows
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
+        private void GenerationCards()
+        {
+            bool flag = true;
+            while (flag)
+            {
+                int cardSequenceNumber = rand.Next(1, 6);
+                switch (cardSequenceNumber)
+                {
+                    case 1:
+                        var wordsToLearn = WordsToLearn.Where(x => x.IsCardPassed[1] == false).Take(5).ToList();
+                        if (wordsToLearn.Count != 0)
+                        {
+                            contentControl.Content = new Card2(wordsToLearn);
+                            flag = false;
+                        }
+                        break;
+                    case 2:
+                        if (WordsToLearn.Count(x => x.IsCardPassed[2] == false) > 0)
+                        {
+                            FormationCard3(2, true);
+                            flag = false;
+                        }
+                        break;
+                    case 3:
+                        if (WordsToLearn.Count(x => x.IsCardPassed[3] == false) > 0)
+                        {
+                            FormationCard4();
+                            flag = false;
+                        }
+                        break;
+                    case 4:
+                        if (WordsToLearn.Count(x => x.IsCardPassed[4] == false) > 0)
+                        {
+                            FormationCard3(4, false);
+                            flag = false;
+                        }
+                        break;
+                    case 5:
+                        if (WordsToLearn.Count(x => x.IsCardPassed[5] == false) > 0)
+                        {
+                            FormationCard5();
+                            flag = false;
+                        }
+                        break;
+                }
+            }
+        }
         private void Launch_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 WordsToLearn = _dal.GetNotLearnedWords(quantityWordsToLearn, selectedDictionaryId);
-                //WordsToLearn.ForEach(x => x.IsLearned = new List<Boolean> { false, false, false, false, false, false });
                 quantityReturnedWords = WordsToLearn.Count();
                 if (quantityReturnedWords == 0)
                 {
@@ -136,36 +182,7 @@ namespace VocabularyUI.Windows
                         }
                     }
                     isAllWordsPassedCard1 = true;
-
-                    bool flag = true;
-                    while(flag)
-                    {
-                        int cardSequenceNumber = rand.Next(1, 6);
-                        switch (cardSequenceNumber)
-                        {
-                            case 1:
-                                var wordsToLearn = WordsToLearn.Where(x => x.IsCardPassed[1] == false).Take(5).ToList();
-                                if (wordsToLearn.Count != 0)
-                                {
-                                    contentControl.Content = new Card2(wordsToLearn);
-                                    flag = false;
-                                }
-                                break;
-                            case 2:
-                                FormationCard3(2, true);
-                                break;
-                            case 3:
-                                FormationCard4();
-                                break;
-                            case 4:
-                                FormationCard3(4, false);
-                                break;
-                            case 5:
-                                FormationCard5();
-                                break;
-                        }
-                    }
-                  
+                    GenerationCards();
                 }
             }
             catch (Exception ex)
@@ -229,61 +246,27 @@ namespace VocabularyUI.Windows
             Dictionary<int, List<bool>> learnedWordsCards = new Dictionary<int, List<bool>>();
             try
             {
-                cardCount++;
-                if (cardCount < quantityReturnedWords)
+                GenerationCards();
+
+                bool isAllWordsLearned = true;
+                bool breakFromCycle = false;
+                foreach(var item in WordsToLearn)
                 {
-                    if(WordsToLearn[cardCount].IsCardPassed[0] == false)
+                    foreach(var item2 in item.IsCardPassed)
                     {
-                        if (WordsToLearn[cardCount].Sound != null)
+                        if(item2 == false)
                         {
-                            Helper.PlaySoundFromBytes(WordsToLearn[cardCount].Sound);
+                            isAllWordsLearned = false;
+                            breakFromCycle = true;
+                            break;
                         }
-                        contentControl.Content = new Card1(WordsToLearn[cardCount]);
-                        WordsToLearn[cardCount].IsCardPassed[0] = true;
                     }
-                    else
+                    if(breakFromCycle)
                     {
-
+                        break;
                     }
                 }
-
-
-
-                int wordSequenceNumber = 0;
-                int cardSequenceNumber = 0;
-                do
-                {
-                    wordSequenceNumber = rand.Next(0, quantityReturnedWords);
-                    cardSequenceNumber = rand.Next(1, 6);
-                } while (WordsToLearn[wordSequenceNumber].IsCardPassed[cardSequenceNumber] == false);
-
-                //foreach(var item in WordsToLearn)
-                //{
-                //    item.IsLearned[0] = true;
-                //}
-                if (cardCount < quantityReturnedWords - 1 + quantityCard)
-                {
-                    contentControl.Content = new Card2(WordsToLearn.Skip(5 * index).Take(5).ToList());
-                    index++;
-                    cardCount++;
-                }
-                else if (WordsToLearn.Any(item => item.IsCardPassed[0].Equals(false)))
-                {
-                    FormationCard3(0, true);
-                }
-                else if (WordsToLearn.Any(item => item.IsCardPassed[1].Equals(false)))
-                {
-                    FormationCard4();
-                }
-                else if (WordsToLearn.Any(item => item.IsCardPassed[2].Equals(false)))
-                {
-                    FormationCard3(2, false);
-                }
-                else if (WordsToLearn.Any(item => item.IsCardPassed[3].Equals(false)))
-                {
-                    FormationCard5();
-                }
-                else
+                if(isAllWordsLearned)
                 {
                     _dal.SetToWordsStatusAsLearned(quantityReturnedWords, selectedDictionaryId);
                     Helper.log.Info($"User with id: {userId} has studied {quantityReturnedWords} words in the dictionary, which id is: {selectedDictionaryId}");
