@@ -92,16 +92,6 @@ namespace VocabularyClient
             }
         }
 
-        //private void StartCounting(int userId)
-        //{
-        //    Thread.Sleep(10000);
-        //    var thread = new Thread(ShowWindow);
-
-        //    thread.SetApartmentState(ApartmentState.STA);
-
-        //    thread.Start(userId);
-        //    thread.Join();
-        //}
         private async void StartCounting(int userId)
         {
             await Task.Delay(10000);
@@ -123,8 +113,8 @@ namespace VocabularyClient
         {
             try
             {
-                path = System.Reflection.Assembly.GetEntryAssembly().Location;
-                fileName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
+                path = Assembly.GetEntryAssembly().Location;
+                fileName = Assembly.GetExecutingAssembly().GetName().Name;
             }
             catch (Exception ex)
             {

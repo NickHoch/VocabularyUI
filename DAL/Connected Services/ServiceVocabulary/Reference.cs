@@ -218,7 +218,10 @@ namespace DAL.ServiceVocabulary {
         private byte[] ImageField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool IsLearnedWordField;
+        private bool[] IsCardPassedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsWordLearnedField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private byte[] SoundField;
@@ -282,14 +285,27 @@ namespace DAL.ServiceVocabulary {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsLearnedWord {
+        public bool[] IsCardPassed {
             get {
-                return this.IsLearnedWordField;
+                return this.IsCardPassedField;
             }
             set {
-                if ((this.IsLearnedWordField.Equals(value) != true)) {
-                    this.IsLearnedWordField = value;
-                    this.RaisePropertyChanged("IsLearnedWord");
+                if ((object.ReferenceEquals(this.IsCardPassedField, value) != true)) {
+                    this.IsCardPassedField = value;
+                    this.RaisePropertyChanged("IsCardPassed");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsWordLearned {
+            get {
+                return this.IsWordLearnedField;
+            }
+            set {
+                if ((this.IsWordLearnedField.Equals(value) != true)) {
+                    this.IsWordLearnedField = value;
+                    this.RaisePropertyChanged("IsWordLearned");
                 }
             }
         }
@@ -413,6 +429,12 @@ namespace DAL.ServiceVocabulary {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetNotLearnedWords", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/GetNotLearnedWordsResponse")]
         System.Threading.Tasks.Task<DAL.ServiceVocabulary.WordDC[]> GetNotLearnedWordsAsync(int quantityWords, int dictionaryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeStatusCards", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeStatusCardsResponse")]
+        void ChangeStatusCards(System.Collections.Generic.Dictionary<int, bool[]> newCardsStatuses, int dictionaryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeStatusCards", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeStatusCardsResponse")]
+        System.Threading.Tasks.Task ChangeStatusCardsAsync(System.Collections.Generic.Dictionary<int, bool[]> newCardsStatuses, int dictionaryId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsLearned", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsLearnedRespon" +
             "se")]
@@ -566,6 +588,14 @@ namespace DAL.ServiceVocabulary {
         
         public System.Threading.Tasks.Task<DAL.ServiceVocabulary.WordDC[]> GetNotLearnedWordsAsync(int quantityWords, int dictionaryId) {
             return base.Channel.GetNotLearnedWordsAsync(quantityWords, dictionaryId);
+        }
+        
+        public void ChangeStatusCards(System.Collections.Generic.Dictionary<int, bool[]> newCardsStatuses, int dictionaryId) {
+            base.Channel.ChangeStatusCards(newCardsStatuses, dictionaryId);
+        }
+        
+        public System.Threading.Tasks.Task ChangeStatusCardsAsync(System.Collections.Generic.Dictionary<int, bool[]> newCardsStatuses, int dictionaryId) {
+            return base.Channel.ChangeStatusCardsAsync(newCardsStatuses, dictionaryId);
         }
         
         public void SetToWordsStatusAsLearned(int quantityWords, int dictionaryId) {

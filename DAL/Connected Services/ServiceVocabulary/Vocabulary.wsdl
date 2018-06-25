@@ -85,6 +85,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ChangeStatusCards">
+      <soap:operation soapAction="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeStatusCards" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="SetToWordsStatusAsLearned">
       <soap:operation soapAction="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsLearned" style="document" />
       <wsdl:input>

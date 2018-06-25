@@ -1,7 +1,9 @@
 ﻿using DAL.DTOs;
 using DAL.Mapping;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Threading.Tasks;
 
 namespace DAL
@@ -54,6 +56,10 @@ namespace DAL
             var listWordsDC = vocabularyClient.GetNotLearnedWords(quantityWords, dictionaryId).ToList();
             listWordsDC.ForEach(x => listWordsDTO.Add(MappingWord.MappingDCtoDTO(x)));
             return listWordsDTO;
+        }
+        public void ChangeCardsStatuses(Dictionary<int, bool[]> newCardsStatuses, int dictionaryId)
+        {
+            vocabularyClient.ChangeStatusCards(newCardsStatuses, dictionaryId);
         }
         public void SetToWordsStatusAsLearned(int quantityWords, int dictionaryId)
         {

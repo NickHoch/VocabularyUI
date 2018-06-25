@@ -87,6 +87,9 @@
     <None Include="Connected Services\ServiceVocabulary\Vocabulary2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ServiceVocabulary\Vocabulary3.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

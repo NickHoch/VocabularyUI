@@ -1,13 +1,23 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/WCF.DCs" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WCF.DCs" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:55842/Vocabulary.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:complexType name="CredentialDC">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Dictionaries" nillable="true" type="tns:ArrayOfDictionaryExtnDC" />
       <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="CredentialDC" nillable="true" type="tns:CredentialDC" />
+  <xs:complexType name="CredentialExtnDC">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:CredentialDC">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Dictionaries" nillable="true" type="tns:ArrayOfDictionaryExtnDC" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CredentialExtnDC" nillable="true" type="tns:CredentialExtnDC" />
   <xs:complexType name="ArrayOfDictionaryExtnDC">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="DictionaryExtnDC" nillable="true" type="tns:DictionaryExtnDC" />
@@ -43,7 +53,8 @@
       <xs:element minOccurs="0" name="Dictionary" nillable="true" type="tns:DictionaryExtnDC" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="Image" nillable="true" type="xs:base64Binary" />
-      <xs:element minOccurs="0" name="IsLearnedWord" type="xs:boolean" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="IsCardPassed" nillable="true" type="q1:ArrayOfboolean" />
+      <xs:element minOccurs="0" name="IsWordLearned" type="xs:boolean" />
       <xs:element minOccurs="0" name="Sound" nillable="true" type="xs:base64Binary" />
       <xs:element minOccurs="0" name="Transcription" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Translation" nillable="true" type="xs:string" />

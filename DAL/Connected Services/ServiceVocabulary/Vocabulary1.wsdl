@@ -5,6 +5,7 @@
       <xsd:import schemaLocation="http://localhost:55842/Vocabulary.svc?xsd=xsd0" namespace="http://Microsoft.ServiceModel.Samples" />
       <xsd:import schemaLocation="http://localhost:55842/Vocabulary.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:55842/Vocabulary.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/WCF.DCs" />
+      <xsd:import schemaLocation="http://localhost:55842/Vocabulary.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IVocabulary_IsDictionaryNameExists_InputMessage">
@@ -60,6 +61,12 @@
   </wsdl:message>
   <wsdl:message name="IVocabulary_GetNotLearnedWords_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetNotLearnedWordsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_ChangeStatusCards_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeStatusCards" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_ChangeStatusCards_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeStatusCardsResponse" />
   </wsdl:message>
   <wsdl:message name="IVocabulary_SetToWordsStatusAsLearned_InputMessage">
     <wsdl:part name="parameters" element="tns:SetToWordsStatusAsLearned" />
@@ -145,6 +152,10 @@
     <wsdl:operation name="GetNotLearnedWords">
       <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetNotLearnedWords" message="tns:IVocabulary_GetNotLearnedWords_InputMessage" />
       <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetNotLearnedWordsResponse" message="tns:IVocabulary_GetNotLearnedWords_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeStatusCards">
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeStatusCards" message="tns:IVocabulary_ChangeStatusCards_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeStatusCardsResponse" message="tns:IVocabulary_ChangeStatusCards_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SetToWordsStatusAsLearned">
       <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsLearned" message="tns:IVocabulary_SetToWordsStatusAsLearned_InputMessage" />
