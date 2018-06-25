@@ -46,13 +46,19 @@
             <Button 
                 x:Name="forgotButton"
                 Grid.Column="1"
-                Click="forgotButton_Click"
-                Content="Forgot"/>
+                Click="forgotButton_Click">
+                <Viewbox StretchDirection="Both">
+                    <TextBlock>Forgot</TextBlock>
+                </Viewbox>
+            </Button>
             <Button 
                 x:Name="recalledButton"
                 Grid.Column="3"
-                Click="recalledButton_ClickAsync"
-                Content="Recalled"/>
+                Click="recalledButton_ClickAsync">
+                <Viewbox StretchDirection="Both">
+                    <TextBlock>Recalled</TextBlock>
+                </Viewbox>
+            </Button>
         </Grid>
         <Label 
             Grid.Row="0"

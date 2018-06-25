@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using VocabularyUI.Utils;
 
 namespace VocabularyUI.Windows
 {
@@ -27,6 +28,7 @@ namespace VocabularyUI.Windows
         public DeleteDictionaryWindow(ServerDAL _dal, int userId)
         {
             InitializeComponent();
+            ResizeMode = ResizeMode.NoResize;
             this._dal = _dal;
             this.userId = userId;
         }
@@ -43,6 +45,7 @@ namespace VocabularyUI.Windows
             }
             catch (Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -55,6 +58,7 @@ namespace VocabularyUI.Windows
             }
             catch(Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -69,18 +73,22 @@ namespace VocabularyUI.Windows
                 else
                 {
                     var res = _dal.DeleteDictionary(selectedDictionaryId);
+                    Helper.log.Info($"User with id: {userId} has deleted dictionary: {(comboBox.SelectedValue as DictionaryDTO).Name}");
                     if (res)
                     {
                         this.Close();
                     }
                     else
                     {
-                        MaterialMessageBox.ShowError("Removal procedure ended accidentally");
+                        string error = "Removal procedure ended accidentally";
+                        Helper.log.Error(error);
+                        MaterialMessageBox.ShowError(error);
                     }
                 }
             }
             catch (Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }

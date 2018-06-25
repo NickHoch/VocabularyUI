@@ -30,13 +30,12 @@ namespace VocabularyUI.UserControls
         private Button wordEngButtom;
 
         private StartLearnWindow parentWindow = Application.Current.Windows.OfType<StartLearnWindow>().FirstOrDefault();
-        private MediaPlayer mplayer = new MediaPlayer();
         public Card2(List<WordDTO> wordsToLearn)
         {
             try
             {
                 InitializeComponent();
-                card2Grid.Background = new SolidColorBrush(Color.FromArgb(177, 255, 204, 204));
+                card2Grid.Background = new SolidColorBrush(Color.FromArgb(1, 71, 147, 223));
                 this.wordsToLearn = wordsToLearn;
 
                 List<int> indeciesList = new List<int>();
@@ -51,7 +50,7 @@ namespace VocabularyUI.UserControls
                     }
                     if (Grid.GetColumn(item).Equals(0) && item is Button)
                     {
-                        (item as Button).Content = wordsToLearn[indeciesList[i++]].WordEng;
+                        (((((item as Button).Content)as Viewbox).Child)as TextBlock).Text = wordsToLearn[indeciesList[i++]].WordEng;
                     }
                 }
 
@@ -66,7 +65,7 @@ namespace VocabularyUI.UserControls
                     }
                     if (Grid.GetColumn(item).Equals(1) && item is Button)
                     {
-                        (item as Button).Content = wordsToLearn[indeciesList[i++]].Translation;
+                        (((((item as Button).Content) as Viewbox).Child) as TextBlock).Text = wordsToLearn[indeciesList[i++]].Translation;
                     }
                 }
                 parentWindow.nextCardButton.IsEnabled = false;
@@ -81,6 +80,7 @@ namespace VocabularyUI.UserControls
             }
             catch (Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -101,40 +101,43 @@ namespace VocabularyUI.UserControls
             }
             catch (Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
 
-        private void buttonWordEng_Click(object sender, RoutedEventArgs e)
+        private void WordEng_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                wordEng = (sender as Button).Content.ToString();
+                wordEng = (((((sender as Button).Content) as Viewbox).Child) as TextBlock).Text;
                 wordEngButtom = (sender as Button);
-                var word = wordsToLearn.Where(item => item.WordEng.Equals(wordEng)).FirstOrDefault();
+                var word = wordsToLearn.Where(item => item.WordEng == wordEng).FirstOrDefault();
                 Helper.PlaySoundFromBytes(word.Sound);
             }
             catch (Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
 
-        private void buttonTranslation_Click(object sender, RoutedEventArgs e)
+        private void Translation_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 if (wordEng != null)
                 {
-                    translation = (sender as Button).Content.ToString();
-                    WordDTO word = wordsToLearn.Where(item => item.WordEng.Equals(wordEng)).Single();
-                    if (word.Translation.Equals(translation))
+                    translation = (((((sender as Button).Content) as Viewbox).Child) as TextBlock).Text;
+                    WordDTO word = wordsToLearn.Where(item => item.WordEng == wordEng).Single();
+                    if (word.Translation == translation)
                     {
                         (sender as Button).Background = Brushes.LightGreen;
                         (sender as Button).IsHitTestVisible = false;
                         wordEngButtom.Background = Brushes.LightGreen;
                         wordEngButtom.IsHitTestVisible = false;
                         CountCorrectlySelectedWords++;
+                        parentWindow.WordsToLearn.Where(x => x.Id == word.Id).SingleOrDefault().IsCardPassed[1] = true;
                     }
                     else
                     {
@@ -160,6 +163,7 @@ namespace VocabularyUI.UserControls
             }
             catch(Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }

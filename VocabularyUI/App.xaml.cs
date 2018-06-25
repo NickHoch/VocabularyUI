@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using BespokeFusion;
 using System;
+using VocabularyUI.UserControls;
 
 namespace VocabularyClient
 {
@@ -15,11 +16,11 @@ namespace VocabularyClient
             try
             {
                 base.OnStartup(e);
-                ShutdownMode = ShutdownMode.OnMainWindowClose;
+                ShutdownMode = ShutdownMode.OnMainWindowClose; // closes all child windows when main window closed
 
                 log4net.Config.XmlConfigurator.Configure();
 
-                MainWindow = new MainWindow();
+                MainWindow = new MainWindow(); // settings behaviour app in system tray
                 MainWindow.Closing += MainWindow_Closing;
                 _notifyIcon = new System.Windows.Forms.NotifyIcon();
                 _notifyIcon.DoubleClick += (s, args) => ShowMainWindow();

@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using BespokeFusion;
 using DAL.DTOs;
+using VocabularyUI.Utils;
 using VocabularyUI.Windows;
 
 namespace VocabularyUI.UserControls
@@ -44,6 +45,7 @@ namespace VocabularyUI.UserControls
             }
             catch(Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -68,6 +70,7 @@ namespace VocabularyUI.UserControls
             }
             catch (Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -80,7 +83,7 @@ namespace VocabularyUI.UserControls
                 compareButton.IsEnabled = false;
                 if (wordToLearn.WordEng.Equals(enteredWord.Text, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    parentWindow.WordsToLearn.Where(item => item.WordEng.Equals(wordToLearn.WordEng)).Single().IsLearned[3] = true;
+                    parentWindow.WordsToLearn.Where(item => item.WordEng.Equals(wordToLearn.WordEng)).Single().IsCardPassed[5] = true;
                     wordEng.Text = "true";
                     await Task.Delay(500);
                     RaiseEvent(new RoutedEventArgs(GreetEventCard, this));
@@ -94,6 +97,7 @@ namespace VocabularyUI.UserControls
             }
             catch (Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }

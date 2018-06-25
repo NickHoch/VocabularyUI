@@ -14,9 +14,23 @@ using System.ServiceModel;
 using BespokeFusion;
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
+using log4net;
+using System.Reflection;
+using VocabularyUI.Utils;
+using System.Threading;
+using System.Windows.Threading;
+using VocabularyUI.Windows;
 
 namespace VocabularyClient
 {
+    public class IdEventArgs : EventArgs
+    {
+        public readonly int id;
+        public IdEventArgs(int id)
+        {
+            this.id = id;
+        }
+    }
     public partial class MainWindow : MetroWindow
     {
         private SignIn signIn;
@@ -37,10 +51,10 @@ namespace VocabularyClient
                 //autorun
                 GetExeLocation();
                 StartExeWhenPcStartup(fileName, path);
-                this.ResizeMode = System.Windows.ResizeMode.NoResize;
+                ResizeMode = ResizeMode.NoResize;
                 BinaryFormatter formatter = new BinaryFormatter();
                 CredentialDTO credential = new CredentialDTO();
-                using (var stream = store.OpenFile("credential.cfg", FileMode.OpenOrCreate, FileAccess.Read))
+                using (var stream = store.OpenFile("credential.cfg", FileMode.OpenOrCreate, FileAccess.Read)) // this snipet of the code checks for the file user`s credential and decides how to start app
                 {
                     if (stream.Length != 0)
                     {
@@ -50,10 +64,12 @@ namespace VocabularyClient
                 var userId = _dal.GetUserIdByCredential(credential);
                 if (userId.HasValue)
                 {
+                    Helper.log.Info($"Login: {credential.Email} Password: {credential.Password} UserId: {userId} entered in the app");
                     menu = new Menu(_dal, (int)userId);
                     contentControl.Content = menu;
                     menu.AddHandler(Menu.ExitClick, new RoutedEventHandler(ExitButton));
                     menu.AddHandler(Menu.LogOutClick, new RoutedEventHandler(LogOutButton));
+                    //StartCounting((int)userId);
                 }
                 else
                 {
@@ -62,19 +78,48 @@ namespace VocabularyClient
                     signIn.AddHandler(SignIn.SignUpClick, new RoutedEventHandler(SignUpButton));
                     signIn.AddHandler(SignIn.LoginClick, new RoutedEventHandler(LoginButton));
                 }
+                
             }
             catch (FaultException ex)
             {
+                Helper.log.Error($"Exception: {ex.ToString()}");
                 MaterialMessageBox.ShowError(ex.ToString());
             }
             catch (Exception ex)
             {
+                Helper.log.Error($"Exception: {ex.ToString()}");
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
-        //autorun
+
+        //private void StartCounting(int userId)
+        //{
+        //    Thread.Sleep(10000);
+        //    var thread = new Thread(ShowWindow);
+
+        //    thread.SetApartmentState(ApartmentState.STA);
+
+        //    thread.Start(userId);
+        //    thread.Join();
+        //}
+        private async void StartCounting(int userId)
+        {
+            await Task.Delay(10000);
+            //await Task.Factory.StartNew(() =>
+            //{
+            //    Thread.Sleep(10000);
+            //});
+            ShowWindow(userId);
+        }
+        public void ShowWindow(object userid)
+        {
+            PopupWindow popupWindow = new PopupWindow();
+            popupWindow.contentControl = new Card1(new WordDTO { WordEng = "test" });
+            popupWindow.Show();
+        }
+
         #region
-        public void GetExeLocation()
+        public void GetExeLocation() //mathods puts app in autorun folder
         {
             try
             {
@@ -83,6 +128,7 @@ namespace VocabularyClient
             }
             catch (Exception ex)
             {
+                Helper.log.Error($"Exception: {ex.ToString()}");
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -95,15 +141,16 @@ namespace VocabularyClient
             }
             catch (Exception ex)
             {
+                Helper.log.Error($"Exception: {ex.ToString()}");
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
-        #endregion autorun // autorun
+        #endregion
         private void LoginButton(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (signIn.rememberChk.IsChecked == true)
+                if (signIn.rememberChk.IsChecked == true) // method creates or refreshes user`s config file if checkbox is selected
                 {
                     CredentialDTO credential = new CredentialDTO
                     {
@@ -116,6 +163,7 @@ namespace VocabularyClient
                         formatter.Serialize(stream, credential);
                     }
                 }
+                //StartCounting((int)signUp.userId);
                 menu = new Menu(_dal, (int)signIn.userId);
                 contentControl.Content = menu;
                 menu.AddHandler(Menu.ExitClick, new RoutedEventHandler(ExitButton));
@@ -123,6 +171,7 @@ namespace VocabularyClient
             }
             catch(Exception ex)
             {
+                Helper.log.Error($"Exception: {ex.ToString()}");
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -134,9 +183,11 @@ namespace VocabularyClient
                 contentControl.Content = signUp;
                 signUp.AddHandler(SignUp.CancelClick, new RoutedEventHandler(CancelButton));
                 signUp.AddHandler(SignUp.ContinueClick, new RoutedEventHandler(ContinueButton));
+
             }
             catch (Exception ex)
             {
+                Helper.log.Error($"Exception: {ex.ToString()}");
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -148,9 +199,11 @@ namespace VocabularyClient
                 contentControl.Content = menu;
                 menu.AddHandler(Menu.ExitClick, new RoutedEventHandler(ExitButton));
                 menu.AddHandler(Menu.LogOutClick, new RoutedEventHandler(LogOutButton));
+                StartCounting((int)signUp.userId);
             }
             catch (Exception ex)
             {
+                Helper.log.Error($"Exception: {ex.ToString()}");
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -165,14 +218,15 @@ namespace VocabularyClient
             }
             catch (Exception ex)
             {
+                Helper.log.Error($"Exception: {ex.ToString()}");
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
-        private void ExitButton(object sender, RoutedEventArgs e)
+        private void ExitButton(object sender, RoutedEventArgs e) // methods closes app. Doesn`t hide app in tray
         {
             Application.Current.Shutdown();
         }
-        private void LogOutButton(object sender, RoutedEventArgs e)
+        private void LogOutButton(object sender, RoutedEventArgs e) // method deletes user`s config file with cedential
         {
             try
             {
@@ -184,6 +238,7 @@ namespace VocabularyClient
             }
             catch (Exception ex)
             {
+                Helper.log.Error($"Exception: {ex.ToString()}");
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }

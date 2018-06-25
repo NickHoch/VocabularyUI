@@ -19,6 +19,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using VocabularyUI.Utils;
 
 namespace VocabularyUI.Windows
 {
@@ -35,6 +36,7 @@ namespace VocabularyUI.Windows
         public EditWordsWindow(ServerDAL _dal, int userId)
         {
             InitializeComponent();
+            ResizeMode = ResizeMode.NoResize;
             this._dal = _dal;
             this.userId = userId;
         }
@@ -58,6 +60,7 @@ namespace VocabularyUI.Windows
                     newWord.Image = imageArr;
                     newWord.Sound = soundArr;
                     _dal.AddWord(newWord, selectedDictionaryId);
+                    Helper.log.Info($"User with id: {userId} has added word(English: {newWord.WordEng}) to dictionary id: {selectedDictionaryId}");
 
                     dataGrid.ItemsSource = null;
                     dataGrid.ItemsSource = _dal.GetWords(selectedDictionaryId);
@@ -70,6 +73,7 @@ namespace VocabularyUI.Windows
             }
             catch(Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -81,6 +85,7 @@ namespace VocabularyUI.Windows
                 {
                     int wordId = (dataGrid.SelectedItem as WordDTO).Id;
                     _dal.DeleteWord(wordId);
+                    Helper.log.Info($"User with id: {userId} has deleted word(English: {(dataGrid.SelectedItem as WordDTO).WordEng}) from dictionary id: {selectedDictionaryId}");
                     dataGrid.ItemsSource = null;
                     dataGrid.ItemsSource = _dal.GetWords(selectedDictionaryId);
                 }
@@ -91,6 +96,7 @@ namespace VocabularyUI.Windows
             }
             catch (Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -103,6 +109,7 @@ namespace VocabularyUI.Windows
                     var wordToUpdate = (dataGrid.SelectedItem as WordDTO);
                     wordToUpdate.Dictionary = null;
                     _dal.UpdateWord(wordToUpdate);
+                    Helper.log.Info($"User with id: {userId} has updated word(English: {wordToUpdate.WordEng}) in dictionary id: {selectedDictionaryId}");
                 }
                 else
                 {
@@ -111,6 +118,7 @@ namespace VocabularyUI.Windows
             }
             catch (Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -126,6 +134,7 @@ namespace VocabularyUI.Windows
             }
             catch(Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -139,6 +148,7 @@ namespace VocabularyUI.Windows
             }
             catch(Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.Show(ex.ToString());
             }
         }
@@ -157,6 +167,7 @@ namespace VocabularyUI.Windows
             }
             catch(Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.Show(ex.ToString());
             }
         }
@@ -175,6 +186,7 @@ namespace VocabularyUI.Windows
             }
             catch(Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.Show(ex.ToString());
             }
         }
@@ -191,18 +203,22 @@ namespace VocabularyUI.Windows
                     var size = new FileInfo(dlg.FileName).Length;
                     if (size > 262144)
                     {
-                        MaterialMessageBox.ShowError("The size of the selected file more than 256KB. Please select another file");
+                        string err = "The size of the selected file more than 256KB. Please select another file";
+                        Helper.log.Error(err);
+                        MaterialMessageBox.ShowError(err);
                         return;
                     }
                     bytesArr = File.ReadAllBytes(dlg.FileName);
                     var word = (dataGrid.SelectedItem as WordDTO);
                     _dal.ChangeSound(word.Id, bytesArr);
+                    Helper.log.Info($"User with id: {userId} has changed sound in word id{word.Id}(word English: {word.WordEng}) in dictionary id: {selectedDictionaryId}");
                     dataGrid.ItemsSource = null;
                     dataGrid.ItemsSource = _dal.GetWords(selectedDictionaryId);
                 }
             }
             catch(Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -219,18 +235,22 @@ namespace VocabularyUI.Windows
                     var size = new FileInfo(dlg.FileName).Length;
                     if (size > 262144)
                     {
-                        MaterialMessageBox.ShowError("The size of the selected file more than 256KB. Please select another file");
+                        string err = "The size of the selected file more than 256KB. Please select another file";
+                        Helper.log.Error(err);
+                        MaterialMessageBox.ShowError(err);
                         return;
                     }
                     bytesArr = File.ReadAllBytes(dlg.FileName);
                     var word = (dataGrid.SelectedItem as WordDTO);
                     _dal.ChangeImage(word.Id, bytesArr);
+                    Helper.log.Info($"User with id: {userId} has changed image in word id{word.Id}(word English: {word.WordEng}) in dictionary id: {selectedDictionaryId}");
                     dataGrid.ItemsSource = null;
                     dataGrid.ItemsSource = _dal.GetWords(selectedDictionaryId);
                 }
             }
             catch(Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -246,6 +266,7 @@ namespace VocabularyUI.Windows
             }
             catch(Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -257,12 +278,14 @@ namespace VocabularyUI.Windows
                 if (result == MessageBoxResult.OK)
                 {
                     _dal.SetToWordsStatusAsUnlearned(selectedDictionaryId);
+                    Helper.log.Info($"User with id: {userId} has changed status of all words in {selectedDictionaryId} dictionary to unlearned");
                     dataGrid.ItemsSource = null;
                     dataGrid.ItemsSource = _dal.GetWords(selectedDictionaryId);
                 }
             }
             catch(Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }

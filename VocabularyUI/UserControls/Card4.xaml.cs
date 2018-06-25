@@ -16,6 +16,7 @@ using System.Windows.Threading;
 using VocabularyUI.Windows;
 using DAL.DTOs;
 using BespokeFusion;
+using VocabularyUI.Utils;
 
 namespace VocabularyUI.UserControls
 {
@@ -45,6 +46,7 @@ namespace VocabularyUI.UserControls
             }  
             catch(Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
 }
@@ -61,7 +63,7 @@ namespace VocabularyUI.UserControls
         {
             try
             {
-                if (time.Equals(1))
+                if (time == 1)
                 {
                     dispatcherTimer.Stop();
                     timer.Text = WordToLearn.Translation;
@@ -92,6 +94,7 @@ namespace VocabularyUI.UserControls
             }
             catch (Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
@@ -104,13 +107,14 @@ namespace VocabularyUI.UserControls
                 forgotButton.IsEnabled = false;
                 parentWindow.WordsToLearn.Where(item => item.WordEng.Equals(WordToLearn.WordEng))
                                                  .Single()
-                                                 .IsLearned[1] = true;
+                                                 .IsCardPassed[3] = true;
                 timer.Text = WordToLearn.Translation;
                 await Task.Delay(500);
                 RaiseEvent(new RoutedEventArgs(GreetEventCard, this));
             }
             catch(Exception ex)
             {
+                Helper.log.Error(ex.ToString());
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }

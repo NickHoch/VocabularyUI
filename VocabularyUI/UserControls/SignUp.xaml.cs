@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using DAL.DTOs;
 using VocabularyUI.Windows;
 using System.IO;
+using VocabularyUI.Utils;
 
 namespace VocabularyUI.UserControls
 {
@@ -90,12 +91,14 @@ namespace VocabularyUI.UserControls
                     var res = _dal.AddUser(credentialDTO);
                     if(res)
                     {
+                        Helper.log.Info($"User with credentials: login {credentialDTO.Email} password {credentialDTO.Password} has been added");
                         userId = _dal.GetUserIdByCredential(credentialDTO);
                         RaiseEvent(new RoutedEventArgs(SignUp.ContinueClick, this));
                     }
                 }
                 else
                 {
+                    Helper.log.Error(msgErr);
                     MaterialMessageBox.ShowError(msgErr);
                     passwordField.Password = String.Empty;
                     confirmPasswordField.Password = String.Empty;
@@ -103,11 +106,13 @@ namespace VocabularyUI.UserControls
             }
             catch (FaultException ex)
             {
-                MaterialMessageBox.ShowError(ex.Message);
+                Helper.log.Error(ex.ToString());
+                MaterialMessageBox.ShowError(ex.ToString());
             }
             catch (Exception ex)
             {
-                MaterialMessageBox.ShowError(ex.Message);
+                Helper.log.Error(ex.ToString());
+                MaterialMessageBox.ShowError(ex.ToString());
             }
         }
         private void Cancel_Click(object sender, RoutedEventArgs e)
@@ -118,7 +123,8 @@ namespace VocabularyUI.UserControls
             }
             catch(Exception ex)
             {
-                MaterialMessageBox.ShowError(ex.Message);
+                Helper.log.Error(ex.ToString());
+                MaterialMessageBox.ShowError(ex.ToString());
             }
         }
     }
