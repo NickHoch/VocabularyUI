@@ -53,7 +53,6 @@ namespace VocabularyUI.Windows
             foreach (var item in WordsToLearn)
             {
                 learnedWordsCards.Add(item.Id, item.IsCardPassed);
-
             }
             _dal.ChangeCardsStatuses(learnedWordsCards, selectedDictionaryId);
         }
@@ -145,7 +144,7 @@ namespace VocabularyUI.Windows
         {
             try
             {
-                WordDTO wordToLearn = RandWord(4);
+                WordDTO wordToLearn = RandWord(5);
                 contentControl.Content = new Card5(wordToLearn);
             }
             catch (Exception ex)
@@ -164,8 +163,25 @@ namespace VocabularyUI.Windows
                 {
                     case 1:
                         var wordsToLearn = WordsToLearn.Where(x => x.IsCardPassed[1] == false).Take(5).ToList();
-                        if (wordsToLearn.Count != 0)
+                        if (wordsToLearn.Count > 1)
                         {
+                            contentControl.Content = new Card2(wordsToLearn);
+                            flag = false;
+                        }
+                        else if(wordsToLearn.Count > 0)
+                        {
+                            WordDTO wordToList;
+                            var wordsForExpansion = new List<WordDTO>();
+                            for (int i = 0; i < 2; i++)
+                            {
+                                do
+                                {
+                                    wordToList = WordsToLearn[rand.Next(0, WordsToLearn.Count)];
+                                } while (wordToList.Equals(wordsToLearn[0]) || wordsForExpansion.Contains(wordToList));
+                                String.Concat(wordToList.WordEng, " added");
+                                wordsForExpansion.Add(wordToList);
+                            }
+                            wordsToLearn.AddRange(wordsForExpansion);
                             contentControl.Content = new Card2(wordsToLearn);
                             flag = false;
                         }
@@ -274,8 +290,7 @@ namespace VocabularyUI.Windows
                             return;
                         }
                     }
-                }
-                GenerationCards();            
+                }          
 
                 bool isAllWordsLearned = true;
                 bool breakFromCycle = false;
@@ -301,6 +316,8 @@ namespace VocabularyUI.Windows
                     Helper.log.Info($"User with id: {userId} has studied {quantityReturnedWords} words in the dictionary, which id is: {selectedDictionaryId}");
                     this.Close();
                 }
+
+                GenerationCards();
             }
             catch (Exception ex)
             {

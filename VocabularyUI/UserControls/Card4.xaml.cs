@@ -106,7 +106,7 @@ namespace VocabularyUI.UserControls
                 recalledButton.IsEnabled = false;
                 forgotButton.IsEnabled = false;
                 parentWindow.WordsToLearn.Where(item => item.WordEng.Equals(WordToLearn.WordEng))
-                                                 .Single()
+                                                 .SingleOrDefault()
                                                  .IsCardPassed[3] = true;
                 timer.Text = WordToLearn.Translation;
                 await Task.Delay(500);

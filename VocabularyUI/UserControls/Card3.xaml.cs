@@ -39,6 +39,7 @@ namespace VocabularyUI.UserControls
                 {
                     wordEng.Text = wordToLearn.WordEng;
                     transcription.Text = wordToLearn.Transcription;
+                    Helper.PlaySoundFromBytes(wordToLearn.Sound);
                 }
                 else
                 {
@@ -169,7 +170,7 @@ namespace VocabularyUI.UserControls
                         if (!wasError)
                         {
                             parentWindow.WordsToLearn.Where(item => item.WordEng.Equals(wordToLearn.WordEng))
-                                                   .Single()
+                                                   .SingleOrDefault()
                                                    .IsCardPassed[2] = true;
                         }
                         CorrectChoice(sender);
@@ -186,7 +187,7 @@ namespace VocabularyUI.UserControls
                         if (!wasError)
                         {
                             parentWindow.WordsToLearn.Where(item => item.WordEng.Equals(wordToLearn.WordEng))
-                                                   .Single()
+                                                   .SingleOrDefault()
                                                    .IsCardPassed[4] = true;
                         }
                         CorrectChoice(sender);

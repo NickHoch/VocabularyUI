@@ -129,7 +129,7 @@ namespace VocabularyUI.UserControls
                 if (wordEng != null)
                 {
                     translation = (((((sender as Button).Content) as Viewbox).Child) as TextBlock).Text;
-                    WordDTO word = wordsToLearn.Where(item => item.WordEng == wordEng).Single();
+                    WordDTO word = wordsToLearn.Where(item => item.WordEng == wordEng).SingleOrDefault();
                     if (word.Translation == translation)
                     {
                         (sender as Button).Background = Brushes.LightGreen;
