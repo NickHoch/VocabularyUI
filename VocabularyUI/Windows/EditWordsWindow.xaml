@@ -70,7 +70,7 @@
                                 EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"/>
                 <DataGridCheckBoxColumn 
                                 Header="Is learned"
-                                Binding="{Binding IsLearnedWord}" 
+                                Binding="{Binding IsWordLearned}" 
                                 ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
                                 EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"/>
             </DataGrid.Columns>

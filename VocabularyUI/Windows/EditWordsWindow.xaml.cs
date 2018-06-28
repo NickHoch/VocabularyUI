@@ -59,6 +59,7 @@ namespace VocabularyUI.Windows
                     newWord.Translation = translationField.Text;
                     newWord.Image = imageArr;
                     newWord.Sound = soundArr;
+                    newWord.IsCardPassed = new bool[6];
                     _dal.AddWord(newWord, selectedDictionaryId);
                     Helper.log.Info($"User with id: {userId} has added word(English: {newWord.WordEng}) to dictionary id: {selectedDictionaryId}");
 

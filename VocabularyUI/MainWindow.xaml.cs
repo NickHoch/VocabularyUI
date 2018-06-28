@@ -109,7 +109,8 @@ namespace VocabularyClient
         }
 
         #region
-        public void GetExeLocation() //mathods puts app in autorun folder
+        //mathods puts app in autorun folder
+        public void GetExeLocation() 
         {
             try
             {
@@ -212,11 +213,13 @@ namespace VocabularyClient
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
-        private void ExitButton(object sender, RoutedEventArgs e) // methods closes app. Doesn`t hide app in tray
+        // methods closes app. Doesn`t hide app in tray
+        private void ExitButton(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
-        private void LogOutButton(object sender, RoutedEventArgs e) // method deletes user`s config file with cedential
+        // method deletes user`s config file with cedential
+        private void LogOutButton(object sender, RoutedEventArgs e) 
         {
             try
             {
