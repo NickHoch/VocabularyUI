@@ -145,7 +145,7 @@
   <xs:element name="SetToWordsStatusAsLearned">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="quantityWords" type="xs:int" />
+        <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="wordsId" nillable="true" type="q8:ArrayOfint" />
         <xs:element minOccurs="0" name="dictionaryId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -196,7 +196,7 @@
   <xs:element name="AddDictionary">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/WCF.DCs" minOccurs="0" name="dictionaryDC" nillable="true" type="q8:DictionaryExtnDC" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/WCF.DCs" minOccurs="0" name="dictionaryDC" nillable="true" type="q9:DictionaryExtnDC" />
         <xs:element minOccurs="0" name="userId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -245,7 +245,7 @@
   <xs:element name="GetDictionariesBaseInfoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/WCF.DCs" minOccurs="0" name="GetDictionariesBaseInfoResult" nillable="true" type="q9:ArrayOfDictionaryDC" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/WCF.DCs" minOccurs="0" name="GetDictionariesBaseInfoResult" nillable="true" type="q10:ArrayOfDictionaryDC" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

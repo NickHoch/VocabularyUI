@@ -61,9 +61,9 @@ namespace DAL
         {
             vocabularyClient.ChangeStatusCards(newCardsStatuses, dictionaryId);
         }
-        public void SetToWordsStatusAsLearned(int quantityWords, int dictionaryId)
+        public void SetToWordsStatusAsLearned(int[] wordsArr, int dictionaryId)
         {
-            vocabularyClient.SetToWordsStatusAsLearned(quantityWords, dictionaryId);
+            vocabularyClient.SetToWordsStatusAsLearned(wordsArr, dictionaryId);
         }
         public void SetToWordsStatusAsUnlearned(int dictionaryId)
         {

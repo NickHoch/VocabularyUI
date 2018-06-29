@@ -438,11 +438,11 @@ namespace DAL.ServiceVocabulary {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsLearned", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsLearnedRespon" +
             "se")]
-        void SetToWordsStatusAsLearned(int quantityWords, int dictionaryId);
+        void SetToWordsStatusAsLearned(int[] wordsId, int dictionaryId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsLearned", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsLearnedRespon" +
             "se")]
-        System.Threading.Tasks.Task SetToWordsStatusAsLearnedAsync(int quantityWords, int dictionaryId);
+        System.Threading.Tasks.Task SetToWordsStatusAsLearnedAsync(int[] wordsId, int dictionaryId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsUnlearned", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsUnlearnedResp" +
             "onse")]
@@ -598,12 +598,12 @@ namespace DAL.ServiceVocabulary {
             return base.Channel.ChangeStatusCardsAsync(newCardsStatuses, dictionaryId);
         }
         
-        public void SetToWordsStatusAsLearned(int quantityWords, int dictionaryId) {
-            base.Channel.SetToWordsStatusAsLearned(quantityWords, dictionaryId);
+        public void SetToWordsStatusAsLearned(int[] wordsId, int dictionaryId) {
+            base.Channel.SetToWordsStatusAsLearned(wordsId, dictionaryId);
         }
         
-        public System.Threading.Tasks.Task SetToWordsStatusAsLearnedAsync(int quantityWords, int dictionaryId) {
-            return base.Channel.SetToWordsStatusAsLearnedAsync(quantityWords, dictionaryId);
+        public System.Threading.Tasks.Task SetToWordsStatusAsLearnedAsync(int[] wordsId, int dictionaryId) {
+            return base.Channel.SetToWordsStatusAsLearnedAsync(wordsId, dictionaryId);
         }
         
         public void SetToWordsStatusAsUnlearned(int dictionaryId) {

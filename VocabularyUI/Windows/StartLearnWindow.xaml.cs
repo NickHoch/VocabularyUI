@@ -312,11 +312,11 @@ namespace VocabularyUI.Windows
                 }
                 if(isAllWordsLearned)
                 {
-                    _dal.SetToWordsStatusAsLearned(quantityReturnedWords, selectedDictionaryId);
+                    var wordsId = WordsToLearn.Select(x => x.Id).ToArray();
+                    _dal.SetToWordsStatusAsLearned(wordsId, selectedDictionaryId);
                     Helper.log.Info($"User with id: {userId} has studied {quantityReturnedWords} words in the dictionary, which id is: {selectedDictionaryId}");
                     this.Close();
                 }
-
                 GenerationCards();
             }
             catch (Exception ex)
