@@ -57,7 +57,7 @@ namespace DAL
             listWordsDC.ForEach(x => listWordsDTO.Add(MappingWord.MappingDCtoDTO(x)));
             return listWordsDTO;
         }
-        public void ChangeCardsStatuses(Dictionary<int, bool[]> newCardsStatuses, int dictionaryId)
+        public void ChangeCardsStatuses(Dictionary<int, string> newCardsStatuses, int dictionaryId)
         {
             vocabularyClient.ChangeStatusCards(newCardsStatuses, dictionaryId);
         }

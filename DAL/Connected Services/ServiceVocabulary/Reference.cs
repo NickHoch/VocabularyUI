@@ -218,7 +218,7 @@ namespace DAL.ServiceVocabulary {
         private byte[] ImageField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool[] IsCardPassedField;
+        private string IsCardPassedField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsWordLearnedField;
@@ -285,7 +285,7 @@ namespace DAL.ServiceVocabulary {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool[] IsCardPassed {
+        public string IsCardPassed {
             get {
                 return this.IsCardPassedField;
             }
@@ -431,10 +431,10 @@ namespace DAL.ServiceVocabulary {
         System.Threading.Tasks.Task<DAL.ServiceVocabulary.WordDC[]> GetNotLearnedWordsAsync(int quantityWords, int dictionaryId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeStatusCards", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeStatusCardsResponse")]
-        void ChangeStatusCards(System.Collections.Generic.Dictionary<int, bool[]> newCardsStatuses, int dictionaryId);
+        void ChangeStatusCards(System.Collections.Generic.Dictionary<int, string> newCardsStatuses, int dictionaryId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeStatusCards", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeStatusCardsResponse")]
-        System.Threading.Tasks.Task ChangeStatusCardsAsync(System.Collections.Generic.Dictionary<int, bool[]> newCardsStatuses, int dictionaryId);
+        System.Threading.Tasks.Task ChangeStatusCardsAsync(System.Collections.Generic.Dictionary<int, string> newCardsStatuses, int dictionaryId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsLearned", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsLearnedRespon" +
             "se")]
@@ -590,11 +590,11 @@ namespace DAL.ServiceVocabulary {
             return base.Channel.GetNotLearnedWordsAsync(quantityWords, dictionaryId);
         }
         
-        public void ChangeStatusCards(System.Collections.Generic.Dictionary<int, bool[]> newCardsStatuses, int dictionaryId) {
+        public void ChangeStatusCards(System.Collections.Generic.Dictionary<int, string> newCardsStatuses, int dictionaryId) {
             base.Channel.ChangeStatusCards(newCardsStatuses, dictionaryId);
         }
         
-        public System.Threading.Tasks.Task ChangeStatusCardsAsync(System.Collections.Generic.Dictionary<int, bool[]> newCardsStatuses, int dictionaryId) {
+        public System.Threading.Tasks.Task ChangeStatusCardsAsync(System.Collections.Generic.Dictionary<int, string> newCardsStatuses, int dictionaryId) {
             return base.Channel.ChangeStatusCardsAsync(newCardsStatuses, dictionaryId);
         }
         

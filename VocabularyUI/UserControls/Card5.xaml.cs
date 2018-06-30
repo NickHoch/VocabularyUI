@@ -83,7 +83,14 @@ namespace VocabularyUI.UserControls
                 compareButton.IsEnabled = false;
                 if (wordToLearn.WordEng.Equals(enteredWord.Text, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    parentWindow.WordsToLearn.Where(item => item.WordEng.Equals(wordToLearn.WordEng)).SingleOrDefault().IsCardPassed[5] = true;
+                    var IsCardPassedStr = parentWindow.WordsToLearn.Where(item => item.WordEng.Equals(wordToLearn.WordEng))
+                                                                   .SingleOrDefault()
+                                                                   .IsCardPassed;
+                    StringBuilder IsCardPassedSB = new StringBuilder(IsCardPassedStr);
+                    IsCardPassedSB[5] = '1';
+                    parentWindow.WordsToLearn.Where(item => item.WordEng.Equals(wordToLearn.WordEng))
+                                             .SingleOrDefault()
+                                             .IsCardPassed = IsCardPassedSB.ToString();
                     wordEng.Text = "true";
                     await Task.Delay(500);
                     RaiseEvent(new RoutedEventArgs(GreetEventCard, this));

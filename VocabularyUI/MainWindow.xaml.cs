@@ -109,7 +109,7 @@ namespace VocabularyClient
         }
 
         #region
-        //mathods puts app in autorun folder
+        //mathods put app in autorun folder
         public void GetExeLocation() 
         {
             try
@@ -213,7 +213,7 @@ namespace VocabularyClient
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
-        // methods closes app. Doesn`t hide app in tray
+        // methods closes app. It doesn`t hide app in tray
         private void ExitButton(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();

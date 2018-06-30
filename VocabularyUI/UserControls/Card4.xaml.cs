@@ -30,7 +30,6 @@ namespace VocabularyUI.UserControls
         {
             try
             {
-
                 InitializeComponent();
                 this.card4Grid.Background = new SolidColorBrush(Color.FromArgb(177, 204, 255, 204));
                 WordToLearn = wordToLearn;
@@ -105,9 +104,16 @@ namespace VocabularyUI.UserControls
                 dispatcherTimer.Stop();
                 recalledButton.IsEnabled = false;
                 forgotButton.IsEnabled = false;
+
+                var IsCardPassedStr = parentWindow.WordsToLearn.Where(item => item.WordEng.Equals(WordToLearn.WordEng))
+                                                               .SingleOrDefault()
+                                                               .IsCardPassed;
+                StringBuilder IsCardPassedSB = new StringBuilder(IsCardPassedStr);
+                IsCardPassedSB[3] = '1';
                 parentWindow.WordsToLearn.Where(item => item.WordEng.Equals(WordToLearn.WordEng))
-                                                 .SingleOrDefault()
-                                                 .IsCardPassed[3] = true;
+                                         .SingleOrDefault()
+                                         .IsCardPassed = IsCardPassedSB.ToString();
+
                 timer.Text = WordToLearn.Translation;
                 await Task.Delay(500);
                 RaiseEvent(new RoutedEventArgs(GreetEventCard, this));

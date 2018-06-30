@@ -169,9 +169,14 @@ namespace VocabularyUI.UserControls
                     {
                         if (!wasError)
                         {
+                            var IsCardPassedStr = parentWindow.WordsToLearn.Where(item => item.WordEng.Equals(wordToLearn.WordEng))
+                                                                           .SingleOrDefault()
+                                                                           .IsCardPassed;
+                            StringBuilder IsCardPassedSB = new StringBuilder(IsCardPassedStr);
+                            IsCardPassedSB[2] = '1';
                             parentWindow.WordsToLearn.Where(item => item.WordEng.Equals(wordToLearn.WordEng))
-                                                   .SingleOrDefault()
-                                                   .IsCardPassed[2] = true;
+                                                     .SingleOrDefault()
+                                                     .IsCardPassed = IsCardPassedSB.ToString();
                         }
                         CorrectChoice(sender);
                     }
@@ -186,9 +191,14 @@ namespace VocabularyUI.UserControls
                     {
                         if (!wasError)
                         {
+                            var IsCardPassedStr = parentWindow.WordsToLearn.Where(item => item.WordEng.Equals(wordToLearn.WordEng))
+                                               .SingleOrDefault()
+                                               .IsCardPassed;
+                            StringBuilder IsCardPassedSB = new StringBuilder(IsCardPassedStr);
+                            IsCardPassedSB[4] = '1';
                             parentWindow.WordsToLearn.Where(item => item.WordEng.Equals(wordToLearn.WordEng))
-                                                   .SingleOrDefault()
-                                                   .IsCardPassed[4] = true;
+                                                     .SingleOrDefault()
+                                                     .IsCardPassed = IsCardPassedSB.ToString();
                         }
                         CorrectChoice(sender);
                     }

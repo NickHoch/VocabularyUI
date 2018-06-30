@@ -129,7 +129,8 @@ namespace VocabularyUI.UserControls
                 if (wordEng != null)
                 {
                     translation = (((((sender as Button).Content) as Viewbox).Child) as TextBlock).Text;
-                    WordDTO word = wordsToLearn.Where(item => item.WordEng == wordEng).SingleOrDefault();
+                    WordDTO word = wordsToLearn.Where(item => item.WordEng == wordEng)
+                                               .SingleOrDefault();
                     if (word.Translation == translation)
                     {
                         (sender as Button).Background = Brushes.LightGreen;
@@ -137,7 +138,15 @@ namespace VocabularyUI.UserControls
                         wordEngButtom.Background = Brushes.LightGreen;
                         wordEngButtom.IsHitTestVisible = false;
                         CountCorrectlySelectedWords++;
-                        parentWindow.WordsToLearn.Where(x => x.Id == word.Id).SingleOrDefault().IsCardPassed[1] = true;
+
+                        var IsCardPassedStr = parentWindow.WordsToLearn.Where(x => x.Id == word.Id)
+                                                          .SingleOrDefault()
+                                                          .IsCardPassed;
+                        StringBuilder IsCardPassedSB = new StringBuilder(IsCardPassedStr);
+                        IsCardPassedSB[1] = '1';
+                        parentWindow.WordsToLearn.Where(x => x.Id == word.Id)
+                                                 .SingleOrDefault()
+                                                 .IsCardPassed = IsCardPassedSB.ToString();
                     }
                     else
                     {

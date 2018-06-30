@@ -49,7 +49,7 @@ namespace VocabularyUI.Windows
         private void OnWindowClosing(object sender, CancelEventArgs e)
         {
             this.Hide();
-            Dictionary<int, bool[]> learnedWordsCards = new Dictionary<int, bool[]>();
+            Dictionary<int, string> learnedWordsCards = new Dictionary<int, string>();
             foreach (var item in WordsToLearn)
             {
                 learnedWordsCards.Add(item.Id, item.IsCardPassed);
@@ -64,7 +64,7 @@ namespace VocabularyUI.Windows
                 do
                 {
                     wordToLearn = WordsToLearn[rand.Next(0, WordsToLearn.Count)];
-                } while (wordToLearn.IsCardPassed[index] == true);
+                } while (wordToLearn.IsCardPassed[index] == '1');
                 return wordToLearn;
             }
             catch (Exception ex)
@@ -162,7 +162,7 @@ namespace VocabularyUI.Windows
                 switch (cardSequenceNumber)
                 {
                     case 1:
-                        var wordsToLearn = WordsToLearn.Where(x => x.IsCardPassed[1] == false).Take(5).ToList();
+                        var wordsToLearn = WordsToLearn.Where(x => x.IsCardPassed[1] == '0').Take(5).ToList();
                         if (wordsToLearn.Count > 1)
                         {
                             contentControl.Content = new Card2(wordsToLearn);
@@ -187,28 +187,28 @@ namespace VocabularyUI.Windows
                         }
                         break;
                     case 2:
-                        if (WordsToLearn.Count(x => x.IsCardPassed[2] == false) > 0)
+                        if (WordsToLearn.Count(x => x.IsCardPassed[2] == '0') > 0)
                         {
                             FormationCard3(2, true);
                             flag = false;
                         }
                         break;
                     case 3:
-                        if (WordsToLearn.Count(x => x.IsCardPassed[3] == false) > 0)
+                        if (WordsToLearn.Count(x => x.IsCardPassed[3] == '0') > 0)
                         {
                             FormationCard4();
                             flag = false;
                         }
                         break;
                     case 4:
-                        if (WordsToLearn.Count(x => x.IsCardPassed[4] == false) > 0)
+                        if (WordsToLearn.Count(x => x.IsCardPassed[4] == '0') > 0)
                         {
                             FormationCard3(4, false);
                             flag = false;
                         }
                         break;
                     case 5:
-                        if (WordsToLearn.Count(x => x.IsCardPassed[5] == false) > 0)
+                        if (WordsToLearn.Count(x => x.IsCardPassed[5] == '0') > 0)
                         {
                             FormationCard5();
                             flag = false;
@@ -243,14 +243,16 @@ namespace VocabularyUI.Windows
 
                     foreach (var item in WordsToLearn)
                     {
-                        if (item.IsCardPassed[0] == false)
+                        if (item.IsCardPassed[0] == '0')
                         {
                             contentControl.Content = new Card1(item);
                             if (item.Sound != null)
                             {
                                 Helper.PlaySoundFromBytes(item.Sound);
                             }
-                            item.IsCardPassed[0] = true;
+                            StringBuilder temp = new StringBuilder(item.IsCardPassed);
+                            temp[0] = '1';
+                            item.IsCardPassed = temp.ToString();
                             isAllWordsPassedCard1 = false;
                             return;
                         }
@@ -275,14 +277,16 @@ namespace VocabularyUI.Windows
                     foreach (var item in WordsToLearn)
                     {
                         countCard++;
-                        if (item.IsCardPassed[0] == false)
+                        if (item.IsCardPassed[0] == '0')
                         {
                             contentControl.Content = new Card1(item);
                             if (item.Sound != null)
                             {
                                 Helper.PlaySoundFromBytes(item.Sound);
                             }
-                            item.IsCardPassed[0] = true;
+                            StringBuilder temp = new StringBuilder(item.IsCardPassed);
+                            temp[0] = '1';
+                            item.IsCardPassed = temp.ToString();
                             if (countCard == WordsToLearn.Count)
                             {
                                 isAllWordsPassedCard1 = true;
@@ -296,9 +300,9 @@ namespace VocabularyUI.Windows
                 bool breakFromCycle = false;
                 foreach(var item in WordsToLearn)
                 {
-                    foreach(var item2 in item.IsCardPassed)
+                    foreach(var item2 in item.IsCardPassed.ToCharArray())
                     {
-                        if(item2 == false)
+                        if(item2 == '0')
                         {
                             isAllWordsLearned = false;
                             breakFromCycle = true;
@@ -312,10 +316,12 @@ namespace VocabularyUI.Windows
                 }
                 if(isAllWordsLearned)
                 {
+                    this.Hide();
+                    MaterialMessageBox.Show($"\tCongratulations. You have learned {quantityReturnedWords} words");
                     var wordsId = WordsToLearn.Select(x => x.Id).ToArray();
                     _dal.SetToWordsStatusAsLearned(wordsId, selectedDictionaryId);
-                    Helper.log.Info($"User with id: {userId} has studied {quantityReturnedWords} words in the dictionary, which id is: {selectedDictionaryId}");
-                    this.Close();
+                    Helper.log.Info($"User with id: {userId} has studied {quantityReturnedWords} words in the dictionary, which id is: {selectedDictionaryId}");                    
+                    return;
                 }
                 GenerationCards();
             }
