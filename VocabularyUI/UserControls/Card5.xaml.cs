@@ -23,7 +23,7 @@ namespace VocabularyUI.UserControls
     public partial class Card5 : UserControl
     {
         private WordDTO wordToLearn = new WordDTO();
-        private StartLearnWindow parentWindow = Application.Current.Windows.OfType<StartLearnWindow>().FirstOrDefault();
+        private LearningWindow parentWindow = Application.Current.Windows.OfType<LearningWindow>().FirstOrDefault();
         public Card5(WordDTO wordToLearn)
         {
             try

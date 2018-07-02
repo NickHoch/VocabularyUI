@@ -56,11 +56,29 @@
   <wsdl:message name="IVocabulary_GetWords_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetWordsResponse" />
   </wsdl:message>
+  <wsdl:message name="IVocabulary_GetNotLearnedWordsByUserId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetNotLearnedWordsByUserId" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_GetNotLearnedWordsByUserId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNotLearnedWordsByUserIdResponse" />
+  </wsdl:message>
   <wsdl:message name="IVocabulary_GetNotLearnedWords_InputMessage">
     <wsdl:part name="parameters" element="tns:GetNotLearnedWords" />
   </wsdl:message>
   <wsdl:message name="IVocabulary_GetNotLearnedWords_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetNotLearnedWordsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_GetQuantityUnlearnedWordsInDictionary_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetQuantityUnlearnedWordsInDictionary" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_GetQuantityUnlearnedWordsInDictionary_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetQuantityUnlearnedWordsInDictionaryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_IsLearningProcessActive_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsLearningProcessActive" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_IsLearningProcessActive_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsLearningProcessActiveResponse" />
   </wsdl:message>
   <wsdl:message name="IVocabulary_ChangeStatusCards_InputMessage">
     <wsdl:part name="parameters" element="tns:ChangeStatusCards" />
@@ -149,9 +167,21 @@
       <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetWords" message="tns:IVocabulary_GetWords_InputMessage" />
       <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetWordsResponse" message="tns:IVocabulary_GetWords_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetNotLearnedWordsByUserId">
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetNotLearnedWordsByUserId" message="tns:IVocabulary_GetNotLearnedWordsByUserId_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetNotLearnedWordsByUserIdResponse" message="tns:IVocabulary_GetNotLearnedWordsByUserId_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetNotLearnedWords">
       <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetNotLearnedWords" message="tns:IVocabulary_GetNotLearnedWords_InputMessage" />
       <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetNotLearnedWordsResponse" message="tns:IVocabulary_GetNotLearnedWords_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetQuantityUnlearnedWordsInDictionary">
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetQuantityUnlearnedWordsInDictionary" message="tns:IVocabulary_GetQuantityUnlearnedWordsInDictionary_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetQuantityUnlearnedWordsInDictionaryResponse" message="tns:IVocabulary_GetQuantityUnlearnedWordsInDictionary_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsLearningProcessActive">
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/IsLearningProcessActive" message="tns:IVocabulary_IsLearningProcessActive_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/IsLearningProcessActiveResponse" message="tns:IVocabulary_IsLearningProcessActive_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ChangeStatusCards">
       <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeStatusCards" message="tns:IVocabulary_ChangeStatusCards_InputMessage" />

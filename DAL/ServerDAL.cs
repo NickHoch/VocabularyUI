@@ -50,12 +50,27 @@ namespace DAL
             listWordsDC.ForEach(x => listWordsDTO.Add(MappingWord.MappingDCtoDTO(x)));
             return listWordsDTO;
         }
-        public List<WordDTO> GetNotLearnedWords(int quantityWords, int dictionaryId)
+        public List<WordDTO> GetNotLearnedWordsByUserId(int userId)
         {
             List<WordDTO> listWordsDTO = new List<WordDTO>();
-            var listWordsDC = vocabularyClient.GetNotLearnedWords(quantityWords, dictionaryId).ToList();
+            var listWordsDC = vocabularyClient.GetNotLearnedWordsByUserId(userId).ToList();
             listWordsDC.ForEach(x => listWordsDTO.Add(MappingWord.MappingDCtoDTO(x)));
             return listWordsDTO;
+        }
+        public List<WordDTO> GetNotLearnedWords(int dictionaryId, int quantityWords)
+        {
+            List<WordDTO> listWordsDTO = new List<WordDTO>();
+            var listWordsDC = vocabularyClient.GetNotLearnedWords(dictionaryId, quantityWords).ToList();
+            listWordsDC.ForEach(x => listWordsDTO.Add(MappingWord.MappingDCtoDTO(x)));
+            return listWordsDTO;
+        }
+        public int GetQuantityUnlearnedWordsInDictionary(int dictionaryId)
+        {
+            return vocabularyClient.GetQuantityUnlearnedWordsInDictionary(dictionaryId);
+        }
+        public int? IsLearningProcessActive(int userId)
+        {
+            return vocabularyClient.IsLearningProcessActive(userId);
         }
         public void ChangeCardsStatuses(Dictionary<int, string> newCardsStatuses, int dictionaryId)
         {

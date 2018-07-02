@@ -76,8 +76,35 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetNotLearnedWordsByUserId">
+      <soap:operation soapAction="http://Microsoft.ServiceModel.Samples/IVocabulary/GetNotLearnedWordsByUserId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetNotLearnedWords">
       <soap:operation soapAction="http://Microsoft.ServiceModel.Samples/IVocabulary/GetNotLearnedWords" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetQuantityUnlearnedWordsInDictionary">
+      <soap:operation soapAction="http://Microsoft.ServiceModel.Samples/IVocabulary/GetQuantityUnlearnedWordsInDictionary" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsLearningProcessActive">
+      <soap:operation soapAction="http://Microsoft.ServiceModel.Samples/IVocabulary/IsLearningProcessActive" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

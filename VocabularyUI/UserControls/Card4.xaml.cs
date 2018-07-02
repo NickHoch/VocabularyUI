@@ -25,7 +25,7 @@ namespace VocabularyUI.UserControls
         private int time = 10;
         private WordDTO WordToLearn { get; set; }
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
-        private StartLearnWindow parentWindow = Application.Current.Windows.OfType<StartLearnWindow>().FirstOrDefault();
+        private LearningWindow parentWindow = Application.Current.Windows.OfType<LearningWindow>().FirstOrDefault();
         public Card4(WordDTO wordToLearn)
         {
             try

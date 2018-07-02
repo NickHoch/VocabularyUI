@@ -28,8 +28,7 @@ namespace VocabularyUI.UserControls
         private int CountCorrectlySelectedWords = 0;
         private List<WordDTO> wordsToLearn;
         private Button wordEngButtom;
-
-        private StartLearnWindow parentWindow = Application.Current.Windows.OfType<StartLearnWindow>().FirstOrDefault();
+        private LearningWindow parentWindow = Application.Current.Windows.OfType<LearningWindow>().FirstOrDefault();
         public Card2(List<WordDTO> wordsToLearn)
         {
             try

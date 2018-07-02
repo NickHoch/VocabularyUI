@@ -29,15 +29,15 @@ namespace VocabularyUI.UserControls
             this._dal = _dal;
             this.userId = userId;
         }
-        public static readonly RoutedEvent ExitClick =
-        EventManager.RegisterRoutedEvent("ExitClick", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Menu));
+        public static readonly RoutedEvent ExitClick = EventManager.RegisterRoutedEvent(
+            "ExitClick", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Menu));
         public event RoutedEventHandler ClickEvent
         {
             add { AddHandler(Menu.ExitClick, value); }
             remove { RemoveHandler(Menu.ExitClick, value); }
         }
-        public static readonly RoutedEvent LogOutClick =
-        EventManager.RegisterRoutedEvent("LogOutClick", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Menu));
+        public static readonly RoutedEvent LogOutClick = EventManager.RegisterRoutedEvent(
+            "LogOutClick", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Menu));
         public event RoutedEventHandler ClickEvent2
         {
             add { AddHandler(Menu.LogOutClick, value); }
@@ -47,8 +47,8 @@ namespace VocabularyUI.UserControls
         {
             try
             {
-                var startLearnWindow = new StartLearnWindow(_dal, userId);
-                startLearnWindow.Show();
+                var selectDictionaryWindow = new SelectDictionaryWindow(_dal, userId);
+                selectDictionaryWindow.Show();
                 Helper.log.Info($"User with id {userId} start to learn words");
             }
             catch (Exception ex)

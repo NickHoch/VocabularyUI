@@ -25,7 +25,7 @@ namespace VocabularyUI.UserControls
         private WordDTO wordToLearn = new WordDTO();
         private bool translationFromEngToUk;
         private bool wasError = false;
-        private StartLearnWindow parentWindow = Application.Current.Windows.OfType<StartLearnWindow>().FirstOrDefault();
+        private LearningWindow parentWindow = Application.Current.Windows.OfType<LearningWindow>().FirstOrDefault();
         public Card3(WordDTO wordToLearn, List<WordDTO> wordsList, bool translationFromEngToUk)
         {
             try

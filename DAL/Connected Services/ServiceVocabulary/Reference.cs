@@ -424,11 +424,37 @@ namespace DAL.ServiceVocabulary {
         [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetWords", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/GetWordsResponse")]
         System.Threading.Tasks.Task<DAL.ServiceVocabulary.WordDC[]> GetWordsAsync(int dictionaryId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetNotLearnedWords", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/GetNotLearnedWordsResponse")]
-        DAL.ServiceVocabulary.WordDC[] GetNotLearnedWords(int quantityWords, int dictionaryId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetNotLearnedWordsByUserId", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/GetNotLearnedWordsByUserIdRespo" +
+            "nse")]
+        DAL.ServiceVocabulary.WordDC[] GetNotLearnedWordsByUserId(int userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetNotLearnedWordsByUserId", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/GetNotLearnedWordsByUserIdRespo" +
+            "nse")]
+        System.Threading.Tasks.Task<DAL.ServiceVocabulary.WordDC[]> GetNotLearnedWordsByUserIdAsync(int userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetNotLearnedWords", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/GetNotLearnedWordsResponse")]
-        System.Threading.Tasks.Task<DAL.ServiceVocabulary.WordDC[]> GetNotLearnedWordsAsync(int quantityWords, int dictionaryId);
+        DAL.ServiceVocabulary.WordDC[] GetNotLearnedWords(int dictionaryId, int quantityWords);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetNotLearnedWords", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/GetNotLearnedWordsResponse")]
+        System.Threading.Tasks.Task<DAL.ServiceVocabulary.WordDC[]> GetNotLearnedWordsAsync(int dictionaryId, int quantityWords);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetQuantityUnlearnedWordsInDict" +
+            "ionary", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/GetQuantityUnlearnedWordsInDict" +
+            "ionaryResponse")]
+        int GetQuantityUnlearnedWordsInDictionary(int dictionaryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetQuantityUnlearnedWordsInDict" +
+            "ionary", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/GetQuantityUnlearnedWordsInDict" +
+            "ionaryResponse")]
+        System.Threading.Tasks.Task<int> GetQuantityUnlearnedWordsInDictionaryAsync(int dictionaryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/IsLearningProcessActive", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/IsLearningProcessActiveResponse" +
+            "")]
+        System.Nullable<int> IsLearningProcessActive(int userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/IsLearningProcessActive", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/IsLearningProcessActiveResponse" +
+            "")]
+        System.Threading.Tasks.Task<System.Nullable<int>> IsLearningProcessActiveAsync(int userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeStatusCards", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeStatusCardsResponse")]
         void ChangeStatusCards(System.Collections.Generic.Dictionary<int, string> newCardsStatuses, int dictionaryId);
@@ -582,12 +608,36 @@ namespace DAL.ServiceVocabulary {
             return base.Channel.GetWordsAsync(dictionaryId);
         }
         
-        public DAL.ServiceVocabulary.WordDC[] GetNotLearnedWords(int quantityWords, int dictionaryId) {
-            return base.Channel.GetNotLearnedWords(quantityWords, dictionaryId);
+        public DAL.ServiceVocabulary.WordDC[] GetNotLearnedWordsByUserId(int userId) {
+            return base.Channel.GetNotLearnedWordsByUserId(userId);
         }
         
-        public System.Threading.Tasks.Task<DAL.ServiceVocabulary.WordDC[]> GetNotLearnedWordsAsync(int quantityWords, int dictionaryId) {
-            return base.Channel.GetNotLearnedWordsAsync(quantityWords, dictionaryId);
+        public System.Threading.Tasks.Task<DAL.ServiceVocabulary.WordDC[]> GetNotLearnedWordsByUserIdAsync(int userId) {
+            return base.Channel.GetNotLearnedWordsByUserIdAsync(userId);
+        }
+        
+        public DAL.ServiceVocabulary.WordDC[] GetNotLearnedWords(int dictionaryId, int quantityWords) {
+            return base.Channel.GetNotLearnedWords(dictionaryId, quantityWords);
+        }
+        
+        public System.Threading.Tasks.Task<DAL.ServiceVocabulary.WordDC[]> GetNotLearnedWordsAsync(int dictionaryId, int quantityWords) {
+            return base.Channel.GetNotLearnedWordsAsync(dictionaryId, quantityWords);
+        }
+        
+        public int GetQuantityUnlearnedWordsInDictionary(int dictionaryId) {
+            return base.Channel.GetQuantityUnlearnedWordsInDictionary(dictionaryId);
+        }
+        
+        public System.Threading.Tasks.Task<int> GetQuantityUnlearnedWordsInDictionaryAsync(int dictionaryId) {
+            return base.Channel.GetQuantityUnlearnedWordsInDictionaryAsync(dictionaryId);
+        }
+        
+        public System.Nullable<int> IsLearningProcessActive(int userId) {
+            return base.Channel.IsLearningProcessActive(userId);
+        }
+        
+        public System.Threading.Tasks.Task<System.Nullable<int>> IsLearningProcessActiveAsync(int userId) {
+            return base.Channel.IsLearningProcessActiveAsync(userId);
         }
         
         public void ChangeStatusCards(System.Collections.Generic.Dictionary<int, string> newCardsStatuses, int dictionaryId) {

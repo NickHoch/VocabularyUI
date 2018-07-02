@@ -1,5 +1,5 @@
-﻿<Controls:MetroWindow 
-        x:Class="VocabularyUI.Windows.DeleteDictionaryWindow"
+﻿<Controls:MetroWindow  
+        x:Class="VocabularyUI.Windows.SelectDictionaryWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -10,9 +10,9 @@
         mc:Ignorable="d"
         BorderThickness="0" 
         GlowBrush="Black"
-        ResizeMode="CanResizeWithGrip"
+        ResizeMode="NoResize"
         WindowTransitionsEnabled="False"
-        Title="Delete dictionary" Height="150" Width="250" WindowStartupLocation="CenterScreen">
+        Title="Selection dictionary" Height="150" Width="250" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -37,7 +37,7 @@
                 Style="{StaticResource MaterialDesignRaisedAccentButton}"
                 materialDesign:RippleAssist.Feedback="#DD000000"
                 Margin="0,20"
-                Click="DeleteDictionary_Click">Delete dictionary</Button>
+                Click="Launch_Click">Launch</Button>
         </StackPanel>
     </Grid>
 </Controls:MetroWindow>

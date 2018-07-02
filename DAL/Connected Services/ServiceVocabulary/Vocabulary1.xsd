@@ -114,25 +114,67 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetNotLearnedWordsByUserId">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNotLearnedWordsByUserIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/WCF.DCs" minOccurs="0" name="GetNotLearnedWordsByUserIdResult" nillable="true" type="q6:ArrayOfWordDC" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetNotLearnedWords">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="quantityWords" type="xs:int" />
         <xs:element minOccurs="0" name="dictionaryId" type="xs:int" />
+        <xs:element minOccurs="0" name="quantityWords" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetNotLearnedWordsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/WCF.DCs" minOccurs="0" name="GetNotLearnedWordsResult" nillable="true" type="q6:ArrayOfWordDC" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/WCF.DCs" minOccurs="0" name="GetNotLearnedWordsResult" nillable="true" type="q7:ArrayOfWordDC" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetQuantityUnlearnedWordsInDictionary">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="dictionaryId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetQuantityUnlearnedWordsInDictionaryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetQuantityUnlearnedWordsInDictionaryResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsLearningProcessActive">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsLearningProcessActiveResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IsLearningProcessActiveResult" nillable="true" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ChangeStatusCards">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="newCardsStatuses" nillable="true" type="q7:ArrayOfKeyValueOfintstring" />
+        <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="newCardsStatuses" nillable="true" type="q8:ArrayOfKeyValueOfintstring" />
         <xs:element minOccurs="0" name="dictionaryId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -145,7 +187,7 @@
   <xs:element name="SetToWordsStatusAsLearned">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="wordsId" nillable="true" type="q8:ArrayOfint" />
+        <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="wordsId" nillable="true" type="q9:ArrayOfint" />
         <xs:element minOccurs="0" name="dictionaryId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -196,7 +238,7 @@
   <xs:element name="AddDictionary">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/WCF.DCs" minOccurs="0" name="dictionaryDC" nillable="true" type="q9:DictionaryExtnDC" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/WCF.DCs" minOccurs="0" name="dictionaryDC" nillable="true" type="q10:DictionaryExtnDC" />
         <xs:element minOccurs="0" name="userId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -245,7 +287,7 @@
   <xs:element name="GetDictionariesBaseInfoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/WCF.DCs" minOccurs="0" name="GetDictionariesBaseInfoResult" nillable="true" type="q10:ArrayOfDictionaryDC" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/WCF.DCs" minOccurs="0" name="GetDictionariesBaseInfoResult" nillable="true" type="q11:ArrayOfDictionaryDC" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

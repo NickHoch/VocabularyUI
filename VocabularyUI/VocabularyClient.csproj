@@ -121,11 +121,11 @@
     <Compile Include="Windows\EditWordsWindow.xaml.cs">
       <DependentUpon>EditWordsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\PopupWindow.xaml.cs">
-      <DependentUpon>PopupWindow.xaml</DependentUpon>
+    <Compile Include="Windows\LearningWindow.xaml.cs">
+      <DependentUpon>LearningWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\StartLearnWindow.xaml.cs">
-      <DependentUpon>StartLearnWindow.xaml</DependentUpon>
+    <Compile Include="Windows\SelectDictionaryWindow.xaml.cs">
+      <DependentUpon>SelectDictionaryWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -187,11 +187,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\PopupWindow.xaml">
+    <Page Include="Windows\LearningWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\StartLearnWindow.xaml">
+    <Page Include="Windows\SelectDictionaryWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
