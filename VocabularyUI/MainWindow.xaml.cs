@@ -110,10 +110,7 @@ namespace VocabularyClient
                 contentControl.Content = menu;
                 menu.AddHandler(Menu.ExitClick, new RoutedEventHandler(ExitButton));
                 menu.AddHandler(Menu.LogOutClick, new RoutedEventHandler(LogOutButton));
-                //StartCounting((int)userId);
-                popupTimer.Interval = new TimeSpan(0, 0, 5);
-                popupTimer.Tick += new EventHandler(popupTimer_Tick);
-                popupTimer.Start();
+                popupTimerStart();
             }
             else
             {
@@ -123,68 +120,20 @@ namespace VocabularyClient
                 signIn.AddHandler(SignIn.LoginClick, new RoutedEventHandler(LoginButton));
             }
         }
+        private void popupTimerStart()
+        {
+            popupTimer.Interval = new TimeSpan(0, 0, 5);
+            popupTimer.Tick += new EventHandler(popupTimer_Tick);
+            popupTimer.Start();
+        }
         private void popupTimer_Tick(object sender, EventArgs e)
         {
             popupTimer.Stop();
-            StartCounting((int)userId);
-        }
-        //public async void StartCounting(int userId)
-        //{
-        //    popupTimer.Interval = new TimeSpan(0, 0, 1);
-        //    popupTimer.Tick += new EventHandler(popupTimer_Tick);
-        //    popupTimer.Start();
-        //    await Task.Run(() =>
-        //    {
-        //        Dispatcher.Invoke(() =>
-        //        {
-
-        //            var dictionaryId = _dal.IsLearningProcessActive(userId);
-        //            while (dictionaryId != null)
-        //            {
-        //                //await Task.Delay(new TimeSpan(0, 0, 5));                    
-        //                if (IsLearningWindowClosed && time >=5)
-        //                {
-        //                    //popupTimer.Stop();
-        //                    var learningWindow = new LearningWindow(_dal, userId, (int)dictionaryId);
-        //                    learningWindow.ShowDialog();
-
-        //                    IsLearningWindowClosed = false;
-        //                    //popupTimer.s
-        //                }
-        //                dictionaryId = _dal.IsLearningProcessActive(userId);
-        //                time = 0;
-        //                //popupTimer.Start();
-        //                //popupTimer = new DispatcherTimer();
-
-        //                //// Work out interval as time you want to popup - current time
-        //                //popupTimer.Interval = new DateTime(2018, 7, 2, 22, 55, 0) - DateTime.Now;
-        //                //popupTimer.IsEnabled = true;
-        //                //popupTimer.Tick += new EventHandler(popupTimer_Tick);
-        //            }
-        //        });
-        //    });
-
-        //    //Thread thread = new Thread(() =>
-        //    //{
-        //    //    var dictionaryId = _dal.IsLearningProcessActive(userId);
-        //    //    var learningWindow = new LearningWindow(_dal, userId, (int)dictionaryId);
-        //    //    learningWindow.Show();
-        //    //    learningWindow.Closed += (sender1, e1) => learningWindow.Dispatcher.InvokeShutdown();
-
-        //    //    System.Windows.Threading.Dispatcher.Run();
-
-        //    //});
-        //    //thread.SetApartmentState(ApartmentState.STA);
-        //    //thread.IsBackground = true;
-        //    //thread.Start();
-        //}
-        public void StartCounting(int userId)
-        {
-            var dictionaryId = _dal.IsLearningProcessActive(userId);    
+            var dictionaryId = _dal.IsLearningProcessActive((int)userId);
             if (IsLearningWindowClosed && dictionaryId.HasValue)
             {
-                var learningWindow = new LearningWindow(_dal, userId, (int)dictionaryId);
-                learningWindow.ShowDialog();
+                var learningWindow = new LearningWindow(_dal, (int)userId, (int)dictionaryId);
+                learningWindow.Show();
                 IsLearningWindowClosed = false;
             }
         }
@@ -209,7 +158,7 @@ namespace VocabularyClient
                 contentControl.Content = menu;
                 menu.AddHandler(Menu.ExitClick, new RoutedEventHandler(ExitButton));
                 menu.AddHandler(Menu.LogOutClick, new RoutedEventHandler(LogOutButton));
-                //StartCounting((int)signUp.userId);
+                popupTimerStart();
             }
             catch (Exception ex)
             {
@@ -225,7 +174,6 @@ namespace VocabularyClient
                 contentControl.Content = signUp;
                 signUp.AddHandler(SignUp.CancelClick, new RoutedEventHandler(CancelButton));
                 signUp.AddHandler(SignUp.ContinueClick, new RoutedEventHandler(ContinueButton));
-
             }
             catch (Exception ex)
             {
@@ -241,7 +189,6 @@ namespace VocabularyClient
                 contentControl.Content = menu;
                 menu.AddHandler(Menu.ExitClick, new RoutedEventHandler(ExitButton));
                 menu.AddHandler(Menu.LogOutClick, new RoutedEventHandler(LogOutButton));
-                //StartCounting((int)signUp.userId);
             }
             catch (Exception ex)
             {
