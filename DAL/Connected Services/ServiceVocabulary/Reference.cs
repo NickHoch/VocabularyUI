@@ -438,6 +438,12 @@ namespace DAL.ServiceVocabulary {
         [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetNotLearnedWords", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/GetNotLearnedWordsResponse")]
         System.Threading.Tasks.Task<DAL.ServiceVocabulary.WordDC[]> GetNotLearnedWordsAsync(int dictionaryId, int quantityWords);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetWordsToRepeat", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/GetWordsToRepeatResponse")]
+        DAL.ServiceVocabulary.WordDC[] GetWordsToRepeat(int userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetWordsToRepeat", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/GetWordsToRepeatResponse")]
+        System.Threading.Tasks.Task<DAL.ServiceVocabulary.WordDC[]> GetWordsToRepeatAsync(int userId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetQuantityUnlearnedWordsInDict" +
             "ionary", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/GetQuantityUnlearnedWordsInDict" +
             "ionaryResponse")]
@@ -455,6 +461,12 @@ namespace DAL.ServiceVocabulary {
         [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/IsLearningProcessActive", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/IsLearningProcessActiveResponse" +
             "")]
         System.Threading.Tasks.Task<System.Nullable<int>> IsLearningProcessActiveAsync(int userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeOutstandingWords", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeOutstandingWordsResponse")]
+        void ChangeOutstandingWords(int userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeOutstandingWords", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeOutstandingWordsResponse")]
+        System.Threading.Tasks.Task ChangeOutstandingWordsAsync(int userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeStatusCards", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeStatusCardsResponse")]
         void ChangeStatusCards(System.Collections.Generic.Dictionary<int, string> newCardsStatuses, int dictionaryId);
@@ -477,6 +489,14 @@ namespace DAL.ServiceVocabulary {
         [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsUnlearned", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsUnlearnedResp" +
             "onse")]
         System.Threading.Tasks.Task SetToWordsStatusAsUnlearnedAsync(int dictionaryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsRepeated", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsRepeatedRespo" +
+            "nse")]
+        void SetToWordsStatusAsRepeated(int[] wordsId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsRepeated", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsRepeatedRespo" +
+            "nse")]
+        System.Threading.Tasks.Task SetToWordsStatusAsRepeatedAsync(int[] wordsId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeImage", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeImageResponse")]
         void ChangeImage(int wordId, byte[] newImage);
@@ -624,6 +644,14 @@ namespace DAL.ServiceVocabulary {
             return base.Channel.GetNotLearnedWordsAsync(dictionaryId, quantityWords);
         }
         
+        public DAL.ServiceVocabulary.WordDC[] GetWordsToRepeat(int userId) {
+            return base.Channel.GetWordsToRepeat(userId);
+        }
+        
+        public System.Threading.Tasks.Task<DAL.ServiceVocabulary.WordDC[]> GetWordsToRepeatAsync(int userId) {
+            return base.Channel.GetWordsToRepeatAsync(userId);
+        }
+        
         public int GetQuantityUnlearnedWordsInDictionary(int dictionaryId) {
             return base.Channel.GetQuantityUnlearnedWordsInDictionary(dictionaryId);
         }
@@ -638,6 +666,14 @@ namespace DAL.ServiceVocabulary {
         
         public System.Threading.Tasks.Task<System.Nullable<int>> IsLearningProcessActiveAsync(int userId) {
             return base.Channel.IsLearningProcessActiveAsync(userId);
+        }
+        
+        public void ChangeOutstandingWords(int userId) {
+            base.Channel.ChangeOutstandingWords(userId);
+        }
+        
+        public System.Threading.Tasks.Task ChangeOutstandingWordsAsync(int userId) {
+            return base.Channel.ChangeOutstandingWordsAsync(userId);
         }
         
         public void ChangeStatusCards(System.Collections.Generic.Dictionary<int, string> newCardsStatuses, int dictionaryId) {
@@ -662,6 +698,14 @@ namespace DAL.ServiceVocabulary {
         
         public System.Threading.Tasks.Task SetToWordsStatusAsUnlearnedAsync(int dictionaryId) {
             return base.Channel.SetToWordsStatusAsUnlearnedAsync(dictionaryId);
+        }
+        
+        public void SetToWordsStatusAsRepeated(int[] wordsId) {
+            base.Channel.SetToWordsStatusAsRepeated(wordsId);
+        }
+        
+        public System.Threading.Tasks.Task SetToWordsStatusAsRepeatedAsync(int[] wordsId) {
+            return base.Channel.SetToWordsStatusAsRepeatedAsync(wordsId);
         }
         
         public void ChangeImage(int wordId, byte[] newImage) {

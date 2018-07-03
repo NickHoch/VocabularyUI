@@ -110,7 +110,7 @@ namespace VocabularyClient
                 contentControl.Content = menu;
                 menu.AddHandler(Menu.ExitClick, new RoutedEventHandler(ExitButton));
                 menu.AddHandler(Menu.LogOutClick, new RoutedEventHandler(LogOutButton));
-                popupTimerStart();
+                PopupTimerStart();
             }
             else
             {
@@ -120,21 +120,33 @@ namespace VocabularyClient
                 signIn.AddHandler(SignIn.LoginClick, new RoutedEventHandler(LoginButton));
             }
         }
-        private void popupTimerStart()
+        private void PopupTimerStart()
         {
             popupTimer.Interval = new TimeSpan(0, 0, 5);
-            popupTimer.Tick += new EventHandler(popupTimer_Tick);
+            popupTimer.Tick += new EventHandler(PopupTimer_Tick);
             popupTimer.Start();
         }
-        private void popupTimer_Tick(object sender, EventArgs e)
+        private void PopupTimer_Tick(object sender, EventArgs e)
         {
-            popupTimer.Stop();
-            var dictionaryId = _dal.IsLearningProcessActive((int)userId);
-            if (IsLearningWindowClosed && dictionaryId.HasValue)
+            _dal.ChangeOutstandingWords((int)userId);
+            var words =_dal.GetWordsToRepeat((int)userId);
+            if(words.Count > 0)
             {
-                var learningWindow = new LearningWindow(_dal, (int)userId, (int)dictionaryId);
+                popupTimer.Stop();
+                var learningWindow = new LearningWindow(_dal, (int)userId, true);
                 learningWindow.Show();
                 IsLearningWindowClosed = false;
+            }
+            else
+            {
+                var dictionaryId = _dal.IsLearningProcessActive((int)userId);
+                if (IsLearningWindowClosed && dictionaryId.HasValue)
+                {
+                    popupTimer.Stop();
+                    var learningWindow = new LearningWindow(_dal, (int)userId, false, (int)dictionaryId);
+                    learningWindow.Show();
+                    IsLearningWindowClosed = false;
+                }
             }
         }
         private void LoginButton(object sender, RoutedEventArgs e)
@@ -158,7 +170,7 @@ namespace VocabularyClient
                 contentControl.Content = menu;
                 menu.AddHandler(Menu.ExitClick, new RoutedEventHandler(ExitButton));
                 menu.AddHandler(Menu.LogOutClick, new RoutedEventHandler(LogOutButton));
-                popupTimerStart();
+                PopupTimerStart();
             }
             catch (Exception ex)
             {
@@ -214,7 +226,15 @@ namespace VocabularyClient
         // methods closes app. It doesn`t hide app in tray
         private void ExitButton(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            try
+            {
+                Application.Current.Shutdown();
+            }
+            catch (Exception ex)
+            {
+                Helper.log.Error($"Exception: {ex.ToString()}");
+                MaterialMessageBox.ShowError(ex.ToString());
+            }
         }
         // method deletes user`s config file with cedential
         private void LogOutButton(object sender, RoutedEventArgs e)

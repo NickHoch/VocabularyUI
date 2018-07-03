@@ -86,9 +86,9 @@ namespace VocabularyUI.Windows
                 }
             }
 
-            var learningWindow = new LearningWindow(_dal, userId, dictionaryId);
+            var learningWindow = new LearningWindow(_dal, userId, false, dictionaryId);
             learningWindow.Show();
-            (mainWindow as MainWindow).popupTimer.Stop();
+            (mainWindow as MainWindow).popupTimer.Start();
             (mainWindow as MainWindow).IsLearningWindowClosed = false;
 
             Helper.log.Info($"User with id: {userId} start to learn words from dictionary id: {dictionaryId}");

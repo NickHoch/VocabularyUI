@@ -94,6 +94,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetWordsToRepeat">
+      <soap:operation soapAction="http://Microsoft.ServiceModel.Samples/IVocabulary/GetWordsToRepeat" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetQuantityUnlearnedWordsInDictionary">
       <soap:operation soapAction="http://Microsoft.ServiceModel.Samples/IVocabulary/GetQuantityUnlearnedWordsInDictionary" style="document" />
       <wsdl:input>
@@ -105,6 +114,15 @@
     </wsdl:operation>
     <wsdl:operation name="IsLearningProcessActive">
       <soap:operation soapAction="http://Microsoft.ServiceModel.Samples/IVocabulary/IsLearningProcessActive" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeOutstandingWords">
+      <soap:operation soapAction="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeOutstandingWords" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -132,6 +150,15 @@
     </wsdl:operation>
     <wsdl:operation name="SetToWordsStatusAsUnlearned">
       <soap:operation soapAction="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsUnlearned" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetToWordsStatusAsRepeated">
+      <soap:operation soapAction="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsRepeated" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -28,42 +28,67 @@ namespace VocabularyUI.Windows
     {
         public static Random rand = new Random();
         public ServerDAL _dal;
+        private bool isRepeat;
         private int userId = 0;
         private int dictionaryId = 0;
         private int quantityWordsToLearn = 10;
         private int quantityReturnedWords = 0;
         private bool isAllWordsPassedCard1 = false;
+        private string CardsIsLearned = "111111";
+        private string CardsIsNotLearned = "000000";
         private List<WordDTO> Dictionary = new List<WordDTO>();
         public List<WordDTO> WordsToLearn = new List<WordDTO>();
-        private Window mainWindow = Application.Current.MainWindow;
-        public LearningWindow(ServerDAL _dal, int userId, int dictionaryId)
+        private MainWindow mainWindow = (Application.Current.MainWindow as MainWindow);
+        public LearningWindow(ServerDAL _dal, int userId, bool isRepeat, int dictionaryId = 0)
         {
             InitializeComponent();
             this._dal = _dal;
             this.userId = userId;
             this.dictionaryId = dictionaryId;
+            this.isRepeat = isRepeat;
             nextCardButton.IsEnabled = false;
             Closing += OnWindowClosing;
             Start();
         }
-
         private void OnWindowClosing(object sender, CancelEventArgs e)
         {
             this.Hide();
-            Dictionary<int, string> learnedWordsCards = new Dictionary<int, string>();
-            foreach (var item in WordsToLearn)
+            if(isRepeat)
             {
-                learnedWordsCards.Add(item.Id, item.IsCardPassed);
+                var wordsId = WordsToLearn.Where(x => x.IsCardPassed == CardsIsLearned)
+                                                .Select(x => x.Id)
+                                                .ToArray();
+                _dal.SetToWordsStatusAsUnlearned(wordsId);
             }
-            _dal.ChangeCardsStatuses(learnedWordsCards, dictionaryId);
-            (mainWindow as MainWindow).IsLearningWindowClosed = true;
-            (mainWindow as MainWindow).popupTimer.Start();
+            else
+            {
+                Dictionary<int, string> learnedWordsCards = new Dictionary<int, string>();
+                foreach (var item in WordsToLearn)
+                {
+                    learnedWordsCards.Add(item.Id, item.IsCardPassed);
+                }
+                _dal.ChangeCardsStatuses(learnedWordsCards, dictionaryId);
+            }
+            mainWindow.IsLearningWindowClosed = true;
+            mainWindow.popupTimer.Start();
         }
         private void Start()
         {
             try
             {
-                WordsToLearn = _dal.GetNotLearnedWords(dictionaryId, quantityWordsToLearn);
+                if(isRepeat)
+                {
+
+                    WordsToLearn = _dal.GetWordsToRepeat(userId);
+                    WordsToLearn.ForEach(x => {
+                        x.IsCardPassed = CardsIsNotLearned;
+                        x.IsWordLearned = false;
+                        });
+                }
+                else
+                {
+                    WordsToLearn = _dal.GetNotLearnedWords(dictionaryId, quantityWordsToLearn);
+                }               
                 quantityReturnedWords = WordsToLearn.Count();
                 nextCardButton.IsEnabled = true;
                 nextCardButton.Focus();
@@ -279,11 +304,12 @@ namespace VocabularyUI.Windows
                 }
                 if (isAllWordsLearned)
                 {
-                    this.Hide();
                     MaterialMessageBox.Show($"\tCongratulations. You have learned {quantityReturnedWords} words");
                     var wordsId = WordsToLearn.Select(x => x.Id).ToArray();
                     _dal.SetToWordsStatusAsLearned(wordsId, dictionaryId);
+                    mainWindow.popupTimer.Stop();
                     Helper.log.Info($"User with id: {userId} has studied {quantityReturnedWords} words in the dictionary, which id is: {dictionaryId}");
+                    this.Close();
                     return;
                 }
                 GenerationCards();
