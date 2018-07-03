@@ -24,23 +24,16 @@ using System.Linq;
 
 namespace VocabularyClient
 {
-    public class IdEventArgs : EventArgs
-    {
-        public readonly int id;
-        public IdEventArgs(int id)
-        {
-            this.id = id;
-        }
-    }
     public partial class MainWindow : MetroWindow
     {
         private SignIn signIn;
         private SignUp signUp;
         private Menu menu;
+        private int? userId;
         private ServerDAL _dal = new ServerDAL();
         public static Random rand = new Random();
         private IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForAssembly();
-        private DispatcherTimer popupTimer;
+        public DispatcherTimer popupTimer= new DispatcherTimer();
         //autorun
         private string path;
         private string fileName;
@@ -109,7 +102,7 @@ namespace VocabularyClient
                     credential = (CredentialDTO)formatter.Deserialize(stream);
                 }
             }
-            var userId = _dal.GetUserIdByCredential(credential);
+            userId = _dal.GetUserIdByCredential(credential);
             if (userId.HasValue)
             {
                 Helper.log.Info($"Login: {credential.Email} Password: {credential.Password} UserId: {userId} entered in the app");
@@ -117,7 +110,10 @@ namespace VocabularyClient
                 contentControl.Content = menu;
                 menu.AddHandler(Menu.ExitClick, new RoutedEventHandler(ExitButton));
                 menu.AddHandler(Menu.LogOutClick, new RoutedEventHandler(LogOutButton));
-                StartCounting((int)userId);
+                //StartCounting((int)userId);
+                popupTimer.Interval = new TimeSpan(0, 0, 5);
+                popupTimer.Tick += new EventHandler(popupTimer_Tick);
+                popupTimer.Start();
             }
             else
             {
@@ -127,46 +123,71 @@ namespace VocabularyClient
                 signIn.AddHandler(SignIn.LoginClick, new RoutedEventHandler(LoginButton));
             }
         }
-        public async void StartCounting(int userId)
+        private void popupTimer_Tick(object sender, EventArgs e)
         {
-            var dictionaryId = _dal.IsLearningProcessActive(userId);
-            while (dictionaryId != null)
-            {
-                await Task.Delay(new TimeSpan(0, 0, 5));
-                if (IsLearningWindowClosed)
-                {
-                    var learningWindow = new LearningWindow(_dal, userId, (int)dictionaryId);
-                    learningWindow.Show();
-                    IsLearningWindowClosed = false;
-                }
-                dictionaryId = _dal.IsLearningProcessActive(userId);
-                //popupTimer = new DispatcherTimer();
-
-                //// Work out interval as time you want to popup - current time
-                //popupTimer.Interval = new DateTime(2018, 7, 2, 22, 55, 0) - DateTime.Now;
-                //popupTimer.IsEnabled = true;
-                //popupTimer.Tick += new EventHandler(popupTimer_Tick);
-            }
-            //Thread thread = new Thread(() =>
-            //{
-            //    var dictionaryId = _dal.IsLearningProcessActive(userId);
-            //    var learningWindow = new LearningWindow(_dal, userId, (int)dictionaryId);
-            //    learningWindow.Show();
-            //    learningWindow.Closed += (sender1, e1) => learningWindow.Dispatcher.InvokeShutdown();
-
-            //    System.Windows.Threading.Dispatcher.Run();
-
-            //});
-            //thread.SetApartmentState(ApartmentState.STA);
-            //thread.IsBackground = true;
-            //thread.Start();
+            popupTimer.Stop();
+            StartCounting((int)userId);
         }
-        //private void popupTimer_Tick(object sender, EventArgs e)
+        //public async void StartCounting(int userId)
         //{
-        //    popupTimer.IsEnabled = false;
-        //    // Show popup
-        //    // ......
+        //    popupTimer.Interval = new TimeSpan(0, 0, 1);
+        //    popupTimer.Tick += new EventHandler(popupTimer_Tick);
+        //    popupTimer.Start();
+        //    await Task.Run(() =>
+        //    {
+        //        Dispatcher.Invoke(() =>
+        //        {
+
+        //            var dictionaryId = _dal.IsLearningProcessActive(userId);
+        //            while (dictionaryId != null)
+        //            {
+        //                //await Task.Delay(new TimeSpan(0, 0, 5));                    
+        //                if (IsLearningWindowClosed && time >=5)
+        //                {
+        //                    //popupTimer.Stop();
+        //                    var learningWindow = new LearningWindow(_dal, userId, (int)dictionaryId);
+        //                    learningWindow.ShowDialog();
+
+        //                    IsLearningWindowClosed = false;
+        //                    //popupTimer.s
+        //                }
+        //                dictionaryId = _dal.IsLearningProcessActive(userId);
+        //                time = 0;
+        //                //popupTimer.Start();
+        //                //popupTimer = new DispatcherTimer();
+
+        //                //// Work out interval as time you want to popup - current time
+        //                //popupTimer.Interval = new DateTime(2018, 7, 2, 22, 55, 0) - DateTime.Now;
+        //                //popupTimer.IsEnabled = true;
+        //                //popupTimer.Tick += new EventHandler(popupTimer_Tick);
+        //            }
+        //        });
+        //    });
+
+        //    //Thread thread = new Thread(() =>
+        //    //{
+        //    //    var dictionaryId = _dal.IsLearningProcessActive(userId);
+        //    //    var learningWindow = new LearningWindow(_dal, userId, (int)dictionaryId);
+        //    //    learningWindow.Show();
+        //    //    learningWindow.Closed += (sender1, e1) => learningWindow.Dispatcher.InvokeShutdown();
+
+        //    //    System.Windows.Threading.Dispatcher.Run();
+
+        //    //});
+        //    //thread.SetApartmentState(ApartmentState.STA);
+        //    //thread.IsBackground = true;
+        //    //thread.Start();
         //}
+        public void StartCounting(int userId)
+        {
+            var dictionaryId = _dal.IsLearningProcessActive(userId);    
+            if (IsLearningWindowClosed && dictionaryId.HasValue)
+            {
+                var learningWindow = new LearningWindow(_dal, userId, (int)dictionaryId);
+                learningWindow.ShowDialog();
+                IsLearningWindowClosed = false;
+            }
+        }
         private void LoginButton(object sender, RoutedEventArgs e)
         {
             try

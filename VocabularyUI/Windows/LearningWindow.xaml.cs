@@ -57,6 +57,7 @@ namespace VocabularyUI.Windows
             }
             _dal.ChangeCardsStatuses(learnedWordsCards, dictionaryId);
             (mainWindow as MainWindow).IsLearningWindowClosed = true;
+            (mainWindow as MainWindow).popupTimer.Start();
         }
         private void Start()
         {
@@ -64,7 +65,6 @@ namespace VocabularyUI.Windows
             {
                 WordsToLearn = _dal.GetNotLearnedWords(dictionaryId, quantityWordsToLearn);
                 quantityReturnedWords = WordsToLearn.Count();
-
                 nextCardButton.IsEnabled = true;
                 nextCardButton.Focus();
                 contentControl.AddHandler(Card3.GreetEventCard, new RoutedEventHandler(GreeterCard));

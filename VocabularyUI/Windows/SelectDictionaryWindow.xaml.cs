@@ -85,9 +85,12 @@ namespace VocabularyUI.Windows
                     return;
                 }
             }
+
             var learningWindow = new LearningWindow(_dal, userId, dictionaryId);
             learningWindow.Show();
-            (mainWindow as MainWindow).StartCounting(userId);
+            (mainWindow as MainWindow).popupTimer.Stop();
+            (mainWindow as MainWindow).IsLearningWindowClosed = false;
+
             Helper.log.Info($"User with id: {userId} start to learn words from dictionary id: {dictionaryId}");
             this.Close();
         }
