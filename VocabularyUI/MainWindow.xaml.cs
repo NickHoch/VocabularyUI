@@ -110,10 +110,7 @@ namespace VocabularyClient
                 contentControl.Content = menu;
                 menu.AddHandler(Menu.ExitClick, new RoutedEventHandler(ExitButton));
                 menu.AddHandler(Menu.LogOutClick, new RoutedEventHandler(LogOutButton));
-                //StartCounting((int)userId);
-                popupTimer.Interval = new TimeSpan(0, 0, 5);
-                popupTimer.Tick += new EventHandler(popupTimer_Tick);
-                popupTimer.Start();
+                PopupTimerStart();
             }
             else
             {
@@ -123,69 +120,33 @@ namespace VocabularyClient
                 signIn.AddHandler(SignIn.LoginClick, new RoutedEventHandler(LoginButton));
             }
         }
-        private void popupTimer_Tick(object sender, EventArgs e)
+        private void PopupTimerStart()
         {
-            popupTimer.Stop();
-            StartCounting((int)userId);
+            popupTimer.Interval = new TimeSpan(0, 0, 5);
+            popupTimer.Tick += new EventHandler(PopupTimer_Tick);
+            popupTimer.Start();
         }
-        //public async void StartCounting(int userId)
-        //{
-        //    popupTimer.Interval = new TimeSpan(0, 0, 1);
-        //    popupTimer.Tick += new EventHandler(popupTimer_Tick);
-        //    popupTimer.Start();
-        //    await Task.Run(() =>
-        //    {
-        //        Dispatcher.Invoke(() =>
-        //        {
-
-        //            var dictionaryId = _dal.IsLearningProcessActive(userId);
-        //            while (dictionaryId != null)
-        //            {
-        //                //await Task.Delay(new TimeSpan(0, 0, 5));                    
-        //                if (IsLearningWindowClosed && time >=5)
-        //                {
-        //                    //popupTimer.Stop();
-        //                    var learningWindow = new LearningWindow(_dal, userId, (int)dictionaryId);
-        //                    learningWindow.ShowDialog();
-
-        //                    IsLearningWindowClosed = false;
-        //                    //popupTimer.s
-        //                }
-        //                dictionaryId = _dal.IsLearningProcessActive(userId);
-        //                time = 0;
-        //                //popupTimer.Start();
-        //                //popupTimer = new DispatcherTimer();
-
-        //                //// Work out interval as time you want to popup - current time
-        //                //popupTimer.Interval = new DateTime(2018, 7, 2, 22, 55, 0) - DateTime.Now;
-        //                //popupTimer.IsEnabled = true;
-        //                //popupTimer.Tick += new EventHandler(popupTimer_Tick);
-        //            }
-        //        });
-        //    });
-
-        //    //Thread thread = new Thread(() =>
-        //    //{
-        //    //    var dictionaryId = _dal.IsLearningProcessActive(userId);
-        //    //    var learningWindow = new LearningWindow(_dal, userId, (int)dictionaryId);
-        //    //    learningWindow.Show();
-        //    //    learningWindow.Closed += (sender1, e1) => learningWindow.Dispatcher.InvokeShutdown();
-
-        //    //    System.Windows.Threading.Dispatcher.Run();
-
-        //    //});
-        //    //thread.SetApartmentState(ApartmentState.STA);
-        //    //thread.IsBackground = true;
-        //    //thread.Start();
-        //}
-        public void StartCounting(int userId)
+        private void PopupTimer_Tick(object sender, EventArgs e)
         {
-            var dictionaryId = _dal.IsLearningProcessActive(userId);    
-            if (IsLearningWindowClosed && dictionaryId.HasValue)
+            _dal.ChangeOutstandingWords((int)userId);
+            var words =_dal.GetWordsToRepeat((int)userId);
+            if(words.Count > 0)
             {
-                var learningWindow = new LearningWindow(_dal, userId, (int)dictionaryId);
-                learningWindow.ShowDialog();
+                popupTimer.Stop();
+                var learningWindow = new LearningWindow(_dal, (int)userId, true);
+                learningWindow.Show();
                 IsLearningWindowClosed = false;
+            }
+            else
+            {
+                var dictionaryId = _dal.IsLearningProcessActive((int)userId);
+                if (IsLearningWindowClosed && dictionaryId.HasValue)
+                {
+                    popupTimer.Stop();
+                    var learningWindow = new LearningWindow(_dal, (int)userId, false, (int)dictionaryId);
+                    learningWindow.Show();
+                    IsLearningWindowClosed = false;
+                }
             }
         }
         private void LoginButton(object sender, RoutedEventArgs e)
@@ -209,7 +170,7 @@ namespace VocabularyClient
                 contentControl.Content = menu;
                 menu.AddHandler(Menu.ExitClick, new RoutedEventHandler(ExitButton));
                 menu.AddHandler(Menu.LogOutClick, new RoutedEventHandler(LogOutButton));
-                //StartCounting((int)signUp.userId);
+                PopupTimerStart();
             }
             catch (Exception ex)
             {
@@ -225,7 +186,6 @@ namespace VocabularyClient
                 contentControl.Content = signUp;
                 signUp.AddHandler(SignUp.CancelClick, new RoutedEventHandler(CancelButton));
                 signUp.AddHandler(SignUp.ContinueClick, new RoutedEventHandler(ContinueButton));
-
             }
             catch (Exception ex)
             {
@@ -241,7 +201,6 @@ namespace VocabularyClient
                 contentControl.Content = menu;
                 menu.AddHandler(Menu.ExitClick, new RoutedEventHandler(ExitButton));
                 menu.AddHandler(Menu.LogOutClick, new RoutedEventHandler(LogOutButton));
-                //StartCounting((int)signUp.userId);
             }
             catch (Exception ex)
             {
@@ -267,7 +226,15 @@ namespace VocabularyClient
         // methods closes app. It doesn`t hide app in tray
         private void ExitButton(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            try
+            {
+                Application.Current.Shutdown();
+            }
+            catch (Exception ex)
+            {
+                Helper.log.Error($"Exception: {ex.ToString()}");
+                MaterialMessageBox.ShowError(ex.ToString());
+            }
         }
         // method deletes user`s config file with cedential
         private void LogOutButton(object sender, RoutedEventArgs e)

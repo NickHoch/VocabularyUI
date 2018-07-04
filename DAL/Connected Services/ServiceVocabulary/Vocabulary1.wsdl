@@ -68,6 +68,12 @@
   <wsdl:message name="IVocabulary_GetNotLearnedWords_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetNotLearnedWordsResponse" />
   </wsdl:message>
+  <wsdl:message name="IVocabulary_GetWordsToRepeat_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWordsToRepeat" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_GetWordsToRepeat_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWordsToRepeatResponse" />
+  </wsdl:message>
   <wsdl:message name="IVocabulary_GetQuantityUnlearnedWordsInDictionary_InputMessage">
     <wsdl:part name="parameters" element="tns:GetQuantityUnlearnedWordsInDictionary" />
   </wsdl:message>
@@ -79,6 +85,12 @@
   </wsdl:message>
   <wsdl:message name="IVocabulary_IsLearningProcessActive_OutputMessage">
     <wsdl:part name="parameters" element="tns:IsLearningProcessActiveResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_ChangeOutstandingWords_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeOutstandingWords" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_ChangeOutstandingWords_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeOutstandingWordsResponse" />
   </wsdl:message>
   <wsdl:message name="IVocabulary_ChangeStatusCards_InputMessage">
     <wsdl:part name="parameters" element="tns:ChangeStatusCards" />
@@ -97,6 +109,12 @@
   </wsdl:message>
   <wsdl:message name="IVocabulary_SetToWordsStatusAsUnlearned_OutputMessage">
     <wsdl:part name="parameters" element="tns:SetToWordsStatusAsUnlearnedResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_SetToWordsStatusAsRepeated_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetToWordsStatusAsRepeated" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_SetToWordsStatusAsRepeated_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetToWordsStatusAsRepeatedResponse" />
   </wsdl:message>
   <wsdl:message name="IVocabulary_ChangeImage_InputMessage">
     <wsdl:part name="parameters" element="tns:ChangeImage" />
@@ -175,6 +193,10 @@
       <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetNotLearnedWords" message="tns:IVocabulary_GetNotLearnedWords_InputMessage" />
       <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetNotLearnedWordsResponse" message="tns:IVocabulary_GetNotLearnedWords_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetWordsToRepeat">
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetWordsToRepeat" message="tns:IVocabulary_GetWordsToRepeat_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetWordsToRepeatResponse" message="tns:IVocabulary_GetWordsToRepeat_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetQuantityUnlearnedWordsInDictionary">
       <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetQuantityUnlearnedWordsInDictionary" message="tns:IVocabulary_GetQuantityUnlearnedWordsInDictionary_InputMessage" />
       <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/GetQuantityUnlearnedWordsInDictionaryResponse" message="tns:IVocabulary_GetQuantityUnlearnedWordsInDictionary_OutputMessage" />
@@ -182,6 +204,10 @@
     <wsdl:operation name="IsLearningProcessActive">
       <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/IsLearningProcessActive" message="tns:IVocabulary_IsLearningProcessActive_InputMessage" />
       <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/IsLearningProcessActiveResponse" message="tns:IVocabulary_IsLearningProcessActive_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeOutstandingWords">
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeOutstandingWords" message="tns:IVocabulary_ChangeOutstandingWords_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeOutstandingWordsResponse" message="tns:IVocabulary_ChangeOutstandingWords_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ChangeStatusCards">
       <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeStatusCards" message="tns:IVocabulary_ChangeStatusCards_InputMessage" />
@@ -194,6 +220,10 @@
     <wsdl:operation name="SetToWordsStatusAsUnlearned">
       <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsUnlearned" message="tns:IVocabulary_SetToWordsStatusAsUnlearned_InputMessage" />
       <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsUnlearnedResponse" message="tns:IVocabulary_SetToWordsStatusAsUnlearned_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetToWordsStatusAsRepeated">
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsRepeated" message="tns:IVocabulary_SetToWordsStatusAsRepeated_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsRepeatedResponse" message="tns:IVocabulary_SetToWordsStatusAsRepeated_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ChangeImage">
       <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeImage" message="tns:IVocabulary_ChangeImage_InputMessage" />
