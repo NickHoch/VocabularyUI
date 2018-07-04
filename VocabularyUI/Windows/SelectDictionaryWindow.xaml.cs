@@ -23,11 +23,11 @@ namespace VocabularyUI.Windows
     public partial class SelectDictionaryWindow : MetroWindow
     {
         public static Random rand = new Random();
-        public ServerDAL _dal;
+        public IDal _dal;
         private int userId = 0;
         private int dictionaryId = 0;
         private Window mainWindow = Application.Current.MainWindow;
-        public SelectDictionaryWindow(ServerDAL _dal, int userId)
+        public SelectDictionaryWindow(IDal _dal, int userId)
         {
             InitializeComponent();
             this._dal = _dal;

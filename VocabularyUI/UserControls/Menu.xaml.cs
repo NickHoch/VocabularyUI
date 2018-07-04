@@ -22,8 +22,8 @@ namespace VocabularyUI.UserControls
     public partial class Menu : UserControl
     {
         private int userId;
-        private ServerDAL _dal = null;
-        public Menu(ServerDAL _dal, int userId)
+        private IDal _dal = null;
+        public Menu(IDal _dal, int userId)
         {
             InitializeComponent();
             this._dal = _dal;

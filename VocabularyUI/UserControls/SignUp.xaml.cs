@@ -15,9 +15,9 @@ namespace VocabularyUI.UserControls
 {
     public partial class SignUp : UserControl
     {
-        private ServerDAL _dal;
+        private IDal _dal;
         public int? userId;
-        public SignUp(ServerDAL _dal)
+        public SignUp(IDal _dal)
         {
             InitializeComponent();
             this._dal = _dal;

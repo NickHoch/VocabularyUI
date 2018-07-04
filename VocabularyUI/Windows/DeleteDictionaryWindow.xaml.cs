@@ -21,11 +21,11 @@ namespace VocabularyUI.Windows
 {
     public partial class DeleteDictionaryWindow : MetroWindow
     {
-        private ServerDAL _dal = null;
+        private IDal _dal = null;
         private int userId = 0;
         private int selectedDictionaryId = 0;
         private string selectedDictionaryName = String.Empty;
-        public DeleteDictionaryWindow(ServerDAL _dal, int userId)
+        public DeleteDictionaryWindow(IDal _dal, int userId)
         {
             InitializeComponent();
             ResizeMode = ResizeMode.NoResize;

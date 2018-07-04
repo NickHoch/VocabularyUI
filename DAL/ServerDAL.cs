@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class ServerDAL
+    public class ServerDAL :IDal
     {
         private ServiceVocabulary.VocabularyClient vocabularyClient = new ServiceVocabulary.VocabularyClient();
         public bool IsEmailAddressExists(string email)

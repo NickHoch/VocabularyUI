@@ -30,7 +30,7 @@ namespace VocabularyClient
         private SignUp signUp;
         private Menu menu;
         private int? userId;
-        private ServerDAL _dal = new ServerDAL();
+        private IDal _dal = new ServerDAL();
         public static Random rand = new Random();
         private IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForAssembly();
         public DispatcherTimer popupTimer= new DispatcherTimer();

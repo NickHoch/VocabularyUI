@@ -25,11 +25,11 @@ namespace VocabularyUI.Windows
     public partial class EditDictonaryNameWindow : MetroWindow
     {
 
-        private ServerDAL _dal = null;
+        private IDal _dal = null;
         private int userId = 0;
         private int selectedDictionaryId = 0;
         private string selectedDictionaryName = String.Empty;
-        public EditDictonaryNameWindow(ServerDAL _dal, int userId)
+        public EditDictonaryNameWindow(IDal _dal, int userId)
         {
             InitializeComponent();
             ResizeMode = ResizeMode.NoResize;

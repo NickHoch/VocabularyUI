@@ -27,7 +27,7 @@ namespace VocabularyUI.Windows
     public partial class LearningWindow : MetroWindow
     {
         public static Random rand = new Random();
-        public ServerDAL _dal;
+        public IDal _dal;
         private bool isRepeat;
         private int userId = 0;
         private int dictionaryId = 0;
@@ -39,7 +39,7 @@ namespace VocabularyUI.Windows
         private List<WordDTO> Dictionary = new List<WordDTO>();
         public List<WordDTO> WordsToLearn = new List<WordDTO>();
         private MainWindow mainWindow = (Application.Current.MainWindow as MainWindow);
-        public LearningWindow(ServerDAL _dal, int userId, bool isRepeat, int dictionaryId = 0)
+        public LearningWindow(IDal _dal, int userId, bool isRepeat, int dictionaryId = 0)
         {
             InitializeComponent();
             this._dal = _dal;

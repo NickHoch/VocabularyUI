@@ -17,9 +17,9 @@ namespace VocabularyUI.UserControls
 {
     public partial class SignIn : UserControl
     {
-        private ServerDAL _dal = null;
+        private IDal _dal = null;
         public int? userId = null;
-        public SignIn(ServerDAL _dal)
+        public SignIn(IDal _dal)
         {
             InitializeComponent();
             this._dal = _dal;

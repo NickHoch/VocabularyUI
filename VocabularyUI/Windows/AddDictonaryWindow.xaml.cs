@@ -21,9 +21,9 @@ namespace VocabularyUI.Windows
 {
     public partial class AddDictonaryWindow : MetroWindow
     {
-        private ServerDAL _dal = null;
+        private IDal _dal = null;
         private int userId = 0;
-        public AddDictonaryWindow(ServerDAL _dal, int userId)
+        public AddDictonaryWindow(IDal _dal, int userId)
         {
             InitializeComponent();
             ResizeMode = ResizeMode.NoResize;

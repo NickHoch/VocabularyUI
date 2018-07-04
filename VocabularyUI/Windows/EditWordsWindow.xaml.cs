@@ -27,13 +27,13 @@ namespace VocabularyUI.Windows
     {
         private int userId = 0;
         private WordDTO newWord;
-        private ServerDAL _dal;
+        private IDal _dal;
         private byte[] soundArr;
         private byte[] imageArr;
         private byte[] bytesArr;
         private int selectedDictionaryId = 0;
 
-        public EditWordsWindow(ServerDAL _dal, int userId)
+        public EditWordsWindow(IDal _dal, int userId)
         {
             InitializeComponent();
             ResizeMode = ResizeMode.NoResize;
