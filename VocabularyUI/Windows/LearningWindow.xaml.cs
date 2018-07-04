@@ -53,21 +53,27 @@ namespace VocabularyUI.Windows
         private void OnWindowClosing(object sender, CancelEventArgs e)
         {
             this.Hide();
-            if(isRepeat)
+            Dictionary<int, string> learnedWordsCards = new Dictionary<int, string>();
+            if(WordsToLearn.All(x => x.IsCardPassed == CardsIsLearned))
             {
-                var wordsId = WordsToLearn.Where(x => x.IsCardPassed == CardsIsLearned)
-                                                .Select(x => x.Id)
-                                                .ToArray();
-                _dal.SetToWordsStatusAsUnlearned(wordsId);
+                var wordsId = WordsToLearn.Select(x => x.Id).ToArray();
+                _dal.SetToWordsStatusAsLearned(wordsId, dictionaryId);
             }
             else
             {
-                Dictionary<int, string> learnedWordsCards = new Dictionary<int, string>();
                 foreach (var item in WordsToLearn)
                 {
                     learnedWordsCards.Add(item.Id, item.IsCardPassed);
                 }
-                _dal.ChangeCardsStatuses(learnedWordsCards, dictionaryId);
+
+                if (isRepeat)
+                {
+                    _dal.ChangeCardsStatusesRepeat(learnedWordsCards);
+                }
+                else
+                {
+                    _dal.ChangeCardsStatuses(learnedWordsCards);
+                }
             }
             mainWindow.IsLearningWindowClosed = true;
             mainWindow.popupTimer.Start();
@@ -78,12 +84,11 @@ namespace VocabularyUI.Windows
             {
                 if(isRepeat)
                 {
-
                     WordsToLearn = _dal.GetWordsToRepeat(userId);
-                    WordsToLearn.ForEach(x => {
-                        x.IsCardPassed = CardsIsNotLearned;
+                    WordsToLearn.ForEach(x =>
+                    {
                         x.IsWordLearned = false;
-                        });
+                    });
                 }
                 else
                 {
@@ -305,8 +310,6 @@ namespace VocabularyUI.Windows
                 if (isAllWordsLearned)
                 {
                     MaterialMessageBox.Show($"\tCongratulations. You have learned {quantityReturnedWords} words");
-                    var wordsId = WordsToLearn.Select(x => x.Id).ToArray();
-                    _dal.SetToWordsStatusAsLearned(wordsId, dictionaryId);
                     mainWindow.popupTimer.Stop();
                     Helper.log.Info($"User with id: {userId} has studied {quantityReturnedWords} words in the dictionary, which id is: {dictionaryId}");
                     this.Close();

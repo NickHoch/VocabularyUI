@@ -23,10 +23,11 @@ namespace DAL
         int GetQuantityUnlearnedWordsInDictionary(int dictionaryId);
         int? IsLearningProcessActive(int userId);
         void ChangeOutstandingWords(int userId);
-        void ChangeCardsStatuses(Dictionary<int, string> newCardsStatuses, int dictionaryId);
+        void ChangeCardsStatuses(Dictionary<int, string> newCardsStatuses);
+        void ChangeCardsStatusesRepeat(Dictionary<int, string> newCardsStatuses);
         void SetToWordsStatusAsLearned(int[] wordsArr, int dictionaryId);
         void SetToWordsStatusAsUnlearned(int dictionaryId);
-        void SetToWordsStatusAsUnlearned(int[] wordsId);
+        //void SetToWordsStatusAsUnlearned(int[] wordsId);
         void ChangeImage(int wordId, byte[] newImage);
         void ChangeSound(int wordId, byte[] newSound);
         bool AddDictionary(DictionaryExtnDTO dictionaryDTO, int userId);

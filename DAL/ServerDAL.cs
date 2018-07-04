@@ -88,9 +88,13 @@ namespace DAL
         {
             vocabularyClient.ChangeOutstandingWords(userId);
         }
-        public void ChangeCardsStatuses(Dictionary<int, string> newCardsStatuses, int dictionaryId)
+        public void ChangeCardsStatuses(Dictionary<int, string> newCardsStatuses)
         {
-            vocabularyClient.ChangeStatusCards(newCardsStatuses, dictionaryId);
+            vocabularyClient.ChangeCardsStatuses(newCardsStatuses);
+        }
+        public void ChangeCardsStatusesRepeat(Dictionary<int, string> newCardsStatuses)
+        {
+            vocabularyClient.ChangeCardsStatusesRepeat(newCardsStatuses);
         }
         public void SetToWordsStatusAsLearned(int[] wordsArr, int dictionaryId)
         {
@@ -100,7 +104,7 @@ namespace DAL
         {
             vocabularyClient.SetToWordsStatusAsUnlearned(dictionaryId);
         }
-        public void SetToWordsStatusAsUnlearned(int[] wordsId)
+        public void SetToWordsStatusAsRepeated(int[] wordsId)
         {
             vocabularyClient.SetToWordsStatusAsRepeated(wordsId);
         }

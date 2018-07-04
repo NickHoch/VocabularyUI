@@ -468,11 +468,19 @@ namespace DAL.ServiceVocabulary {
         [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeOutstandingWords", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeOutstandingWordsResponse")]
         System.Threading.Tasks.Task ChangeOutstandingWordsAsync(int userId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeStatusCards", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeStatusCardsResponse")]
-        void ChangeStatusCards(System.Collections.Generic.Dictionary<int, string> newCardsStatuses, int dictionaryId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeCardsStatuses", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeCardsStatusesResponse")]
+        void ChangeCardsStatuses(System.Collections.Generic.Dictionary<int, string> newCardsStatuses);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeStatusCards", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeStatusCardsResponse")]
-        System.Threading.Tasks.Task ChangeStatusCardsAsync(System.Collections.Generic.Dictionary<int, string> newCardsStatuses, int dictionaryId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeCardsStatuses", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeCardsStatusesResponse")]
+        System.Threading.Tasks.Task ChangeCardsStatusesAsync(System.Collections.Generic.Dictionary<int, string> newCardsStatuses);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeCardsStatusesRepeat", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeCardsStatusesRepeatRespon" +
+            "se")]
+        void ChangeCardsStatusesRepeat(System.Collections.Generic.Dictionary<int, string> newCardsStatuses);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeCardsStatusesRepeat", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeCardsStatusesRepeatRespon" +
+            "se")]
+        System.Threading.Tasks.Task ChangeCardsStatusesRepeatAsync(System.Collections.Generic.Dictionary<int, string> newCardsStatuses);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsLearned", ReplyAction="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsLearnedRespon" +
             "se")]
@@ -676,12 +684,20 @@ namespace DAL.ServiceVocabulary {
             return base.Channel.ChangeOutstandingWordsAsync(userId);
         }
         
-        public void ChangeStatusCards(System.Collections.Generic.Dictionary<int, string> newCardsStatuses, int dictionaryId) {
-            base.Channel.ChangeStatusCards(newCardsStatuses, dictionaryId);
+        public void ChangeCardsStatuses(System.Collections.Generic.Dictionary<int, string> newCardsStatuses) {
+            base.Channel.ChangeCardsStatuses(newCardsStatuses);
         }
         
-        public System.Threading.Tasks.Task ChangeStatusCardsAsync(System.Collections.Generic.Dictionary<int, string> newCardsStatuses, int dictionaryId) {
-            return base.Channel.ChangeStatusCardsAsync(newCardsStatuses, dictionaryId);
+        public System.Threading.Tasks.Task ChangeCardsStatusesAsync(System.Collections.Generic.Dictionary<int, string> newCardsStatuses) {
+            return base.Channel.ChangeCardsStatusesAsync(newCardsStatuses);
+        }
+        
+        public void ChangeCardsStatusesRepeat(System.Collections.Generic.Dictionary<int, string> newCardsStatuses) {
+            base.Channel.ChangeCardsStatusesRepeat(newCardsStatuses);
+        }
+        
+        public System.Threading.Tasks.Task ChangeCardsStatusesRepeatAsync(System.Collections.Generic.Dictionary<int, string> newCardsStatuses) {
+            return base.Channel.ChangeCardsStatusesRepeatAsync(newCardsStatuses);
         }
         
         public void SetToWordsStatusAsLearned(int[] wordsId, int dictionaryId) {

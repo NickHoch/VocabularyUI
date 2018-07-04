@@ -197,15 +197,26 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="ChangeStatusCards">
+  <xs:element name="ChangeCardsStatuses">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="newCardsStatuses" nillable="true" type="q9:ArrayOfKeyValueOfintstring" />
-        <xs:element minOccurs="0" name="dictionaryId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="ChangeStatusCardsResponse">
+  <xs:element name="ChangeCardsStatusesResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ChangeCardsStatusesRepeat">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="newCardsStatuses" nillable="true" type="q10:ArrayOfKeyValueOfintstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ChangeCardsStatusesRepeatResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
@@ -213,7 +224,7 @@
   <xs:element name="SetToWordsStatusAsLearned">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="wordsId" nillable="true" type="q10:ArrayOfint" />
+        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="wordsId" nillable="true" type="q11:ArrayOfint" />
         <xs:element minOccurs="0" name="dictionaryId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -238,7 +249,7 @@
   <xs:element name="SetToWordsStatusAsRepeated">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="wordsId" nillable="true" type="q11:ArrayOfint" />
+        <xs:element xmlns:q12="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="wordsId" nillable="true" type="q12:ArrayOfint" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -276,7 +287,7 @@
   <xs:element name="AddDictionary">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/WCF.DCs" minOccurs="0" name="dictionaryDC" nillable="true" type="q12:DictionaryExtnDC" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/WCF.DCs" minOccurs="0" name="dictionaryDC" nillable="true" type="q13:DictionaryExtnDC" />
         <xs:element minOccurs="0" name="userId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -325,7 +336,7 @@
   <xs:element name="GetDictionariesBaseInfoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/WCF.DCs" minOccurs="0" name="GetDictionariesBaseInfoResult" nillable="true" type="q13:ArrayOfDictionaryDC" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/WCF.DCs" minOccurs="0" name="GetDictionariesBaseInfoResult" nillable="true" type="q14:ArrayOfDictionaryDC" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -68,7 +68,7 @@ namespace VocabularyUI.Windows
             var res = _dal.IsLearningProcessActive(userId);
             if (res != dictionaryId && res != null)
             {
-                MaterialMessageBox.ShowError($"The process of learning the words of \"{res}\" dictionary isn`t completed. Please try again after completion of the process");
+                MaterialMessageBox.ShowError($"The process of learning the words isn`t completed. Please try again after completion of the process");
                 return;
             }
             else if(res == null)

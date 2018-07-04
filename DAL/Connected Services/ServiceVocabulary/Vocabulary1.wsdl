@@ -92,11 +92,17 @@
   <wsdl:message name="IVocabulary_ChangeOutstandingWords_OutputMessage">
     <wsdl:part name="parameters" element="tns:ChangeOutstandingWordsResponse" />
   </wsdl:message>
-  <wsdl:message name="IVocabulary_ChangeStatusCards_InputMessage">
-    <wsdl:part name="parameters" element="tns:ChangeStatusCards" />
+  <wsdl:message name="IVocabulary_ChangeCardsStatuses_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeCardsStatuses" />
   </wsdl:message>
-  <wsdl:message name="IVocabulary_ChangeStatusCards_OutputMessage">
-    <wsdl:part name="parameters" element="tns:ChangeStatusCardsResponse" />
+  <wsdl:message name="IVocabulary_ChangeCardsStatuses_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeCardsStatusesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_ChangeCardsStatusesRepeat_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeCardsStatusesRepeat" />
+  </wsdl:message>
+  <wsdl:message name="IVocabulary_ChangeCardsStatusesRepeat_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeCardsStatusesRepeatResponse" />
   </wsdl:message>
   <wsdl:message name="IVocabulary_SetToWordsStatusAsLearned_InputMessage">
     <wsdl:part name="parameters" element="tns:SetToWordsStatusAsLearned" />
@@ -209,9 +215,13 @@
       <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeOutstandingWords" message="tns:IVocabulary_ChangeOutstandingWords_InputMessage" />
       <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeOutstandingWordsResponse" message="tns:IVocabulary_ChangeOutstandingWords_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="ChangeStatusCards">
-      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeStatusCards" message="tns:IVocabulary_ChangeStatusCards_InputMessage" />
-      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeStatusCardsResponse" message="tns:IVocabulary_ChangeStatusCards_OutputMessage" />
+    <wsdl:operation name="ChangeCardsStatuses">
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeCardsStatuses" message="tns:IVocabulary_ChangeCardsStatuses_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeCardsStatusesResponse" message="tns:IVocabulary_ChangeCardsStatuses_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeCardsStatusesRepeat">
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeCardsStatusesRepeat" message="tns:IVocabulary_ChangeCardsStatusesRepeat_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeCardsStatusesRepeatResponse" message="tns:IVocabulary_ChangeCardsStatusesRepeat_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SetToWordsStatusAsLearned">
       <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IVocabulary/SetToWordsStatusAsLearned" message="tns:IVocabulary_SetToWordsStatusAsLearned_InputMessage" />

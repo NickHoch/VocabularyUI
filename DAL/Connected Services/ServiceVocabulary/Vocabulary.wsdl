@@ -130,8 +130,17 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ChangeStatusCards">
-      <soap:operation soapAction="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeStatusCards" style="document" />
+    <wsdl:operation name="ChangeCardsStatuses">
+      <soap:operation soapAction="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeCardsStatuses" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeCardsStatusesRepeat">
+      <soap:operation soapAction="http://Microsoft.ServiceModel.Samples/IVocabulary/ChangeCardsStatusesRepeat" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

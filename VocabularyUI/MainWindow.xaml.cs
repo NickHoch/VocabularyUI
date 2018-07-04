@@ -36,7 +36,6 @@ namespace VocabularyClient
         {
             try
             {
-                MessageBox.Show("test");
                 _dal = dal;
                 InitializeComponent();
                 //autorun
@@ -128,10 +127,14 @@ namespace VocabularyClient
             var words =_dal.GetWordsToRepeat((int)userId);
             if(words.Count > 0)
             {
-                popupTimer.Stop();
-                var learningWindow = new LearningWindow(_dal, (int)userId, true);
-                learningWindow.Show();
-                IsLearningWindowClosed = false;
+                if (IsLearningWindowClosed)
+                {
+                    popupTimer.Stop();
+                    var learningWindow = new LearningWindow(_dal, (int)userId, true);
+                    learningWindow.Title = "Repeating";
+                    learningWindow.Show();
+                    IsLearningWindowClosed = false;
+                }
             }
             else
             {
@@ -140,6 +143,7 @@ namespace VocabularyClient
                 {
                     popupTimer.Stop();
                     var learningWindow = new LearningWindow(_dal, (int)userId, false, (int)dictionaryId);
+                    learningWindow.Title = "Reminding";
                     learningWindow.Show();
                     IsLearningWindowClosed = false;
                 }
