@@ -17,7 +17,7 @@ namespace TestClient
         public void Init()
         {
             mock = new Mock<IVocabulary>();
-            serverDAL = new ServerDAL(mock.Object);            
+            serverDAL = new ServerDAL(mock.Object);
         }
 
         [TestCleanup]
@@ -39,7 +39,7 @@ namespace TestClient
         public void IsEmailAddressExists2()
         {
             mock.Setup(m => m.IsEmailAddressExists(null)).Throws(new FaultException());
-           serverDAL.IsEmailAddressExists(null);
+            serverDAL.IsEmailAddressExists(null);
         }
 
 
