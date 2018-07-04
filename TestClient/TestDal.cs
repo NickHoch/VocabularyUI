@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ServiceModel;
 using DAL;
 using DAL.ServiceVocabulary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -10,12 +11,13 @@ namespace TestClient
     public class TestDal
     {
         ServerDAL serverDAL;
-        Mock<VocabularyClient> mock;
+        Mock<IVocabulary> mock;
+
         [TestInitialize]
         public void Init()
         {
-            serverDAL = new ServerDAL();
-            mock = new Mock<VocabularyClient>();
+            mock = new Mock<IVocabulary>();
+            serverDAL = new ServerDAL(mock.Object);            
         }
 
         [TestCleanup]
@@ -26,8 +28,20 @@ namespace TestClient
         }
 
         [TestMethod]
-        public void TestMethod1()
+        public void IsEmailAddressExists1()
         {
+            mock.Setup(m => m.IsEmailAddressExists(It.IsAny<string>())).Returns(true);
+            Assert.IsTrue(serverDAL.IsEmailAddressExists("myemail.com"));
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(FaultException))]
+        public void IsEmailAddressExists2()
+        {
+            mock.Setup(m => m.IsEmailAddressExists(null)).Throws(new FaultException());
+           serverDAL.IsEmailAddressExists(null);
+        }
+
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using DAL.DTOs;
 using DAL.Mapping;
+using DAL.ServiceVocabulary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,13 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class ServerDAL :IDal
+    public class ServerDAL : IDal
     {
-        private ServiceVocabulary.VocabularyClient vocabularyClient = new ServiceVocabulary.VocabularyClient();
+        private ServiceVocabulary.IVocabulary vocabularyClient;
+        public ServerDAL(IVocabulary vocabulary)
+        {
+            vocabularyClient = vocabulary;
+        }
         public bool IsEmailAddressExists(string email)
         {
             return vocabularyClient.IsEmailAddressExists(email);

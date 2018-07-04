@@ -5,6 +5,7 @@ using System;
 using VocabularyUI.UserControls;
 using Ninject;
 using DAL;
+using DAL.ServiceVocabulary;
 
 namespace VocabularyClient
 {
@@ -20,6 +21,7 @@ namespace VocabularyClient
                 base.OnStartup(e);
                 IKernel kernel = new StandardKernel();
                 kernel.Bind<IDal>().To<ServerDAL>();
+                kernel.Bind<IVocabulary>().To<DAL.ServiceVocabulary.VocabularyClient>();
                 kernel.Bind<Window>().To<MainWindow>();
                 ShutdownMode = ShutdownMode.OnMainWindowClose; // closes all child windows when main window closed
 
