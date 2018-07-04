@@ -55,6 +55,7 @@
     <Compile Include="DTOs\DictionaryDTO.cs" />
     <Compile Include="DTOs\DictionaryExtnDTO.cs" />
     <Compile Include="DTOs\WordDTO.cs" />
+    <Compile Include="IDal.cs" />
     <Compile Include="Mapping\MappingCredential.cs" />
     <Compile Include="Mapping\MappingCredentialExtn.cs" />
     <Compile Include="Mapping\MappingDictionary.cs" />
