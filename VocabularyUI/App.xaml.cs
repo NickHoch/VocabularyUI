@@ -3,6 +3,8 @@ using System.ComponentModel;
 using BespokeFusion;
 using System;
 using VocabularyUI.UserControls;
+using Ninject;
+using DAL;
 
 namespace VocabularyClient
 {
@@ -16,18 +18,24 @@ namespace VocabularyClient
             try
             {
                 base.OnStartup(e);
+                IKernel kernel = new StandardKernel();
+                kernel.Bind<IDal>().To<ServerDAL>();
+                kernel.Bind<Window>().To<MainWindow>();
                 ShutdownMode = ShutdownMode.OnMainWindowClose; // closes all child windows when main window closed
 
                 log4net.Config.XmlConfigurator.Configure();
 
-                MainWindow = new MainWindow(); // settings behaviour app in system tray
+                MainWindow = kernel.Get<Window>(); // settings behaviour app in system tray
                 MainWindow.Closing += MainWindow_Closing;
+                MainWindow.Show();
                 _notifyIcon = new System.Windows.Forms.NotifyIcon();
                 _notifyIcon.DoubleClick += (s, args) => ShowMainWindow();
                 _notifyIcon.Icon = VocabularyUI.Properties.Resources.icon;
                 _notifyIcon.Visible = true;
                 _notifyIcon.Text = "Vocabulary";
                 CreateContextMenu();
+              
+               
             }
             catch(Exception ex)
             {

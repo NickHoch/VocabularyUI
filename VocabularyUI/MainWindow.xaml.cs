@@ -1,26 +1,20 @@
-﻿using MahApps.Metro.Controls;
-using System.Windows;
-using VocabularyUI.UserControls;
+﻿using BespokeFusion;
 using DAL;
-using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.IO.IsolatedStorage;
-using System.IO;
 using DAL.DTOs;
+using MahApps.Metro.Controls;
 using Microsoft.Win32;
-using System.Threading.Tasks;
-using System.ServiceModel;
-using BespokeFusion;
-using System.Runtime.InteropServices;
-using System.Windows.Interop;
-using log4net;
+using System;
+using System.IO;
+using System.IO.IsolatedStorage;
 using System.Reflection;
-using VocabularyUI.Utils;
-using System.Threading;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.ServiceModel;
+using System.Windows;
 using System.Windows.Threading;
+using VocabularyUI.UserControls;
+using VocabularyUI.Utils;
 using VocabularyUI.Windows;
-using System.Linq;
+using Ninject;
 
 namespace VocabularyClient
 {
@@ -30,7 +24,7 @@ namespace VocabularyClient
         private SignUp signUp;
         private Menu menu;
         private int? userId;
-        private IDal _dal = new ServerDAL();
+        private IDal _dal;
         public static Random rand = new Random();
         private IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForAssembly();
         public DispatcherTimer popupTimer= new DispatcherTimer();
@@ -38,10 +32,12 @@ namespace VocabularyClient
         private string path;
         private string fileName;
         public bool IsLearningWindowClosed = true;
-        public MainWindow()
+        public MainWindow(IDal dal)
         {
             try
             {
+                MessageBox.Show("test");
+                _dal = dal;
                 InitializeComponent();
                 //autorun
                 GetExeLocation();
