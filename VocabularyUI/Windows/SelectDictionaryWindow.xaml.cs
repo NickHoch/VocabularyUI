@@ -26,7 +26,7 @@ namespace VocabularyUI.Windows
         public ServerDAL _dal;
         private int userId = 0;
         private int dictionaryId = 0;
-        private Window mainWindow = Application.Current.MainWindow;
+        private MainWindow mainWindow = (Application.Current.MainWindow as MainWindow);
         public SelectDictionaryWindow(ServerDAL _dal, int userId)
         {
             InitializeComponent();
@@ -85,11 +85,10 @@ namespace VocabularyUI.Windows
                     return;
                 }
             }
-
             var learningWindow = new LearningWindow(_dal, userId, dictionaryId);
             learningWindow.Show();
-            (mainWindow as MainWindow).popupTimer.Stop();
-            (mainWindow as MainWindow).IsLearningWindowClosed = false;
+            mainWindow.popupTimer.Stop();
+            mainWindow.IsLearningWindowClosed = false;
 
             Helper.log.Info($"User with id: {userId} start to learn words from dictionary id: {dictionaryId}");
             this.Close();
