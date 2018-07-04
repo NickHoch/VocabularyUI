@@ -29,7 +29,6 @@ namespace VocabularyUI.UserControls
             try
             {
                 InitializeComponent();
-                border.Background = new SolidColorBrush(Color.FromArgb(177, 204, 229, 255));
                 this.wordToLearn = wordToLearn;
                 translation.Text = wordToLearn.Translation;
                 StringBuilder starsString = new StringBuilder();

@@ -17,7 +17,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="7*"></RowDefinition>
-            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
             <RowDefinition Height="2.5*"></RowDefinition>
             <RowDefinition Height="3.5*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
@@ -29,7 +29,7 @@
             Grid.Column="1"
             Grid.RowSpan="6"
             BorderBrush="Black"
-            BorderThickness="2"/>
+            BorderThickness="2" Background="#CCE1F7D5"/>
         <Grid Grid.Row="4" Grid.Column="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>

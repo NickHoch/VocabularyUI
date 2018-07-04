@@ -309,7 +309,15 @@ namespace VocabularyUI.Windows
                 }
                 if (isAllWordsLearned)
                 {
-                    MaterialMessageBox.Show($"\tCongratulations. You have learned {quantityReturnedWords} words");
+                    if(isRepeat)
+                    {
+                        MaterialMessageBox.Show($"\tCongratulations. You have repeated {quantityReturnedWords} words");
+                    }
+                    else
+                    {
+                        MaterialMessageBox.Show($"\tCongratulations. You have learned {quantityReturnedWords} words");
+                    }
+                    
                     mainWindow.popupTimer.Stop();
                     Helper.log.Info($"User with id: {userId} has studied {quantityReturnedWords} words in the dictionary, which id is: {dictionaryId}");
                     this.Close();

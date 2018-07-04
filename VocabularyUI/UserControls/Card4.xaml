@@ -28,7 +28,7 @@
             Grid.RowSpan="5"
             BorderBrush="Black"
             BorderThickness="2"
-            Background="LightCyan"/>
+            Background="#CCE1F7D5"/>
         <Border 
             Grid.Row="2"
             Grid.Column="1"

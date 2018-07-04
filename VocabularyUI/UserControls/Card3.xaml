@@ -31,7 +31,7 @@
             Grid.Column="1"
             Grid.RowSpan="9"
             BorderThickness="2"
-            BorderBrush="Black"/>
+            BorderBrush="Black" Background="#CCE1F7D5"/>
         <Label 
             Grid.Row="0"
             Grid.Column="1"
