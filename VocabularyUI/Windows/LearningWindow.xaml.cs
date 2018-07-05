@@ -35,7 +35,6 @@ namespace VocabularyUI.Windows
         private int quantityReturnedWords = 0;
         private bool isAllWordsPassedCard1 = false;
         private string CardsIsLearned = "111111";
-        private string CardsIsNotLearned = "000000";
         private List<WordDTO> Dictionary = new List<WordDTO>();
         public List<WordDTO> WordsToLearn = new List<WordDTO>();
         private MainWindow mainWindow = (Application.Current.MainWindow as MainWindow);
@@ -259,7 +258,7 @@ namespace VocabularyUI.Windows
                 }
             }
         }
-       
+        //event decides what kind of card app will show
         private void NextCardButton_Click(object sender, RoutedEventArgs e)
         {
             try

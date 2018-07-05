@@ -10,7 +10,6 @@
         mc:Ignorable="d"
         BorderThickness="0" 
         GlowBrush="Black"
-        ResizeMode="NoResize"
         WindowTransitionsEnabled="False"
         Title="Learning" Height="400" Width="400" WindowStartupLocation="CenterScreen">
     <Grid>

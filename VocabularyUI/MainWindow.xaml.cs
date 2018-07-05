@@ -56,9 +56,8 @@ namespace VocabularyClient
                 MaterialMessageBox.ShowError(ex.ToString());
             }
         }
-
-        #region
         //mathods put app in autorun folder
+        #region
         public void GetExeLocation()
         {
             try
@@ -86,6 +85,7 @@ namespace VocabularyClient
             }
         }
         #endregion
+        //method contains of the logic of the starting app
         private void StartApp()
         {
             BinaryFormatter formatter = new BinaryFormatter();
@@ -121,6 +121,7 @@ namespace VocabularyClient
             popupTimer.Tick += new EventHandler(PopupTimer_Tick);
             popupTimer.Start();
         }
+        //method decides what kind of window app will show
         private void PopupTimer_Tick(object sender, EventArgs e)
         {
             _dal.ChangeOutstandingWords((int)userId);
@@ -228,6 +229,7 @@ namespace VocabularyClient
         {
             try
             {
+                popupTimer.Stop();
                 Application.Current.Shutdown();
             }
             catch (Exception ex)
